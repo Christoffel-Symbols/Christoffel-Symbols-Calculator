@@ -15,13 +15,13 @@ const Result = () => {
         gap: '1rem'
       }}>
         <div>
-          Christoffel Symbols (Second Kind)
+          Christoffel Symbols (Second kind)
         </div>
         <div>
-          Christoffel Symbols (First Kind)
+          Christoffel Symbols (First kind)
         </div>
         <div>
-          Riemann Tensor (Non-zero Components)
+          Riemann Tensor (Non-zero components)
         </div>
         <div>
           Ricci Tensor
@@ -30,7 +30,7 @@ const Result = () => {
           Ricci Scalar
         </div>
         <div>
-          Einstein Tensor (Non-zero Components)
+          Einstein Tensor (Non-zero components)
         </div>
       </div>
     </div>

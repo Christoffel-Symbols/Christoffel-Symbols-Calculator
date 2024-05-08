@@ -52,6 +52,7 @@ html, body {
 }
 
 .metricTensor {
+  margin-top: 1rem;
   text-align: center;
   font-size: 2rem;
 }

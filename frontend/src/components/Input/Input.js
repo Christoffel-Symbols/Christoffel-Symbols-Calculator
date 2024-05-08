@@ -12,21 +12,40 @@ import { Button } from '@mui/material';
 
 const Input = () => {
 
+  const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
+
+  let myInitialValues = {}
+
+  if (sessionStorage.getItem(FORM_SESSION) === null){
+    myInitialValues = {
+    num_coordinates: 2,
+    variable_parameters: {
+      alpha: '',
+      delta: '',
+      epsilon: ''
+    },
+    reserve_parameters: {
+      a: 'False',
+      p: 'False',
+      P: 'False',
+      e: 'False'
+    },
+    metric_tensor: [[0,0], [0,0]]
+    }
+  } else {
+    myInitialValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
+  }
+
   const [selected, setSelected] = useState('');
-  const [coordList, setCoordList] = useState(['x','y']);
 
   return (
     <>
     <div className='input'>
       <TabMenu setSelected={setSelected}/>
-      <div style={{
-        display: 'flex',
-        gap:'1rem'
-      }}>
         {
         selected === ''
         ?
-        <Options coordList={coordList} setCoordList={setCoordList}/>
+        <Options myInitialValues={myInitialValues}/>
         :
         selected === 'ABOUT'
         ?
@@ -40,10 +59,8 @@ const Input = () => {
         ?
         <Guide/>
         :
-        <Options coordList={coordList} setCoordList={setCoordList}/>
+        <Options myInitialValues={myInitialValues}/>
         }
-      </div>
-    <MetricTensor coordList={coordList}/>
     <Button size='large' variant='contained'>Calculate</Button>
     </div>
     </>
