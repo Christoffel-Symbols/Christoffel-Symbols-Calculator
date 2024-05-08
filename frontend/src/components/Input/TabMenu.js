@@ -1,29 +1,17 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
+import { Button } from '@mui/material';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import '../../App.css'
 
 
-const TabMenu = () => {
+const TabMenu = ({setSelected}) => {
+
   return (
     <div className='menu'>
-      <Box sx={{ width: '100%' }}>
-      <Stack spacing={1}>
-        <Item>About</Item>
-        <Item>Example</Item>
-        <Item>Quick Guide</Item>
-        <Item>Options</Item>
-      </Stack>
-    </Box>
+        <Button variant='outlined' size='large' onClick={()=>setSelected('ABOUT')}>ABOUT</Button>
+        <Button variant='outlined' size='large' onClick={()=>setSelected('EXAMPLES')}>EXAMPLES</Button>
+        <Button variant='outlined' size='large' onClick={()=>setSelected('QUICK GUIDE')}>QUICK GUIDE</Button>
+        <Button variant='outlined' size='large' onClick={()=> setSelected('OPTIONS')}>OPTIONS</Button>
     </div>
   )
 }

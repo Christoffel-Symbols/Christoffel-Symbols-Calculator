@@ -5,12 +5,12 @@ html, body {
 }
 
 .header {
-  border: 3px solid black;
   padding: 5px;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   justify-content: center;
+  border: 3px solid black;
 }
 
 .app {
@@ -47,6 +47,8 @@ html, body {
   gap: 1rem;
   padding: 0.5rem;
   align-items: center;
+  border: 3px solid black;
+  width: 100%;
 }
 
 .metricTensor {
@@ -55,11 +57,13 @@ html, body {
 }
 
 .menu {
-  border: 3px solid black;
-  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem
 }
 
 .result {
   text-align: center;
   font-size: 2rem;
+  width: 100%;
 }

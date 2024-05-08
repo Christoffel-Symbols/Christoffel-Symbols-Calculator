@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Input from './components/Input/Input';
-import Result from './components/Result';
+import Result from './components/output/Result';
 
 
 import './App.css';

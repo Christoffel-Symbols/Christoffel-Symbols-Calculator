@@ -15,13 +15,10 @@ const Header = () => {
         <img src={logo} className='logo'/>
         </div>
         <div className='heading'>
-      <div style={{
-        border: '3px solid black'
-      }}>
+      <div>
         Christoffel Symbols 
         </div>
         <div style={{
-          border: '3px solid black',
           textAlign: 'center'
         }}>
         Calculator

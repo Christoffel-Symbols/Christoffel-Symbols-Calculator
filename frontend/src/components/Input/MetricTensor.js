@@ -1,10 +1,12 @@
 import React from 'react'
-import {TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 const MetricTensor = ({coordList}) => {
   return (
     <div className='metricTensor'>
-      Define Metric Tensor
+    <Button variant='outlined' size='large' sx={{
+      marginBottom: '1rem'
+    }}>Metric Tensor</Button>
       <div style={{
         border: '3px solid black',
         display: 'flex',
@@ -12,9 +14,7 @@ const MetricTensor = ({coordList}) => {
         gap: '10rem',
         justifyContent: 'space-between'
       }}>
-        <div style={{
-          border: '3px solid red'
-        }}>
+        <div>
         {
           coordList.map((coord)=>{
             return(
@@ -33,7 +33,7 @@ const MetricTensor = ({coordList}) => {
           })
         }
         </div>
-        <div style={{
+        {/* <div style={{
            border: '3px solid red'
         }}>
         {
@@ -53,7 +53,7 @@ const MetricTensor = ({coordList}) => {
             )
           })
         }
-        </div>
+        </div> */}
       </div>
     </div>
   )
