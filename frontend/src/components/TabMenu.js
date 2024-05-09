@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from '@mui/material';
 
-import '../../App.css'
+import '../App.css'
 
+// Pop up window 
 
 const TabMenu = ({setSelected}) => {
 
@@ -11,7 +12,6 @@ const TabMenu = ({setSelected}) => {
         <Button variant='outlined' size='large' onClick={()=>setSelected('ABOUT')}>ABOUT</Button>
         <Button variant='outlined' size='large' onClick={()=>setSelected('EXAMPLES')}>EXAMPLES</Button>
         <Button variant='outlined' size='large' onClick={()=>setSelected('QUICK GUIDE')}>QUICK GUIDE</Button>
-        <Button variant='outlined' size='large' onClick={()=> setSelected('OPTIONS')}>OPTIONS</Button>
     </div>
   )
 }

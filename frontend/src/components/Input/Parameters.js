@@ -1,20 +1,8 @@
 import React, {useState} from 'react'
 import Box from '@mui/material/Box';
-
-
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-
 import FormGroup from '@mui/material/FormGroup';
-
-import { Formik, Form, FormikValues } from "formik";
 import { CommonTextField, CommonCheckBox, CommonSelect } from '../CommonFormElements';
-
-
-import {API_URL} from '../../env'
-import axios from "axios";
-
-import MetricTensor from './MetricTensor';
-
 
 const CoordList = ({numCoords}) => {
 
@@ -32,42 +20,9 @@ const CoordList = ({numCoords}) => {
   )
 }
 
-
-
-const Options = ({myInitialValues}) => {
-
-  const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
-  const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
-
-
+const Parameters = ({myInitialValues}) => {
   return (
     <>
-        <Formik
-          initialValues={myInitialValues}
-          onSubmit={
-            async (data, { setSubmitting }) => {
-              setSubmitting(true);
-
-              // Make async call
-              await axios
-              .put(API_URL + "christoffelsymbols", data)
-              .then((response)=>response.data)
-              .then((response)=>
-                sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response))
-                .then(()=>{
-                  sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
-                })
-                .catch((error)=>{
-                  console.log(error);
-                })
-                .finally(setSubmitting(false))
-              )
-            }
-          }
-          >
-            {({ values, isSubmitting, isValid }) => (
-      <Form>
-
         <div style={{
           display: 'flex',
           gap: '1rem'
@@ -88,7 +43,7 @@ const Options = ({myInitialValues}) => {
         Number of Dimensions
        <CommonSelect
           name="num_coordinates"
-          values={values}
+          values={myInitialValues}
           label="Dimensions"
           options={[2,3,4]}
        />
@@ -102,22 +57,22 @@ const Options = ({myInitialValues}) => {
         <FormGroup>
         <CommonCheckBox
           name="reserve_parameters.a"
-          values={values}
+          values={myInitialValues.reserve_parameters.a}
           label="a(t) (Scale Factor)"
         />
         <CommonCheckBox
           name="reserve_parameters.p"
-          values={values}
+          values={myInitialValues.reserve_parameters.p}
           label="p(t) (Pressure as a function of time)"
         />
         <CommonCheckBox
           name="reserve_parameters.P"
-          values={values}
+          values={myInitialValues.reserve_parameters.P}
           label="&#961;(t) (Density as a function of time)"
         />
         <CommonCheckBox
           name="reserve_parameters.e"
-          values={values}
+          values={myInitialValues.reserve_parameters.e}
           label="e (Euler's number)"
         />
         </FormGroup>
@@ -141,11 +96,11 @@ const Options = ({myInitialValues}) => {
             gap: '0.5rem'
           }}>
             
-          &#120572; (<CoordList numCoords={values.num_coordinates}/>)
+          &#120572; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           = 
           <CommonTextField
             name="variable_parameters.alpha"
-            value={values.variable_parameters.alpha}
+            value={myInitialValues.variable_parameters.alpha}
             placeholder={"i.e., x**2 + y**2"}
           />
           </span>
@@ -155,11 +110,11 @@ const Options = ({myInitialValues}) => {
             alignItems: 'center',
             gap: '0.5rem'
           }}> 
-          &delta; (<CoordList numCoords={values.num_coordinates}/>)
+          &delta; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           = 
           <CommonTextField
             name="variable_parameters.delta"
-            value={values.variable_parameters.delta}
+            value={myInitialValues.variable_parameters.delta}
             placeholder={"i.e., x**2 + 2*y"}
           />
           </span>
@@ -169,24 +124,19 @@ const Options = ({myInitialValues}) => {
             alignItems: 'center',
             gap: '0.5rem'
           }}>
-          &#949; (<CoordList numCoords={values.num_coordinates}/>)
+          &#949; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           =
           <CommonTextField
             name="variable_parameters.epsilon"
-            value={values.variable_parameters.epsilon}
+            value={myInitialValues.variable_parameters.epsilon}
             placeholder={"i.e., 2*x + 2*y"}
           />
           </span>
         </Box>
       </div>
       </div>
-          <MetricTensor myInitialValues={values}/>
-    </Form>
-            )}
-        </Formik>
-       
     </>
   )
 }
 
-export default Options
+export default Parameters;

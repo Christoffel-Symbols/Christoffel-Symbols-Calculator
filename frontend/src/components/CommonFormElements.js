@@ -54,11 +54,10 @@ export const CommonCheckBox = ({values, label, ...props}) => {
     return (
         <FormControlLabel 
         name={field.name}
-        value={values.reserve_parameters.a}
         onChange={(e)=>{
             setFieldValue(String(field.name), e.currentTarget.checked);
         }}
-        control={<Checkbox/>} 
+        control={<Checkbox checked={values}/>} 
         label={label}
         />
         )
@@ -112,3 +111,19 @@ export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
         />
     );
 };
+
+export const CalculateButton = ({isSubmitting}) => {
+  return (
+    <LoadingButton
+    type="Submit"
+    disabled={isSubmitting}
+    size="large"
+    variant="contained"
+    style={{ width: "25%", fontSize: 24, margin: 16 }}
+    loading={isSubmitting}
+    loadingIndicator="Calculating..."
+    >
+    Calculate
+    </LoadingButton>
+  )
+}
