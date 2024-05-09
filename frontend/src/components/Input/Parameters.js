@@ -34,7 +34,6 @@ const Parameters = ({myInitialValues}) => {
         fontSize: '2rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem'
       }}>
         <div style={{
           textAlign: 'center',
@@ -70,11 +69,6 @@ const Parameters = ({myInitialValues}) => {
           values={myInitialValues.reserve_parameters.P}
           label="&#961;(t) (Density as a function of time)"
         />
-        <CommonCheckBox
-          name="reserve_parameters.e"
-          values={myInitialValues.reserve_parameters.e}
-          label="e (Euler's number)"
-        />
         </FormGroup>
         </div>
       </div>
@@ -101,7 +95,7 @@ const Parameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.alpha"
             value={myInitialValues.variable_parameters.alpha}
-            placeholder={"i.e., x**2 + y**2"}
+            placeholder={"Example: x**2 + y**2"}
           />
           </span>
 
@@ -115,7 +109,7 @@ const Parameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.delta"
             value={myInitialValues.variable_parameters.delta}
-            placeholder={"i.e., x**2 + 2*y"}
+            placeholder={"Example: x**2 + 2*y"}
           />
           </span>
 
@@ -129,7 +123,7 @@ const Parameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.epsilon"
             value={myInitialValues.variable_parameters.epsilon}
-            placeholder={"i.e., 2*x + 2*y"}
+            placeholder={"Example: 2*x + 2*y"}
           />
           </span>
         </Box>

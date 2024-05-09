@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 
+import '../App.css'
 
 function createMatrix(numCoords) {
 
@@ -32,6 +33,13 @@ export const CommonTextField = ({placeholder, label, disabled=false, required=fa
 
     return (
         <Field
+        inputProps={{
+          style: {
+            fontFamily: "Roboto,sans-serif;",
+            fontSize: '1.5rem',
+            fontWeight: '200',
+          }
+        }}
         placeholder={placeholder}
         label={label}
         as={TextField}
@@ -102,6 +110,13 @@ export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
 
     return (
         <Field
+        inputProps={{
+          style: {
+            fontFamily: "Roboto,sans-serif;",
+            fontSize: '1.5rem',
+            fontWeight: '200',
+          }
+        }}
         placeholder={placeholder}
         as={TextField}
         type="input"

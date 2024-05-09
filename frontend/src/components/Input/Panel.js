@@ -1,12 +1,12 @@
 import React from 'react';
 import MetricTensor from './MetricTensor';
-import Options from './Parameters';
+import Parameters from './Parameters';
 import axios from "axios";
 import {API_URL} from '../../env'
 import { Formik, Form } from 'formik';
 import { CalculateButton } from '../CommonFormElements';
 
-const Panel = () => {
+const Panel = ({incrNumChristoffelCalculated}) => {
 
   const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
@@ -22,10 +22,9 @@ const Panel = () => {
       epsilon: ''
     },
     reserve_parameters: {
-      a: true,
+      a: false,
       p: false,
       P: false,
-      e: false
     },
     metric_tensor: [[0,0], [0,0]]
     }
@@ -46,22 +45,22 @@ const Panel = () => {
               .put(API_URL + "christoffelsymbols", data)
               .then((response)=>response.data)
               .then((response)=>
-                sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response))
-                .then(()=>{
-                  sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
+                sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response)))
+              .then(()=>{
+                sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
+                incrNumChristoffelCalculated();
                 })
                 .catch((error)=>{
                   console.log(error);
                 })
-                .finally(setSubmitting(false))
-              )
+                .finally(() => setSubmitting(false))
             }
           }
           >
              {({ values, isSubmitting, isValid }) => (
                 <Form>
                <div className='input'>
-                  <Options myInitialValues={values}/>
+                  <Parameters myInitialValues={values}/>
                   <MetricTensor myInitialValues={values}/>
                <CalculateButton isSubmitting={isSubmitting}/>
                </div>

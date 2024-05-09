@@ -11,11 +11,16 @@ import './App.css';
 
 const App = () => {
 
-  const [selected, setSelected] = useState('CALCULATE');
+  const [selected, setSelected] = useState('');
+  const [numChristoffelCalculated, setNumChristoffelCalculated] = useState(0);
+  const incrNumChristoffelCalculated = () => {
+    setNumChristoffelCalculated((prevState)=>{
+      return prevState + 1;
+    })
+  }
+
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
-
-
 
   return (
     <div className='app'>
@@ -28,14 +33,14 @@ const App = () => {
         padding: '0.5rem'
       }}>
         <TabMenu setSelected={setSelected}/>
-        <Panel/>
+        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
       </div>
       {
       sessionStorage.getItem(FORM_PARAMS) === null 
       ?
       null
       :
-      <Result/>
+      <Result numChristoffelCalculated={numChristoffelCalculated}/>
       }
       <Footer/>
     </div>

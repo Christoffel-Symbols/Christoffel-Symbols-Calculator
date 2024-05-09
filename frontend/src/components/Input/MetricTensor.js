@@ -2,17 +2,24 @@ import React from 'react'
 import {Button, TextField} from "@mui/material";
 import { MatrixComponent } from '../CommonFormElements';
 import {Formik, Form} from "formik";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
+
 
 const MetricTensor = ({myInitialValues}) => {
   const dummyList = ['x','y','z','t']
   const coordList = dummyList.splice(0,myInitialValues.num_coordinates)
+
+
   return (
-    <div className='metricTensor'>
+    <>
     <Button variant='outlined' size='large' sx={{
-      marginBottom: '1rem'
+      marginTop: '1rem'
     }}>Metric Tensor</Button>
+    <div className='metricTensor'>
       <div style={{
-        border: '3px solid black',
+        border: '3px solid',
+        borderColor: 'white black white black',
+        borderRadius: '2rem',
         display: 'flex',
         padding: '1rem',
         justifyContent: 'center'
@@ -47,6 +54,7 @@ const MetricTensor = ({myInitialValues}) => {
         </div>
       </div>
     </div>
+     </>
   )
 }
 
