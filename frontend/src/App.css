@@ -2,17 +2,34 @@ html, body {
   padding: 0;
   margin: 0;
   height: 100%;
-  font-family: "Roboto",
-    sans-serif;
+  /*https: //stackoverflow.com/questions/3540194/how-to-make-a-grid-like-graph-paper-grid-with-just-css*/
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
 }
 
 .header {
   padding: 5px;
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
   justify-content: center;
-  border: 3px solid black;
+  background-color: black;
+  color: white;
+}
+
+.heading {
+    font-size: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .app {
@@ -22,25 +39,6 @@ html, body {
   justify-content: space-between;
 }
 
-.footer {
-  border: 3px solid black;
-  text-align: center;
-  bottom: 0;
-  padding-bottom: 10px;
-}
-
-.logo {
-  border: 3px solid black;
-  border-radius: 10rem;
-}
-
-.heading {
-    font-size: 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 0.5rem;
-}
 
 .input {
   display: flex;
@@ -55,19 +53,12 @@ html, body {
 .metricTensor {
   text-align: center;
   font-size: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.menu {
+  gap: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 1rem;
-  gap: 0.5rem;
-  border: 3px solid black;
 }
+
 
 .result {
   text-align: center;
@@ -78,4 +69,12 @@ html, body {
 .TextField {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 5rem;
+}
+
+.footer {
+  text-align: center;
+  bottom: 0;
+  padding-bottom: 10px;
+  background-color: black;
+  color: white;
 }

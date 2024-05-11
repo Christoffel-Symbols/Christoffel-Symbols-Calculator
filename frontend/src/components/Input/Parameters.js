@@ -21,6 +21,7 @@ const CoordList = ({numCoords}) => {
 }
 
 const Parameters = ({myInitialValues}) => {
+
   return (
     <>
         <div style={{
@@ -30,15 +31,12 @@ const Parameters = ({myInitialValues}) => {
           
       <div style={{
         border: '3px solid black',
-        padding:'0.5rem',
         fontSize: '2rem',
         display: 'flex',
         flexDirection: 'column',
+        textAlign: 'center'
       }}>
-        <div style={{
-          textAlign: 'center',
-          padding: '0.5rem'
-        }}>
+        <div>
         Number of Dimensions
        <CommonSelect
           name="num_coordinates"
@@ -47,11 +45,7 @@ const Parameters = ({myInitialValues}) => {
           options={[2,3,4]}
        />
         </div>
-        <div style={{
-          fontSize: '2rem',
-          textAlign: 'center',
-          padding: '0.5rem'
-        }}>
+        <div>
         Reserve Parameters
         <FormGroup>
         <CommonCheckBox
@@ -75,11 +69,11 @@ const Parameters = ({myInitialValues}) => {
       <div style={{
         border: '3px solid black',
         padding:'0.5rem',
-        fontSize: '2rem'
+        fontSize: '2rem',
+        textAlign: 'center'
       }}>
         Define Variable Parameters
         <Box style={{
-          marginTop: '1rem',
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem'

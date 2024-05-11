@@ -11,14 +11,14 @@ import './App.css';
 
 const App = () => {
 
-  const [selected, setSelected] = useState('');
+  // When one of the states is updated, it causes all the children to re-render.
   const [numChristoffelCalculated, setNumChristoffelCalculated] = useState(0);
+
   const incrNumChristoffelCalculated = () => {
     setNumChristoffelCalculated((prevState)=>{
       return prevState + 1;
     })
-  }
-
+  };
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
 
@@ -32,7 +32,7 @@ const App = () => {
         gap: '1rem',
         padding: '0.5rem'
       }}>
-        <TabMenu setSelected={setSelected}/>
+        <TabMenu incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
         <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
       </div>
       {

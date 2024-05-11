@@ -32,10 +32,12 @@ const Panel = ({incrNumChristoffelCalculated}) => {
     myInitialValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
   }
 
+
   return (
     <>
      <Formik
           initialValues={myInitialValues}
+          enableReinitialize={true}
           onSubmit={
             async (data, { setSubmitting }) => {
               setSubmitting(true);
@@ -47,7 +49,7 @@ const Panel = ({incrNumChristoffelCalculated}) => {
               .then((response)=>
                 sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response)))
               .then(()=>{
-                sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
+                sessionStorage.setItem(FORM_SESSION, JSON.stringify({...data, value: ''}))
                 incrNumChristoffelCalculated();
                 })
                 .catch((error)=>{

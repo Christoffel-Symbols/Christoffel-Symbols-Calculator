@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Field, FieldAttributes, useField, useFormikContext } from "formik";
-import { TextField } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,6 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
+import Slide from '@mui/material/Slide';
+import Button from '@mui/material/Button';
 
 import '../App.css'
 
@@ -26,6 +28,27 @@ function createMatrix(numCoords) {
   return dummyList;
 }
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const styleButton = {
+  "&:hover": {
+    backgroundColor: "white",
+    color: "black"
+  },
+  "&:active": {
+    backgroundColor: "blue"
+  },
+  backgroundColor: 'black',
+  color: 'white',
+  fontSize: '1.3rem',
+  fontFamily: 'Roboto',
+  letterSpacing: '3px'
+};
+
+
+
 export const CommonTextField = ({placeholder, label, disabled=false, required=false, fullWidth=false, ...props}) => {
 
     const [field, meta] = useField(props);
@@ -35,7 +58,7 @@ export const CommonTextField = ({placeholder, label, disabled=false, required=fa
         <Field
         inputProps={{
           style: {
-            fontFamily: "Roboto,sans-serif;",
+            fontFamily: "Roboto,sans-serif",
             fontSize: '1.5rem',
             fontWeight: '200',
           }
@@ -112,7 +135,7 @@ export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
         <Field
         inputProps={{
           style: {
-            fontFamily: "Roboto,sans-serif;",
+            fontFamily: "Roboto,sans-serif",
             fontSize: '1.5rem',
             fontWeight: '200',
           }
@@ -141,4 +164,39 @@ export const CalculateButton = ({isSubmitting}) => {
     Calculate
     </LoadingButton>
   )
+}
+
+export const CommonAlertDialog = ({name, description, open, handleClose, handleClickOpen}) => {
+
+  return (
+    <React.Fragment>
+      <Button
+      variant='outlined'
+      sx={styleButton}
+      onClick={() => handleClickOpen(name)}
+      >
+        {name}
+      </Button>
+    <Dialog
+    open={open}
+    TransitionComponent={Transition}
+    keepMounted
+    onClose={handleClose}
+    maxWidth={'md'}
+    >
+      <DialogTitle sx={{textAlign: 'center'}}>
+        {name}
+      </DialogTitle>
+      <DialogContent>
+        {/* span because DialogContextText is a wrapper over p tag and FormControl is a wrapper over div */}
+        <DialogContentText component={'span'}>
+          {description()}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Done</Button>
+      </DialogActions>
+    </Dialog>
+    </React.Fragment>
+  );
 }

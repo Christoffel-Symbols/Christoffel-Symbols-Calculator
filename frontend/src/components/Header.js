@@ -6,23 +6,16 @@ import logo from '../data/logo.png'
 const Header = () => {
   return (
     <div className='header'>
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: '15%'
-        }}>
-        <img src={logo} className='logo'/>
-        </div>
         <div className='heading'>
-      <div>
+          <span>
         Christoffel Symbols 
-        </div>
-        <div style={{
-          textAlign: 'center'
-        }}>
+          </span>
+          <span style={{
+            background: 'white',
+            color: 'black'
+          }}>
         Calculator
-        </div>
+          </span>
         </div>
     </div>
   )

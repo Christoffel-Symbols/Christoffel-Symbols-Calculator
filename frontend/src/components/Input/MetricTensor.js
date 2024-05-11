@@ -6,8 +6,12 @@ import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 
 const MetricTensor = ({myInitialValues}) => {
-  const dummyList = ['x','y','z','t']
-  const coordList = dummyList.splice(0,myInitialValues.num_coordinates)
+  const dummyList = ['x','y','z','t'];
+  const coordList = dummyList.splice(0,myInitialValues.num_coordinates);
+
+  const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
+
+  let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
 
 
   return (
@@ -53,6 +57,32 @@ const MetricTensor = ({myInitialValues}) => {
         }
         </div>
       </div>
+      =
+      {
+        christoffelParams?.metric_tensor
+        ?
+        <div style={{
+        border: '3px solid',
+        padding: '1rem',
+        backgroundColor: 'white',
+      }}>
+         <MathJaxContext>
+            <MathJax>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
+          </MathJaxContext>
+        </div>
+        :
+        <div style={{
+        border: '3px solid',
+        padding: '1rem',
+        backgroundColor: 'white',
+        width: '30%'
+        }}>
+        Please submit a new request to see how the inputted metric tensor will be evaluated. 
+        <br/>
+        Click on CALCULATE.
+        </div>
+
+      }
     </div>
      </>
   )
