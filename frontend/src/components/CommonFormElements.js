@@ -1,6 +1,6 @@
 import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Field, FieldAttributes, useField, useFormikContext } from "formik";
+import { Field, useField, useFormikContext } from "formik";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,8 +11,8 @@ import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
-
 import '../App.css'
+
 
 function createMatrix(numCoords) {
 
@@ -44,7 +44,8 @@ const styleButton = {
   color: 'white',
   fontSize: '1.3rem',
   fontFamily: 'Roboto',
-  letterSpacing: '3px'
+  letterSpacing: '3px',
+  borderRadius: '1rem'
 };
 
 
@@ -89,7 +90,14 @@ export const CommonCheckBox = ({values, label, ...props}) => {
             setFieldValue(String(field.name), e.currentTarget.checked);
         }}
         control={<Checkbox checked={values}/>} 
-        label={label}
+        label={
+        <article style={{
+          fontFamily: "Roboto,sans-serif",
+          fontSize: '1rem',
+          fontWeight: '100',
+        }}>
+          {label}
+        </article>}
         />
         )
         
@@ -101,7 +109,11 @@ export const CommonSelect = ({values, label, ...props}) => {
         const [field] = useField(props);
         
         return (
-            <Box sx={{ minWidth: 120, padding: '1rem' }}>
+            <Box 
+            sx={{ 
+              minWidth: 120, 
+              padding: '1rem'
+              }}>
           <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
             <Select
@@ -157,7 +169,12 @@ export const CalculateButton = ({isSubmitting}) => {
     disabled={isSubmitting}
     size="large"
     variant="contained"
-    style={{ width: "25%", fontSize: 24, margin: 16 }}
+    style={{ 
+    width: "18%", 
+    fontSize: 24, 
+    margin: 16,
+    borderRadius: '1rem'
+    }}
     loading={isSubmitting}
     loadingIndicator="Calculating..."
     >

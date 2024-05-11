@@ -6,6 +6,22 @@ import {API_URL} from '../../env'
 import { Formik, Form } from 'formik';
 import { CalculateButton } from '../CommonFormElements';
 
+const styleButton = {
+  "&:hover": {
+    backgroundColor: "white",
+    color: "black"
+  },
+  "&:active": {
+    backgroundColor: "blue"
+  },
+  backgroundColor: 'black',
+  color: 'white',
+  fontSize: '1.3rem',
+  fontFamily: 'Roboto',
+  letterSpacing: '3px',
+  marginTop: '1rem'
+};
+
 const Panel = ({incrNumChristoffelCalculated}) => {
 
   const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
@@ -64,7 +80,9 @@ const Panel = ({incrNumChristoffelCalculated}) => {
                <div className='input'>
                   <Parameters myInitialValues={values}/>
                   <MetricTensor myInitialValues={values}/>
-               <CalculateButton isSubmitting={isSubmitting}/>
+               <CalculateButton 
+               isSubmitting={isSubmitting}
+               />
                </div>
                 </Form>
              )}

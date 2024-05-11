@@ -26,18 +26,17 @@ const Parameters = ({myInitialValues}) => {
     <>
         <div style={{
           display: 'flex',
-          gap: '1rem'
+          gap: '1rem',
         }}>
           
-      <div style={{
-        border: '3px solid black',
-        fontSize: '2rem',
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'center'
-      }}>
+      <div className='leftPanel'>
         <div>
+          <article className='panelHeading' style={{
+            paddingLeft: '0.5rem',
+            paddingRight: '0.5rem'
+          }}>
         Number of Dimensions
+          </article>
        <CommonSelect
           name="num_coordinates"
           values={myInitialValues}
@@ -46,7 +45,9 @@ const Parameters = ({myInitialValues}) => {
        />
         </div>
         <div>
+          <article className='panelHeading'>
         Reserve Parameters
+          </article>
         <FormGroup>
         <CommonCheckBox
           name="reserve_parameters.a"
@@ -66,23 +67,16 @@ const Parameters = ({myInitialValues}) => {
         </FormGroup>
         </div>
       </div>
-      <div style={{
-        border: '3px solid black',
-        padding:'0.5rem',
-        fontSize: '2rem',
-        textAlign: 'center'
-      }}>
+      <div className='rightPanel'>
+        <article className='panelHeading'>
         Define Variable Parameters
+        </article>
         <Box style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem'
         }}>
-          <span style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
+          <span className='variable'>
             
           &#120572; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           = 
@@ -93,11 +87,7 @@ const Parameters = ({myInitialValues}) => {
           />
           </span>
 
-          <span style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}> 
+          <span className='variable'> 
           &delta; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           = 
           <CommonTextField
@@ -107,11 +97,7 @@ const Parameters = ({myInitialValues}) => {
           />
           </span>
 
-          <span style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
+          <span className='variable'>
           &#949; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           =
           <CommonTextField
