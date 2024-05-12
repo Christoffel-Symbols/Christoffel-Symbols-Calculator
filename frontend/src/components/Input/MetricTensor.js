@@ -24,8 +24,12 @@ const styleButton = {
 
 
 const MetricTensor = ({myInitialValues}) => {
-  const dummyList = ['x','y','z','t'];
-  const coordList = dummyList.splice(0,myInitialValues.num_coordinates);
+  const dummyList = ['t','x','y','z'];
+  var coordList = dummyList.splice(0,myInitialValues.num_coordinates);
+
+  if(myInitialValues.num_coordinates !==4){
+     coordList = ['t','x','y','z'].splice(1,myInitialValues.num_coordinates);
+  }
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
 
@@ -55,6 +59,22 @@ const MetricTensor = ({myInitialValues}) => {
         gap: '0.5rem',
         justifyContent: 'center'
       }}>
+      {
+        coordList.map((coord, index)=>{
+          return(
+             <Chip sx={{
+            backgroundColor: 'green',
+            color: 'white'
+          }} key={coord} label={
+          <span style={{
+            fontSize: '1.2rem'
+          }}>
+            {coord}
+          </span>
+          } />
+          )
+        })
+      }
       {
       Object.keys(myInitialValues["reserve_parameters"]).map((keyName) => {
         return(

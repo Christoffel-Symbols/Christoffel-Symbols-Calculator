@@ -6,8 +6,13 @@ import { CommonTextField, CommonCheckBox, CommonSelect } from '../CommonFormElem
 
 const CoordList = ({numCoords}) => {
 
-  const coordList = ['x','y','z','t'];
-  const displayList = coordList.splice(0,numCoords);
+  const coordList = ['t','x','y','z'];
+  var displayList = coordList.splice(0,numCoords);
+  
+  if(numCoords !== 4){
+    displayList = ['t','x','y','z'].splice(1,numCoords);
+  }
+
 
   return (
     displayList.map((coord, index)=>
