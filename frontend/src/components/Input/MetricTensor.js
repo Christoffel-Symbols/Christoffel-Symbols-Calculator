@@ -11,42 +11,60 @@ const MetricTensor = ({myInitialValues}) => {
   const coordList = dummyList.splice(0,myInitialValues.num_coordinates);
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
-  const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
 
   let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
-  let christoffelForm = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
 
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '1rem',
-      marginTop: '1rem'
-    }}>
-    <div
-    style={{
-      textAlign: 'center',
-      fontSize: '3rem',
-      width: '40%',
-      borderRadius:'1rem',
-      backgroundColor: 'black',
-      color: 'white',
-      padding: '0.1rem'
-    }}
-    >
-    Metric Tensor
-    </div>
       <div className='metricTensor'>
       <div>
-         <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} sx={{
+        marginBottom: '0.5rem'
+      }}>
       {
       Object.keys(myInitialValues["reserve_parameters"]).map((keyName) => {
         return(
           myInitialValues["reserve_parameters"][keyName]
           ?
-          <Chip color="success" key={keyName} label={"INPUT " + keyName + "(t) as " + keyName} />
+          <Chip sx={{
+            backgroundColor: 'red',
+            color: 'white'
+          }} key={keyName} label={"INPUT " + keyName + "(t) as " + keyName} />
+          :
+          null
+        )
+        })
+      }
+      {
+      Object.keys(myInitialValues["variable_parameters"]).map((keyName) => {
+        return(
+          myInitialValues["variable_parameters"][keyName]
+          ?
+          <Chip sx={{
+            backgroundColor: 'red',
+            color: 'white'
+          }} key={keyName} label={
+            <span>
+              {
+              keyName === 'alpha'
+              ?
+              <span style={{
+                fontSize: '1.2rem'
+              }}>&#120572;</span>
+              :
+              keyName === 'delta'
+              ?
+              <span style={{
+                fontSize: '1rem'
+              }}>&delta;</span>
+              :
+              <span style={{
+                fontSize: '1.2rem'
+              }}>&#949;</span>
+              }
+            </span>
+          
+          } />
           :
           null
         )
@@ -55,11 +73,11 @@ const MetricTensor = ({myInitialValues}) => {
         </Stack>
       <div style={{
         border: '3px solid',
-        borderColor: 'white black white black',
         borderRadius: '2rem',
         display: 'flex',
         padding: '1rem',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:'white'
       }}>
         <div>
         {
@@ -97,7 +115,9 @@ const MetricTensor = ({myInitialValues}) => {
       {
         christoffelParams?.metric_tensor
         ?
-        <div className='paperGrid'>
+        <div style={{
+          backgroundColor: 'white'
+        }}>
         <div style={{
         border: '3px solid',
         padding: '1rem',
@@ -120,7 +140,6 @@ const MetricTensor = ({myInitialValues}) => {
         </div>
 
       }
-            </div>
     </div>
   )
 }

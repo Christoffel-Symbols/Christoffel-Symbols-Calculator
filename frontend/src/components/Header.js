@@ -10,10 +10,7 @@ const Header = () => {
           <span>
         Christoffel Symbols 
           </span>
-          <span style={{
-            background: 'white',
-            color: 'black'
-          }}>
+          <span>
         Calculator
           </span>
         </div>

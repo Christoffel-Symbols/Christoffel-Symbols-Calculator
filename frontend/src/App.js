@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -11,6 +11,8 @@ import './App.css';
 
 const App = () => {
 
+  const resultRef = useRef(null);
+
   // When one of the states is updated, it causes all the children to re-render.
   const [numChristoffelCalculated, setNumChristoffelCalculated] = useState(0);
 
@@ -19,8 +21,6 @@ const App = () => {
       return prevState + 1;
     })
   };
-
-  const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
 
   return (
     <div className='app'>
@@ -33,15 +33,9 @@ const App = () => {
         padding: '0.5rem'
       }}>
         <TabMenu incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
-        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
+        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated} resultRef={resultRef}/>
       </div>
-      {
-      sessionStorage.getItem(FORM_PARAMS) === null 
-      ?
-      null
-      :
-      <Result numChristoffelCalculated={numChristoffelCalculated}/>
-      }
+      <Result numChristoffelCalculated={numChristoffelCalculated} resultRef={resultRef}/>
       <Footer/>
     </div>
   )

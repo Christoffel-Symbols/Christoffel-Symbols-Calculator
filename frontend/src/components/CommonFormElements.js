@@ -1,7 +1,7 @@
 import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Field, useField, useFormikContext } from "formik";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
+import { Alert, AlertTitle, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,6 +13,24 @@ import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
 import '../App.css'
 
+export function zeroMatrix(arr){
+    let zeroCounter = 0; // keeps track of zeros
+    let numCounter = 0; // keeps track of zeros and other numbers
+    arr.every(subArray => subArray.every(elem => {
+        if (elem === '0'){
+            zeroCounter += 1;
+            numCounter += 1;
+        } else{
+            numCounter -= 1;
+        }
+    }))
+    
+    if (zeroCounter === numCounter){
+        return true; // zero matrix
+    } else{
+        return false; // not a zero matrix
+    }
+}
 
 function createMatrix(numCoords) {
 
@@ -35,17 +53,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const styleButton = {
   "&:hover": {
     backgroundColor: "white",
-    color: "black"
+    color: "black",
+    border: 'solid #006d77'
   },
   "&:active": {
-    backgroundColor: "blue"
+    backgroundColor: '#006d77'
   },
-  backgroundColor: 'black',
+  backgroundColor: '#006d77',
   color: 'white',
   fontSize: '1.3rem',
   fontFamily: 'Roboto',
   letterSpacing: '3px',
-  borderRadius: '1rem'
 };
 
 
@@ -162,11 +180,11 @@ export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
     );
 };
 
-export const CalculateButton = ({isSubmitting}) => {
+export const CalculateButton = ({isSubmitting, isValid, isZeroMatrix}) => {
   return (
     <LoadingButton
     type="Submit"
-    disabled={isSubmitting}
+    disabled={isSubmitting || !isValid}
     size="large"
     variant="contained"
     style={{ 
@@ -177,6 +195,7 @@ export const CalculateButton = ({isSubmitting}) => {
     }}
     loading={isSubmitting}
     loadingIndicator="Calculating..."
+    sx={styleButton}
     >
     Calculate
     </LoadingButton>
@@ -215,5 +234,31 @@ export const CommonAlertDialog = ({name, description, open, handleClose, handleC
       </DialogActions>
     </Dialog>
     </React.Fragment>
+  );
+}
+
+export const AlertError = ({isError, setIsError, errorMessage, setErrorMessage}) => {
+  return (
+    <Snackbar
+      open={isError}
+      autoHideDuration={3000}
+      onClose={()=>{
+        setIsError(false);
+        setErrorMessage("");
+      }}
+      >
+      <Alert
+        severity="error"
+        onClose={()=>{
+          setIsError(false);
+          setErrorMessage("")
+        }}
+      >
+        <AlertTitle>
+          Error</AlertTitle> 
+        {errorMessage} <br/>
+        Please revise your inputs and submit a new request.
+      </Alert>
+    </Snackbar>
   );
 }
