@@ -29,14 +29,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
   
     return (
       <div id={numChristoffelCalculated} className='result' ref={resultRef}>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          margin: '1rem 1rem 1rem 1rem',
-          justifyContent: 'center'
-        }}>
+        <div className='resultMenuBar'>
           <Button 
           variant='contained' 
           onClick={()=> executeScroll(christoffel_skRef)}

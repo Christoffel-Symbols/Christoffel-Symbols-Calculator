@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Box from '@mui/material/Box';
-import { MathJax, MathJaxContext } from "better-react-mathjax";
 import FormGroup from '@mui/material/FormGroup';
 import { CommonTextField, CommonCheckBox, CommonSelect } from '../CommonFormElements';
 
@@ -53,7 +52,7 @@ const Parameters = ({myInitialValues}) => {
           <article className='panelHeading'>
         Reserve Parameters
           </article>
-        <FormGroup>
+        <FormGroup sx={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
         <CommonCheckBox
           name="reserve_parameters.a"
           values={myInitialValues.reserve_parameters.a}
@@ -93,8 +92,10 @@ const Parameters = ({myInitialValues}) => {
           </span>
 
           <span className='variable'> 
+          <article>
           &delta; (<CoordList numCoords={myInitialValues.num_coordinates}/>)
           = 
+          </article>
           <CommonTextField
             name="variable_parameters.delta"
             value={myInitialValues.variable_parameters.delta}

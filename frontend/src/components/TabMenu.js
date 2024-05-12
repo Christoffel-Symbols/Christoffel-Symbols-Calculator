@@ -29,7 +29,16 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
   const aboutDescription = () => {
     return(
       <>
-        Christoffel Symbols Calculator is an online Graphical User Interface that helps you calculate christoffel symbols and a bunch of Tensors (i.e., Riemann Tensor, Ricci Tensor, and etcetera) from a given metric tensor.
+        Christoffel Symbols Calculator is a mathematical tool with a Graphical User Interface that helps you calculate Christoffel Symbols from a Metric Tensor, along with non-zero components of the Riemann Tensor and the Christoffel Symbols of first kind, Ricci Tensor, Ricci Scalar and the Einstein Tensor. 
+        <br/>
+        <br/>
+        You can work with a 2,3,4-Dimensional coordinate system and specify and reserve parameters that you want to include in the Metric Tensor (i.e., symbol <b>a</b> can be reserved as the scale factor <b>a(t)</b> or can be used as a constant).
+        <br/>
+        <br/>
+        If you are a first-time user, please check out the <b>EXAMPLES</b> section: it has a bunch of pre-defined cases of popular metric tensors in relativistic and gravitational astrophysics. The <b>QUICK GUIDE</b> section gives a detailed step by step instructions on how to use this tool. 
+        <br/>
+        <br/>
+        It is a project still very much in development and as the mission matures, we expect it to become more efficient and sophisticated. Thank you for using the tool!
       </>
     )
   }
@@ -53,10 +62,20 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
     <FormControl>
       <FormLabel sx={{
         textAlign: 'center'
-      }}>Options</FormLabel>
+      }}><b>
+        Given below are a bunch of pre-defined 
+        <br/> 
+        metric tensors that are popular in astrophyiscs. 
+        <br/>
+        Please select one.
+        </b>
+        </FormLabel>
       <RadioGroup
         name="tab-menu-radio-buttons-group"
         onChange={handleRadioChange}
+        sx={{
+         alignContent: 'center'
+        }}
       >
         <FormControlLabel 
         value="example-1" 
@@ -100,6 +119,18 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
     return (
       <>
         Step 1: Select number of dimensions from the drop-down menu below.
+        <br/>
+        <br/>
+        Step 2: Reserve symbols from a given list of symbols that you want to include in the metric tensor.
+        <br/>
+        <br/>
+        Step 3: Defined atmost 3 variable parameters that you want to include in the metric tensor.
+        <br/>
+        <br/>
+        Step 4: Fill the metric tensor.
+        <br/>
+        <br/>
+        Step 5: Calculate Away!  
       </>
     )
   }

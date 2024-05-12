@@ -7,6 +7,14 @@ import Stack from '@mui/material/Stack';
 import { useFormikContext } from 'formik';
 import { styleButton } from '../CommonFormElements';
 
+const chipStyle={
+        marginBottom: '0.5rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.5rem',
+        justifyContent: 'center'
+}
+
 
 const MetricTensor = ({myInitialValues}) => {
   const dummyList = ['t','x','y','z'];
@@ -37,13 +45,7 @@ const MetricTensor = ({myInitialValues}) => {
   return (
       <div className='metricTensor'>
       <div>
-      <Stack direction="row" spacing={1} sx={{
-        marginBottom: '0.5rem',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.5rem',
-        justifyContent: 'center'
-      }}>
+      <Stack direction="row" spacing={1} sx={chipStyle}>
       {
         coordList.map((coord, index)=>{
           return(
@@ -203,11 +205,10 @@ const MetricTensor = ({myInitialValues}) => {
         border: '3px solid',
         padding: '1rem',
         backgroundColor: 'white',
-        width: '30%',
         width: 'auto',
         height: 'auto'
         }}>
-        Please submit a new request to see how the inputted metric tensor will be evaluated. 
+        Please use Python mathematical operators to fill the Metric Tensor.
         </div>
 
       }

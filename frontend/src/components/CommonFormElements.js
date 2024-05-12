@@ -93,6 +93,7 @@ export const CommonCheckBox = ({values, label, ...props}) => {
           fontFamily: "Roboto,sans-serif",
           fontSize: '1rem',
           fontWeight: '100',
+          textAlign: 'left'
         }}>
           {label}
         </article>}
@@ -168,7 +169,6 @@ export const CalculateButton = ({isSubmitting, isValid}) => {
     size="large"
     variant="contained"
     style={{ 
-    width: "18%", 
     fontSize: 24, 
     margin: 16,
     borderRadius: '1rem'
