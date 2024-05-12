@@ -6,7 +6,6 @@ import {API_URL} from '../../env'
 import { Formik, Form } from 'formik';
 import { AlertError, CalculateButton } from '../CommonFormElements';
 import * as Yup from "yup";
-import { zeroMatrix } from '../CommonFormElements';
 
 const christoffelSymbolsValidationSchema = Yup.object({
   num_coordinates: Yup.number()

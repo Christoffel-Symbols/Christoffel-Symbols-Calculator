@@ -1,10 +1,27 @@
 import React from 'react'
-import {Button, TextField} from "@mui/material";
+import {Button} from "@mui/material";
 import { MatrixComponent } from '../CommonFormElements';
-import {Formik, Form} from "formik";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { useFormikContext } from 'formik';
+
+const styleButton = {
+  "&:hover": {
+    backgroundColor: "white",
+    color: "black",
+    border: 'solid #006d77'
+  },
+  "&:active": {
+    backgroundColor: '#006d77'
+  },
+  backgroundColor: '#006d77',
+  color: 'white',
+  fontSize: '1.3rem',
+  fontFamily: 'Roboto',
+  letterSpacing: '3px',
+};
+
 
 const MetricTensor = ({myInitialValues}) => {
   const dummyList = ['x','y','z','t'];
@@ -14,12 +31,29 @@ const MetricTensor = ({myInitialValues}) => {
 
   let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
 
+  const { setFieldValue } = useFormikContext();
+
+  const handleClick = () => {
+    // setFieldValue('metric_tensor[0][0]', '0');
+    coordList.map((coord,index)=>{
+      let row = index;
+          {coordList.map((coord,index)=>{
+            let col = index;
+                setFieldValue(`metric_tensor${'[' + String(row) + ']' + '[' + String(col) + ']'}]`, '0')
+          })}
+    })
+  };
+
 
   return (
       <div className='metricTensor'>
       <div>
       <Stack direction="row" spacing={1} sx={{
-        marginBottom: '0.5rem'
+        marginBottom: '0.5rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.5rem',
+        justifyContent: 'center'
       }}>
       {
       Object.keys(myInitialValues["reserve_parameters"]).map((keyName) => {
@@ -29,7 +63,19 @@ const MetricTensor = ({myInitialValues}) => {
           <Chip sx={{
             backgroundColor: 'red',
             color: 'white'
-          }} key={keyName} label={"INPUT " + keyName + "(t) as " + keyName} />
+          }} key={keyName} label={
+            <span>
+              INPUT {
+              keyName === 'P' 
+              ? 
+              <span>
+                &#961; 
+              </span>
+              : keyName
+              }(t) as {keyName}
+            </span>
+          
+          } />
           :
           null
         )
@@ -48,19 +94,31 @@ const MetricTensor = ({myInitialValues}) => {
               {
               keyName === 'alpha'
               ?
+              <>
+              <span>Input </span>
               <span style={{
                 fontSize: '1.2rem'
               }}>&#120572;</span>
+              <span> as `alpha`</span>
+              </>
               :
               keyName === 'delta'
               ?
-              <span style={{
+              <>
+              <span>Input </span>
+               <span style={{
                 fontSize: '1rem'
               }}>&delta;</span>
+              <span> as `delta`</span>
+              </>
               :
-              <span style={{
+              <>
+              <span>Input </span>
+               <span style={{
                 fontSize: '1.2rem'
               }}>&#949;</span>
+              <span> as `epsilon`</span>
+              </>
               }
             </span>
           
@@ -95,7 +153,7 @@ const MetricTensor = ({myInitialValues}) => {
                   let col = index;
                   return(
                     <MatrixComponent
-                    key={col}
+                      key={col}
                       placeholder={'(' + String(row) + ',' + String(col) + ')'}
                       name={`metric_tensor${'[' + String(row) + ']' + '[' + String(col) + ']'}]`}
                       value={myInitialValues.metric_tensor[row,col]}
@@ -107,6 +165,15 @@ const MetricTensor = ({myInitialValues}) => {
           })
         }
         </div>
+      </div>
+      <div style={{
+        marginTop: '0.5rem'
+      }}>
+        <Button 
+        variant='contained' 
+        onClick={handleClick}
+        style={styleButton}
+        >Reset</Button>
       </div>
       </div>
       <div>

@@ -13,25 +13,6 @@ import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
 import '../App.css'
 
-export function zeroMatrix(arr){
-    let zeroCounter = 0; // keeps track of zeros
-    let numCounter = 0; // keeps track of zeros and other numbers
-    arr.every(subArray => subArray.every(elem => {
-        if (elem === '0'){
-            zeroCounter += 1;
-            numCounter += 1;
-        } else{
-            numCounter -= 1;
-        }
-    }))
-    
-    if (zeroCounter === numCounter){
-        return true; // zero matrix
-    } else{
-        return false; // not a zero matrix
-    }
-}
-
 function createMatrix(numCoords) {
 
   var dummyList = [];
@@ -180,7 +161,7 @@ export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
     );
 };
 
-export const CalculateButton = ({isSubmitting, isValid, isZeroMatrix}) => {
+export const CalculateButton = ({isSubmitting, isValid}) => {
   return (
     <LoadingButton
     type="Submit"
