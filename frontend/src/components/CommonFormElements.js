@@ -31,22 +31,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const styleButton = {
+export const styleButton = {
   "&:hover": {
     backgroundColor: "white",
     color: "black",
-    border: 'solid #006d77'
+    border: 'solid #244855'
   },
   "&:active": {
-    backgroundColor: '#006d77'
+    backgroundColor: '#244855'
   },
-  backgroundColor: '#006d77',
+  backgroundColor: '#244855',
   color: 'white',
   fontSize: '1.3rem',
   fontFamily: 'Roboto',
   letterSpacing: '3px',
 };
-
 
 
 export const CommonTextField = ({placeholder, label, disabled=false, required=false, fullWidth=false, ...props}) => {

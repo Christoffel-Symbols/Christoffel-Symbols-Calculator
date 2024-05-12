@@ -5,22 +5,7 @@ import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { useFormikContext } from 'formik';
-
-const styleButton = {
-  "&:hover": {
-    backgroundColor: "white",
-    color: "black",
-    border: 'solid #006d77'
-  },
-  "&:active": {
-    backgroundColor: '#006d77'
-  },
-  backgroundColor: '#006d77',
-  color: 'white',
-  fontSize: '1.3rem',
-  fontFamily: 'Roboto',
-  letterSpacing: '3px',
-};
+import { styleButton } from '../CommonFormElements';
 
 
 const MetricTensor = ({myInitialValues}) => {
@@ -190,9 +175,8 @@ const MetricTensor = ({myInitialValues}) => {
         marginTop: '0.5rem'
       }}>
         <Button 
-        variant='contained' 
         onClick={handleClick}
-        style={styleButton}
+        sx={styleButton}
         >Reset</Button>
       </div>
       </div>

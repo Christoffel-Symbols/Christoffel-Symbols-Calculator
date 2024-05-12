@@ -1,22 +1,8 @@
 import React, { useRef } from 'react'
 import { Button } from '@mui/material'
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { styleButton } from '../CommonFormElements';
 
-const styleButton = {
-  "&:hover": {
-    backgroundColor: "white",
-    color: "black",
-    border: 'solid #006d77'
-  },
-  "&:active": {
-    backgroundColor: '#006d77'
-  },
-  backgroundColor: '#006d77',
-  color: 'white',
-  fontSize: '1rem',
-  fontFamily: 'Roboto',
-  letterSpacing: '3px',
-};
 
 const Result = ({numChristoffelCalculated, resultRef}) => {
 
@@ -103,7 +89,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
           margin: '0rem 1rem 0rem 1rem'
         }}>
           <article className='resultHeading' ref={christoffel_skRef}>
-          Christoffel Symbols (Second kind)
+          Christoffel Symbols
           </article>
           <div style={{
               display: 'flex',
@@ -135,7 +121,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
           </div>
           <div>
             <article className='resultHeading' ref={christoffel_fkRef}>
-            Christoffel Symbols (First kind)
+            Christoffel Symbols First kind (Non-Zero Components)
             </article>
             <div style={{
               display: 'flex',
