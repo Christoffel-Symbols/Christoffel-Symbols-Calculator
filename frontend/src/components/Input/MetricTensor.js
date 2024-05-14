@@ -40,6 +40,14 @@ const MetricTensor = ({myInitialValues}) => {
 
   return (
       <div className='metricTensor'>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.3rem'
+        }}>
+      <MathJaxContext>
+            <MathJax>{"$$ g_{\\mu\\nu} =  $$"}</MathJax>
+      </MathJaxContext>
       <div>
       <Stack direction="row" spacing={1} sx={chipStyle}>
       {
@@ -56,32 +64,6 @@ const MetricTensor = ({myInitialValues}) => {
           </span>
           } />
           )
-        })
-      }
-      {
-      Object.keys(myInitialValues["reserve_parameters"]).map((keyName) => {
-        return(
-          myInitialValues["reserve_parameters"][keyName]
-          ?
-          <Chip sx={{
-            backgroundColor: 'red',
-            color: 'white'
-          }} key={keyName} label={
-            <span>
-              INPUT {
-              keyName === 'P' 
-              ? 
-              <span>
-                &#961; 
-              </span>
-              : keyName
-              }(t) as {keyName}
-            </span>
-          
-          } />
-          :
-          null
-        )
         })
       }
       {
@@ -132,6 +114,7 @@ const MetricTensor = ({myInitialValues}) => {
         })
       }
         </Stack>
+      
       <div style={{
         border: '3px solid',
         borderRadius: '2rem',
@@ -189,7 +172,7 @@ const MetricTensor = ({myInitialValues}) => {
         </span>
       </article>
       </div>
-
+      </div>
       {
         christoffelParams?.metric_tensor
         ?

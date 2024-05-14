@@ -75,24 +75,13 @@ const christoffelSymbolsValidationSchema = Yup.object({
   variable_parameters: Yup.object({
     alpha: Yup.string()
     .notRequired()
-    .matches("^[a-zA-Z0-9*()_\/+. -]*$", "Not a valid special character"),
+    .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character"),
     delta: Yup.string()
     .notRequired()
-    .matches("^[a-zA-Z0-9*()_\/+. -]*$", "Not a valid special character"),
+    .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character"),
     epsilon: Yup.string()
     .notRequired()
-    .matches("^[a-zA-Z0-9*()_\/+. -]*$","Not a valid special character"),
-  }),
-  reserve_parameters: Yup.object({
-    a: Yup.bool()
-    .required()
-    .typeError("a can eithe be true or false"),
-    p: Yup.bool()
-    .required()
-    .typeError("p can eithe be true or false"),
-    P: Yup.string()
-    .required()
-    .typeError("P can eithe be option_1 or option_2"),
+    .matches("^[a-zA-Z0-9*(),_\/+. -]*$","Not a valid special character"),
   }),
   metric_tensor: Yup.array().test("zeroMatrix", "", (value) => {
     let zeroCounter = 0; // keeps track of zeros
@@ -113,7 +102,7 @@ const christoffelSymbolsValidationSchema = Yup.object({
         return true; // not a zero matrix therefore test passed
     }
   })
-  .of(Yup.array().of(Yup.string().matches("^[a-zA-Z0-9*()_\/+. -]*$", "Not a valid special character").required())),
+  .of(Yup.array().of(Yup.string().matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character").required())),
   onlyCS: Yup.string()
   .required("onlyCS must be either true or false")
   .typeError("onlyCS must either be true or false")
@@ -145,11 +134,6 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
       alpha: '',
       delta: '',
       epsilon: ''
-    },
-    reserve_parameters: {
-      a: false,
-      p: false,
-      P: false,
     },
     metric_tensor: [['0','0'], ['0','0']],
     onlyCS: 'option_1'

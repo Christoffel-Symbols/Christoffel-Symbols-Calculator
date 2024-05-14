@@ -60,7 +60,7 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-1',0,0,0], [0,'(a**2)/(1-(k*x**2))',0,0], [0,0,'a**2*(x**2)',0], [0,0,0,'(a**2)*(x**2)*sin(y)**2']],
+    metric_tensor: [['-1',0,0,0], [0,'(a(t)**2)/(1-(k*x**2))',0,0], [0,0,'a(t)**2*(x**2)',0], [0,0,0,'(a(t)**2)*(x**2)*sin(y)**2']],
     onlyCS: 'option_1'
     },
     {

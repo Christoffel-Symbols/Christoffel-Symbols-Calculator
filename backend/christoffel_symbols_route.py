@@ -33,10 +33,6 @@ def put_christoffel_symbols_json():
             for parameter in variable_parameters:
                 variable_parameters[parameter] = str(variable_parameters[parameter])
             logger.info("Variable parameters: " + str(variable_parameters))
-            reserve_parameters = request_data["reserve_parameters"]
-            for parameter in reserve_parameters:
-                reserve_parameters[parameter] = str(reserve_parameters[parameter])
-            logger.info("Reserve parameters: " + str(reserve_parameters))
             metric_tensor = str(request_data["metric_tensor"])
             logger.info("metric_tensor: " + str(metric_tensor))
             onlyCS = str(request_data["onlyCS"])
@@ -66,11 +62,8 @@ def put_christoffel_symbols_json():
         for key in variable_parameters:
             if variable_parameters[key]:
                 variable_dict[key] = variable_parameters[key]
-                
 
-        print(variable_dict)
-
-        PyCSCObj.metric_tensor(matrix=metric_tensor, scale_factor=eval(reserve_parameters['a']), pressure=eval(reserve_parameters['p']), density=eval(reserve_parameters['P']), variable_values=variable_dict) #self.metric
+        PyCSCObj.metric_tensor(matrix=metric_tensor, variable_values=variable_dict) #self.metric
 
         PyCSCObj.calculate_christoffel_symbol(show_symbols=False) #self.christoffel_sk
 

@@ -16,7 +16,6 @@ const Parameters = ({myInitialValues}) => {
           
       <div className='leftPanel'>
         <Dimensions myInitialValues={myInitialValues}/>
-        <ReserveParameters myInitialValues={myInitialValues}/>
       </div>
           <VariableParameters myInitialValues={myInitialValues}/>
       </div>
