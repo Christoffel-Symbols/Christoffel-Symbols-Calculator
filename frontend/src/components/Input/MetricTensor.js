@@ -40,9 +40,7 @@ const MetricTensor = ({myInitialValues}) => {
 
   return (
       <div className='metricTensor'>
-      <div style={{
-        width: '70%'
-      }}>
+      <div>
       <Stack direction="row" spacing={1} sx={chipStyle}>
       {
         coordList.map((coord, index)=>{
@@ -196,24 +194,24 @@ const MetricTensor = ({myInitialValues}) => {
         christoffelParams?.metric_tensor
         ?
         <div style={{
-          backgroundColor: 'white'
-        }}>
-        <div style={{
         border: '3px solid',
         padding: '1rem',
+         backgroundColor: 'white'
       }}>
          <MathJaxContext>
             <MathJax>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
           </MathJaxContext>
-        </div>
         </div>
         :
         <div style={{
         border: '3px solid',
         padding: '1rem',
         backgroundColor: 'white',
+        borderRadius: '2rem',
+        height: '100%',
+        width:'30%'
         }}>
-        Please submit a new request to calculate Christoffel Symbols.
+        A LaTeX version of the Metric Tensor will be displayed once a request is submitted.
         </div>
 
       }
