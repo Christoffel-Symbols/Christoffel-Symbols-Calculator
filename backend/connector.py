@@ -52,6 +52,9 @@ def redirect(path):
     Redirects request to the appropriate function based on the path.
     """
 
+    logger.info(f"Parsing request for /{path}")
+    logger.info(f"URL of request: " + str(request.url))
+
     if re.search(r"\bchristoffelsymbols\b", path) is not None:
         logger.info("Redirecting request to /christoffelsymbols")
         if request.method != "PUT":

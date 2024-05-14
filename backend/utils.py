@@ -7,23 +7,17 @@ from flask import Flask, Response, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
-cors = CORS(app=app)
-
-#
-# Configure logger
-#
-app.logger.handlers.clear() #prevent double-logging with Flask logger
-log_handler = logging.StreamHandler() # log to stdout/stderr
-log_formatter = logging.Formatter(
-    "%(asctime)s [%(name)-12s] %(levelname)-8s %(message)s"
+app = Flask(
+    __name__,
+    # static_folder="../frontend/build",
+    static_folder="/backend/client",
+    static_url_path='/'
 )
-log_handler.setFormatter(log_formatter)
-log_handler.setLevel(logging.DEBUG) # This should allow all error messages to be displayed
-app.logger.addHandler(log_handler)
-# Use this logger for manual addition of log messages
-logger = logging.getLogger("werkzeug")
-logger.setLevel(logging.DEBUG)
+cors = CORS()
+logger = logging.getLogger("gunicorn.errir")
+app.logger.handlers = logger.handlers
+app.logger.setLevel(logger.level)
+logger.debug('Static URL path is set to: /' + str(app.static_url_path))
 
 def bad_request(message):
     """
