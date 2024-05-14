@@ -29,19 +29,16 @@ const aboutDescription = () => {
   const quickGuideDescription = () => {
     return (
       <>
-        Step 1: Select number of dimensions from the drop-down menu below.
+        Step 1: Select the number of coordinates/dimensions of your space-time from the drop-down menu in the section `Number of Dimensions`.
         <br/>
         <br/>
-        Step 2: Reserve symbols from a given list of symbols that you want to include in the metric tensor.
+        Step 2: Defined atmost 3 variable parameters that you want to include in the metric tensor.
         <br/>
         <br/>
-        Step 3: Defined atmost 3 variable parameters that you want to include in the metric tensor.
+        Step 3: Fill the metric tensor with the appropriate expressions and values.
         <br/>
         <br/>
-        Step 4: Fill the metric tensor.
-        <br/>
-        <br/>
-        Step 5: Calculate Away!  
+        Step 4: Calculate Away!  
       </>
     )
   }
