@@ -115,7 +115,9 @@ html, body {
   gap: 1rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  flex-wrap: wrap;
+  border: solid black;
+  justify-content: center;
 }
 
 .app {
@@ -162,4 +164,17 @@ html, body {
   padding-bottom: 10px;
   background-color: #e64833;
   color: white;
+}
+
+.mathJax {
+  font-size: 1.5vw;
+  overflow: scroll;
+}
+
+.calculateOptions {
+  margin-bottom: 0.5rem;
+  background-color: #874f41;
+  color: white;
+  border-radius: 1rem;
+  text-align: center;
 }

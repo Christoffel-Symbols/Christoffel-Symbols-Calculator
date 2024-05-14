@@ -100,7 +100,7 @@ export const CommonCheckBox = ({values, label, ...props}) => {
         />
         )
         
-    }
+}
     
 export const CommonSelect = ({values, label, ...props}) => {
         
@@ -137,13 +137,14 @@ export const CommonSelect = ({values, label, ...props}) => {
   
 }
 
-export const MatrixComponent = ({placeholder, fullWidth=false, ...props}) => {
+export const MatrixComponent = ({placeholder, fullWidth=true, ...props}) => {
 
     const [field, meta] = useField(props);
     const errorText = meta.error || meta.touched ? meta.error : ''
 
     return (
         <Field
+        fullWidth={fullWidth}
         inputProps={{
           style: {
             fontFamily: "Roboto,sans-serif",
@@ -170,7 +171,6 @@ export const CalculateButton = ({isSubmitting, isValid}) => {
     variant="contained"
     style={{ 
     fontSize: 24, 
-    margin: 16,
     borderRadius: '1rem'
     }}
     loading={isSubmitting}

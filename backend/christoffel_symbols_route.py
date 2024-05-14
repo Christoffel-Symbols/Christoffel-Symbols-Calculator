@@ -36,8 +36,11 @@ def put_christoffel_symbols_json():
             reserve_parameters = request_data["reserve_parameters"]
             for parameter in reserve_parameters:
                 reserve_parameters[parameter] = str(reserve_parameters[parameter])
+            logger.info("Reserve parameters: " + str(reserve_parameters))
             metric_tensor = str(request_data["metric_tensor"])
             logger.info("metric_tensor: " + str(metric_tensor))
+            onlyCS = str(request_data["onlyCS"])
+            logger.info("onlyCS: " + str(onlyCS))
 
 
 
@@ -55,42 +58,70 @@ def put_christoffel_symbols_json():
             num_coordinates = num_coordinates
         )
 
-        PyCSCObj.metric_tensor(matrix=metric_tensor) #self.metric
+        cs_sk_dict = dict()
+        cs_fk_dict = dict()
+        riemann_dict = dict()
+        variable_dict = dict()
+
+        for key in variable_parameters:
+            if variable_parameters[key]:
+                variable_dict[key] = variable_parameters[key]
+                
+
+        print(variable_dict)
+
+        PyCSCObj.metric_tensor(matrix=metric_tensor, scale_factor=eval(reserve_parameters['a']), pressure=eval(reserve_parameters['p']), density=eval(reserve_parameters['P']), variable_values=variable_dict) #self.metric
 
         PyCSCObj.calculate_christoffel_symbol(show_symbols=False) #self.christoffel_sk
 
-        christoffel_fk = PyCSCObj.calculate_christoffel_symbol_fk(show_symbols=False)
-
-        
-        PyCSCObj.calculate_riemann_tensor(show_tensor=False) #self.riemann_dict
-
-        PyCSCObj.calculate_ricci_tensor(show_tensor=False) # self.ricci_tensor
-
-        PyCSCObj.calculate_ricci_scalar(show_scalar=False) # self.ricci_scalar
-
-        einstein_tensor = PyCSCObj.calculate_einstein_tensor(show_tensor=False)
-
-        for key in christoffel_fk:
-            christoffel_fk[key] = sym.latex(christoffel_fk[key])
-
-        for key in PyCSCObj.riemann_dict:
-            PyCSCObj.riemann_dict[key] = sym.latex(PyCSCObj.riemann_dict[key])
-
-        christoffel_sk_dict = dict()
         for index in range(num_coordinates):
-            christoffel_sk_dict[str(index)] = sym.latex(PyCSCObj.christoffel_sk[index])
+            cs_sk_dict[str(index)] = sym.latex(sym.simplify(PyCSCObj.christoffel_sk[index]))
+
+        PyCSCObj.calculate_christoffel_symbol_fk(show_symbols=False)
+
+        for key in PyCSCObj.christoffel_fk:
+            ans = PyCSCObj.christoffel_fk[key]
+            if ans != 0:
+                cs_fk_dict[key] = sym.latex(PyCSCObj.christoffel_fk[key])
 
 
+        if onlyCS == "option_2":
 
-        return jsonify(
+            PyCSCObj.calculate_riemann_tensor(show_tensor=False) #self.riemann_dict
+
+            PyCSCObj.calculate_ricci_tensor(show_tensor=False) # self.ricci_tensor
+
+            PyCSCObj.calculate_ricci_scalar(show_scalar=False) # self.ricci_scalar
+
+            einstein_tensor = PyCSCObj.calculate_einstein_tensor(show_tensor=False)
+
+
+            for key in PyCSCObj.riemann_dict:
+                ans = PyCSCObj.riemann_dict[key]
+                if ans != 0:
+                    riemann_dict[key] = sym.latex(PyCSCObj.riemann_dict[key])
+
+
+        if onlyCS == "option_2":
+            return jsonify(
             metric_tensor = sym.latex(PyCSCObj.metric),
-            christoffel_symbols = christoffel_sk_dict,
-            christoffel_symbols_fk = christoffel_fk,
-            riemann_tensor = PyCSCObj.riemann_dict,
+            christoffel_symbols = cs_sk_dict,
+            christoffel_symbols_fk = cs_fk_dict,
+            riemann_tensor = riemann_dict,
             ricci_tensor = sym.latex(PyCSCObj.ricci_tensor),
             ricci_scalar = sym.latex(PyCSCObj.ricci_scalar),
             einstein_tensor = sym.latex(einstein_tensor)
-        )
+        ) 
+        else:
+            return jsonify(
+            metric_tensor = sym.latex(PyCSCObj.metric),
+            christoffel_symbols = cs_sk_dict,
+            christoffel_symbols_fk = cs_fk_dict,
+            riemann_tensor = {},
+            ricci_tensor = "",
+            ricci_scalar = "",
+            einstein_tensor = ""
+            )
     
     except Exception as e:
         log_tracebook(e)

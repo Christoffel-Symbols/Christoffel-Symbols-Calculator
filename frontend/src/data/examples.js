@@ -12,7 +12,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['r**2',0], [0,'(r**2)*sin(x)**2']]
+    metric_tensor: [['r**2',0], [0,'(r**2)*sin(x)**2']],
+    onlyCS : 'option_1'
     },
     {
     value: "example-2",
@@ -27,7 +28,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['1',0,0], [0,'(x**2)',0],[0,0,'(x**2)*sin(y)**2']]
+    metric_tensor: [['1',0,0], [0,'(x**2)',0],[0,0,'(x**2)*sin(y)**2']],
+    onlyCS: 'option_1'
     },
     {
     value: "example-3",
@@ -42,7 +44,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-(1-r_s/x)',0,0,0], [0,'(1-r_s/x)**(-1)',0,0], [0,0,'x**2',0], [0,0,0,'(x**2)*sin(y)**2']]
+    metric_tensor: [['-(1-r_s/x)',0,0,0], [0,'(1-r_s/x)**(-1)',0,0], [0,0,'x**2',0], [0,0,0,'(x**2)*sin(y)**2']],
+    onlyCS: 'option_1'
     },
     {
     value: "example-4",
@@ -57,7 +60,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-1',0,0,0], [0,'(a**2)/(1-(k*x**2))',0,0], [0,0,'a**2*(x**2)',0], [0,0,0,'(a**2)*(x**2)*sin(y)**2']]
+    metric_tensor: [['-1',0,0,0], [0,'(a**2)/(1-(k*x**2))',0,0], [0,0,'a**2*(x**2)',0], [0,0,0,'(a**2)*(x**2)*sin(y)**2']],
+    onlyCS: 'option_1'
     },
     {
     value: "example-5",
@@ -72,7 +76,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-(1 - (r_s/x) + (r_Q**2)/x**2)',0,0,0], [0,'(1 - (r_s/x) + (r_Q**2)/x**2)**-1',0,0], [0,0,'(x**2)',0], [0,0,0,'(x**2)*sin(y)**2']]
+    metric_tensor: [['-(1 - (r_s/x) + (r_Q**2)/x**2)',0,0,0], [0,'(1 - (r_s/x) + (r_Q**2)/x**2)**-1',0,0], [0,0,'(x**2)',0], [0,0,0,'(x**2)*sin(y)**2']],
+    onlyCS: 'option_1'
     },
     {
     value: "example-6",
@@ -87,7 +92,8 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-(1 - (r_s*x)/delta)',0,0,'-(r_s*x*a*sin(y)**2)/delta'], [0,'delta/epsilon',0,0], [0,0,'delta',0], ['-(r_s*a*sin(y)**2)/delta',0,0,'(alpha + (r_s*x*(a**2)*sin(y)**2)/delta)*sin(y)**2']]
+    metric_tensor: [['-(1 - (r_s*x)/delta)',0,0,'-(r_s*x*a*sin(y)**2)/delta'], [0,'delta/epsilon',0,0], [0,0,'delta',0], ['-(r_s*a*x*sin(y)**2)/delta',0,0,'(alpha + (r_s*x*(a**2)*sin(y)**2)/delta)*sin(y)**2']],
+    onlyCS: 'option_1'
     },
     {
     value: "example-7",
@@ -102,6 +108,7 @@ export const examplesData = [
       p: false,
       P: false,
     },
-    metric_tensor: [['-(1 + (2*alpha)/(c**2))',0,0,0], [0,'1- (2*alpha)/(c**2)',0,0], [0,0,'(1 - (2*alpha)/c**2)*(x**2)',0], [0,0,0,'(1-(2*alpha)/(c**2))*(x**2)*(sin(y)**2)']]
+    metric_tensor: [['-(1 + (2*alpha)/(c**2))',0,0,0], [0,'1- (2*alpha)/(c**2)',0,0], [0,0,'(1 - (2*alpha)/c**2)*(x**2)',0], [0,0,0,'(1-(2*alpha)/(c**2))*(x**2)*(sin(y)**2)']],
+    onlyCS: 'option_1'
     },
 ];

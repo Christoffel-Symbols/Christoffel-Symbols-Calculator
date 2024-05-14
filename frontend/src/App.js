@@ -13,6 +13,10 @@ const App = () => {
 
   const resultRef = useRef(null);
 
+  // clean slate a.k.a fresh input form
+  // Also removes sessionStorage inputs 
+  const [reset, setReset] = useState(0);
+
   // When one of the states is updated, it causes all the children to re-render.
   const [numChristoffelCalculated, setNumChristoffelCalculated] = useState(0);
 
@@ -33,7 +37,7 @@ const App = () => {
         padding: '0.5rem'
       }}>
         <TabMenu incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
-        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated} resultRef={resultRef}/>
+        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated} resultRef={resultRef} setReset={setReset}/>
       </div>
       <Result numChristoffelCalculated={numChristoffelCalculated} resultRef={resultRef}/>
       <Footer/>

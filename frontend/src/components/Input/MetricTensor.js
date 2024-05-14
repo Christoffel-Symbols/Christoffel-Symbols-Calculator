@@ -1,11 +1,9 @@
 import React from 'react'
-import {Button} from "@mui/material";
 import { MatrixComponent } from '../CommonFormElements';
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import { useFormikContext } from 'formik';
-import { styleButton } from '../CommonFormElements';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const chipStyle={
         marginBottom: '0.5rem',
@@ -28,23 +26,23 @@ const MetricTensor = ({myInitialValues}) => {
 
   let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
 
-  const { setFieldValue } = useFormikContext();
+  // const handleClick = () => {
 
-  const handleClick = () => {
-    // setFieldValue('metric_tensor[0][0]', '0');
-    coordList.map((coord,index)=>{
-      let row = index;
-          {coordList.map((coord,index)=>{
-            let col = index;
-                setFieldValue(`metric_tensor${'[' + String(row) + ']' + '[' + String(col) + ']'}]`, '0')
-          })}
-    })
-  };
+  //   coordList.map((coord,index)=>{
+  //     let row = index;
+  //         {coordList.map((coord,index)=>{
+  //           let col = index;
+  //               setFieldValue(`metric_tensor${'[' + String(row) + ']' + '[' + String(col) + ']'}]`, '0')
+  //         })}
+  //   })
+  // };
 
 
   return (
       <div className='metricTensor'>
-      <div>
+      <div style={{
+        width: '70%'
+      }}>
       <Stack direction="row" spacing={1} sx={chipStyle}>
       {
         coordList.map((coord, index)=>{
@@ -106,7 +104,7 @@ const MetricTensor = ({myInitialValues}) => {
               <span style={{
                 fontSize: '1.2rem'
               }}>&#120572;</span>
-              <span> as `alpha`</span>
+              <span> as alpha</span>
               </>
               :
               keyName === 'delta'
@@ -116,7 +114,7 @@ const MetricTensor = ({myInitialValues}) => {
                <span style={{
                 fontSize: '1rem'
               }}>&delta;</span>
-              <span> as `delta`</span>
+              <span> as delta</span>
               </>
               :
               <>
@@ -124,7 +122,7 @@ const MetricTensor = ({myInitialValues}) => {
                <span style={{
                 fontSize: '1.2rem'
               }}>&#949;</span>
-              <span> as `epsilon`</span>
+              <span> as epsilon</span>
               </>
               }
             </span>
@@ -142,7 +140,7 @@ const MetricTensor = ({myInitialValues}) => {
         display: 'flex',
         padding: '1rem',
         justifyContent: 'center',
-        backgroundColor:'white'
+        backgroundColor:'white',
       }}>
         <div>
         {
@@ -152,7 +150,7 @@ const MetricTensor = ({myInitialValues}) => {
               <div style={{
                 display: 'flex',
                 gap: '0.5rem',
-                padding: '0.3rem'
+                padding: '0.3rem',
               }}
               key={row}
               >
@@ -173,18 +171,27 @@ const MetricTensor = ({myInitialValues}) => {
         }
         </div>
       </div>
-      <div style={{
-        marginTop: '0.5rem'
+      <article style={{
+        marginTop: '0.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.2rem',
+        fontFamily: 'Roboto',
+        textWrap: 'wrap',
       }}>
-        <Button 
-        onClick={handleClick}
-        sx={styleButton}
-        >Reset</Button>
+      <WarningIcon sx={{
+        color: 'red',
+        fontSize: '1.4rem'
+      }}/> 
+      <span style={{
+          fontSize: '1.2rem',
+          marginTop:'0.1rem'
+      }}>
+        Use <b>Python Syntax</b> and <b>Mathematical operators</b> to fill the Metric Tensor.
+        </span>
+      </article>
       </div>
-      </div>
-      <div>
-      =
-      </div>
+
       {
         christoffelParams?.metric_tensor
         ?
@@ -205,10 +212,8 @@ const MetricTensor = ({myInitialValues}) => {
         border: '3px solid',
         padding: '1rem',
         backgroundColor: 'white',
-        width: 'auto',
-        height: 'auto'
         }}>
-        Please use Python mathematical operators to fill the Metric Tensor.
+        Please submit a new request to calculate Christoffel Symbols.
         </div>
 
       }
