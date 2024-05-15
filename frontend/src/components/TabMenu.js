@@ -29,7 +29,9 @@ const aboutDescription = () => {
   const quickGuideDescription = () => {
     return (
       <>
-        Step 1: Select the number of coordinates/dimensions of your space-time from the drop-down menu in the section `Number of Dimensions`.
+        Step 1: Select the number of coordinates/dimensions of your space-time from the drop-down menu in the <b>
+          Number of Dimensions section.
+          </b>
         <br/>
         <br/>
         Step 2: Defined atmost 3 variable parameters that you want to include in the metric tensor.

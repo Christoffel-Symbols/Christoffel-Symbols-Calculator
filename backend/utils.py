@@ -9,8 +9,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(
     __name__,
-    # static_folder="../frontend/build",
-    static_folder="/backend/client",
+    # static_folder="../frontend/build", # For local testing
+    static_folder="/backend/client", # For building inside Docker container
     static_url_path='/'
 )
 cors = CORS(app=app)

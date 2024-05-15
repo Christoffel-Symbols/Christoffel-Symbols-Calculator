@@ -154,7 +154,7 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
 
               // Make async call
               await axios
-              .put(API_URL + "christoffelsymbols", data, {timeout: 30000})
+              .put(API_URL + "christoffelsymbols", data)
               .then((response)=>response.data)
               .then((response)=>
                 sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response)))
