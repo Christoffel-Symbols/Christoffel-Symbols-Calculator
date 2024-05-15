@@ -2,8 +2,8 @@
 # COPY frontend/build /frontend/build
 
 # -------------------------------------------------------------------------------------- #
-
-FROM --platform=linux/amd64 python:3.9-slim
+# needed in macos --platform=linux/arm64
+FROM --platform=linux/arm64 python:3.9-slim
 
 USER root
 
