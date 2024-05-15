@@ -1,8 +1,6 @@
 """
 init.py
 
-Consumes RESTful API from the frontend GUI.
-
 GNU General Public License v3 (GNU GPLv3)
 
 (c) 2024. All rights reserved                  
