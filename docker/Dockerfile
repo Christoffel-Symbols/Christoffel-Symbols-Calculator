@@ -37,6 +37,4 @@ ADD docker/startup.sh /skaha/
 RUN chmod a+x /skaha/startup.sh
 
 # https://stackoverflow.com/a/67206046
-ENV skaha_sessionid=1
-ENTRYPOINT [ "/bin/bash", "-c", "exec /skaha/startup.sh ${skaha_sessionid} \"${@}\"", "--" ]
-# ENTRYPOINT [ "/skaha/startup.sh" ]
+ENTRYPOINT [ "/bin/bash", "-c", "exec /skaha/startup.sh \"${@}\"", "--" ]

@@ -1,11 +1,9 @@
 import logging
-import os
 from traceback import format_exception
 
 
 from flask import Flask, Response, jsonify
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
 
 app = Flask(
     __name__,
