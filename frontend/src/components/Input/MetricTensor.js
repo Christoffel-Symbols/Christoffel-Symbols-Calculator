@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MatrixComponent } from '../CommonFormElements';
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import WarningIcon from '@mui/icons-material/Warning';
+import { TextField } from '@mui/material';
 
 const chipStyle={
         marginBottom: '0.5rem',
@@ -13,8 +14,22 @@ const chipStyle={
         justifyContent: 'center'
 }
 
+const config = {
+  loader: { load: ["input/asciimath"] },
+  asciimath: {
+    displaystyle: true,
+    delimiters: [
+      ["$", "$"],
+      ["`", "`"],
+    ],
+  },
+};
+
 
 const MetricTensor = ({myInitialValues}) => {
+
+  const [expression, setExpression] = useState('');
+
   const dummyList = ['t','x','y','z'];
   var coordList = dummyList.splice(0,myInitialValues.num_coordinates);
 
@@ -45,9 +60,7 @@ const MetricTensor = ({myInitialValues}) => {
           alignItems: 'center',
           gap: '0.3rem'
         }}>
-      <MathJaxContext>
             <MathJax>{"$$ g_{\\mu\\nu} =  $$"}</MathJax>
-      </MathJaxContext>
       <div>
       <Stack direction="row" spacing={1} sx={chipStyle}>
       {
@@ -181,9 +194,7 @@ const MetricTensor = ({myInitialValues}) => {
         padding: '1rem',
          backgroundColor: 'white'
       }}>
-         <MathJaxContext>
-            <MathJax>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
-          </MathJaxContext>
+            <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
         </div>
         :
         <div style={{

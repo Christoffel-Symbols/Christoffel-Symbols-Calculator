@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Button } from '@mui/material'
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { MathJax } from "better-react-mathjax";
 import { styleButton } from '../CommonFormElements';
 
 const Result = ({numChristoffelCalculated, resultRef}) => {
@@ -19,7 +19,6 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
   const einsteinTensorRef = useRef(null);
   
   const executeScroll = (ref) => ref.current.scrollIntoView();
-
   
   if (christoffelParams){
 
@@ -53,7 +52,6 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
           Christoffel Symbols
           </article>
           <div className='resultMathJax'>
-            <MathJaxContext>
               {Object.keys(christoffel_sk).map((keyName)=>{
                 return(
                 <div 
@@ -66,21 +64,23 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                     padding: '1rem',
                   }}
                   key={keyName}>
-                    <MathJax>{"$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + "$$"}</MathJax>
+                    <MathJax 
+                    >{"$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + "$$"}</MathJax>
                     =
-                    <MathJax className='mathJax'>{"$$" + christoffel_sk[keyName] + "$$"}</MathJax>
+                    <MathJax 
+                    className='mathJax'
+                    dynamic
+                    >{"$$" + christoffel_sk[keyName] + "$$"}</MathJax>
                   </div>
                 )
               })
               }
-            </MathJaxContext>
           </div>
           <div>
             <article className='resultHeading' ref={christoffel_fkRef}>
             Christoffel Symbols First kind (Non-Zero Components)
             </article>
             <div className='resultMathJax'>
-            <MathJaxContext>
               {Object.keys(christoffel_fk).map((keyName)=>{
                 return(
                   <div 
@@ -95,11 +95,13 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                   key={keyName}>
                     <MathJax>{"$$" + "\\Gamma_{" + keyName + "}" + "$$"}</MathJax>
                     =
-                    <MathJax className='mathJax'>{"$$" + christoffel_fk[keyName] + "$$"}</MathJax>
+                    <MathJax 
+                    className='mathJax'
+                    dynamic
+                    >{"$$" + christoffel_fk[keyName] + "$$"}</MathJax>
                   </div>
                 )
               })}
-            </MathJaxContext>
             </div>
           </div>
         </div>
@@ -163,7 +165,6 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
           Christoffel Symbols
           </article>
           <div className='resultMathJax'>
-            <MathJaxContext>
               {Object.keys(christoffel_sk).map((keyName)=>{
                 return(
                 <div 
@@ -178,19 +179,20 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                   key={keyName}>
                     <MathJax>{"$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + "$$"}</MathJax>
                     =
-                    <MathJax className='mathJax'>{"$$" + christoffel_sk[keyName] + "$$"}</MathJax>
+                    <MathJax 
+                    className='mathJax'
+                    dynamic
+                    >{"$$" + christoffel_sk[keyName] + "$$"}</MathJax>
                   </div>
                 )
               })
               }
-            </MathJaxContext>
           </div>
           <div>
             <article className='resultHeading' ref={christoffel_fkRef}>
             Christoffel Symbols First kind (Non-Zero Components)
             </article>
             <div className='resultMathJax'>
-            <MathJaxContext>
               {Object.keys(christoffel_fk).map((keyName)=>{
                 return(
                   <div 
@@ -205,11 +207,13 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                   key={keyName}>
                     <MathJax>{"$$" + "\\Gamma_{" + keyName + "}" + "$$"}</MathJax>
                     =
-                    <MathJax className='mathJax'>{"$$" + christoffel_fk[keyName] + "$$"}</MathJax>
+                    <MathJax 
+                    className='mathJax'
+                    dynamic
+                    >{"$$" + christoffel_fk[keyName] + "$$"}</MathJax>
                   </div>
                 )
               })}
-            </MathJaxContext>
             </div>
           </div>
           <div>
@@ -217,9 +221,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Riemann Tensor (Non-zero components)
             </article>
              <div className='resultMathJax'>
-  
-            <MathJaxContext>
-              {Object.keys(riemann_tensor).map((keyName)=>{
+                {Object.keys(riemann_tensor).map((keyName)=>{
                 return(
                   <div 
                   style={{
@@ -233,11 +235,13 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                   key={keyName}>
                     <MathJax>{"$$" + "R^{" + keyName[0] + "}_{" + keyName.slice(1,4) + "}" + "$$"}</MathJax>
                     =
-                    <MathJax className='mathJax'>{"$$" + riemann_tensor[keyName] + "$$"}</MathJax>
+                    <MathJax 
+                    className='mathJax'
+                    dynamic
+                    >{"$$" + riemann_tensor[keyName] + "$$"}</MathJax>
                   </div>
                 )
               })}
-            </MathJaxContext>
               </div>
           </div>
           <div>
@@ -245,9 +249,10 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Ricci Tensor
             </article>
             <div className='resultMathJax'>
-          <MathJaxContext>
-            <MathJax className='mathJax'>{"$$" + ricci_tensor + "$$"}</MathJax>
-          </MathJaxContext>
+            <MathJax 
+            className='mathJax'
+            dynamic
+            >{"$$" + ricci_tensor + "$$"}</MathJax>
             </div>
           </div>
           <div style={{
@@ -257,9 +262,10 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Ricci Scalar
             </article>
             <div className='resultMathJax'>
-          <MathJaxContext>
-            <MathJax className='mathJax'>{"$$" + ricci_scalar + "$$"}</MathJax>
-          </MathJaxContext>
+            <MathJax 
+            className='mathJax'
+            dynamic
+            >{"$$" + ricci_scalar + "$$"}</MathJax>
             </div>
   
           </div>
@@ -268,9 +274,10 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Einstein Tensor
             </article>
             <div className='resultMathJax'>
-          <MathJaxContext>
-            <MathJax className='mathJax'>{"$$" + einstein_tensor + "$$"}</MathJax>
-          </MathJaxContext>
+            <MathJax 
+            className='mathJax'
+            dynamic
+            >{"$$" + einstein_tensor + "$$"}</MathJax>
             </div>
           </div>
         </div>
