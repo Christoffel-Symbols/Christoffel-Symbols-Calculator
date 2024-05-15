@@ -20,7 +20,7 @@ RUN pip3 install flask flask-cors wheel gunicorn
 ARG CACHEBUST_PyCSC=1
 
 # Make sure the spectrum.py file in the github repository points towards the correct stellar_models directory path.
-RUN pip3 install git+https://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@github.com/Christoffel-Symbols/Christoffel-Symbols-Calculator.git
+RUN pip3 install git+https://github.com/Christoffel-Symbols/Christoffel-Symbols-Calculator.git
 
 ARG CACHEBUST_BACKEND=1
 # REVIEW: cachebust not working?
