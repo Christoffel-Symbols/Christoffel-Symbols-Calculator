@@ -1,6 +1,4 @@
-# CS-frontend
-
-Graphical User Interface to calculate Christoffel Symbols
+# Christoffel Symbols Calculator frontend
 
 Christoffel-Symbols-Calculator Team - 2024-2025
 
@@ -18,7 +16,7 @@ Brief walkthrough on how to _locally_ prepare the `PyCSC GUI` in a Docker contai
    git clone https://github.com/Christoffel-Symbols/Christoffel-Symbols-Calculator-frontend.git
    ```
 
-2. Change directory to `frontend` and run the following:
+2. Change the present working directory to `frontend` and run the following:
 
    ```bash
    npm install
