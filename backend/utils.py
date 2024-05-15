@@ -13,8 +13,8 @@ app = Flask(
     static_folder="/backend/client",
     static_url_path='/'
 )
-cors = CORS()
-logger = logging.getLogger("gunicorn.errir")
+cors = CORS(app=app)
+logger = logging.getLogger("gunicorn.error")
 app.logger.handlers = logger.handlers
 app.logger.setLevel(logger.level)
 logger.debug('Static URL path is set to: /' + str(app.static_url_path))
