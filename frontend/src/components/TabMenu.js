@@ -12,16 +12,16 @@ import { examplesData } from '../data/examples';
 const aboutDescription = () => {
     return(
       <>
-        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate Christoffel Symbols (both first and second kind) from a Metric Tensor, along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar and Einstein Tensor. 
+        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate Christoffel Symbols (both first and second kind) from a Metric Tensor, along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
         <br/>
         <br/>
-        You can work with a 2,3,4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the Metric Tensor. You can also include any implicit function in the Metric Tensor (i.e., a(t), which is most popularly known as the scale factor in cosmology.)
+        You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (i.e., a(t), which is most popularly known as the scale factor in cosmology).
         <br/>
         <br/>
-        If you are a first-time user, please check out the <b>EXAMPLES</b> section: it has a bunch of pre-defined space-time metrics that are popular in relativistic and gravitational astrophysics. The <b>QUICK GUIDE</b> section gives a detailed step by step instructions on how to use this tool. 
+        If you are a first-time user, please check out the <b>EXAMPLES</b> section. It has a bunch of pre-defined space-time metrics that are popular in relativistic and gravitational astrophysics. The <b>QUICK GUIDE</b> section gives detailed step-by-step instructions on how to use this tool. 
         <br/>
         <br/>
-        This project is still very much in development and as the mission matures, you can expect the software to become more efficient and sophisticated. I hope you find this tool useful!
+        This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. I hope you find this tool useful!
       </>
     )
   }
@@ -29,18 +29,24 @@ const aboutDescription = () => {
   const quickGuideDescription = () => {
     return (
       <>
-        Step 1: Select the number of coordinates/dimensions of your space-time from the drop-down menu in the <b>
-          Number of Dimensions section.
-          </b>
+        Step 1: Select the number of dimensions of your space-time from the drop-down menu in the <b>
+          Number of Dimensions
+          </b> section. 
         <br/>
         <br/>
-        Step 2: Defined atmost 3 variable parameters that you want to include in the metric tensor.
+        Step 2: Define at most 3 variable parameters in the <b>Define Variable Parameters</b> section that you want to include in the metric tensor. 
         <br/>
         <br/>
-        Step 3: Fill the metric tensor with the appropriate expressions and values.
+        Step 3: Fill the metric tensor with the appropriate expressions and values. 
         <br/>
         <br/>
-        Step 4: Calculate Away!  
+        Step 4: In the <b>Calculate Options</b>, choose whether you want to calculate only Christoffel Symbols (both first and second kinds) or calculate tensors along with Christoffel Symbols.
+        <br/>
+        <br/>
+        Step 5 (a): After the inputted values and expressions have been validated, click on <b>Calculate</b>. 
+        <br/>
+        <br/>
+        Step 5 (b): If you want to start all over again, you can click on the <b>Reset</b> button. 
       </>
     )
   }
@@ -127,7 +133,7 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         <FormControlLabel 
         value="example-6" 
         control={<Radio />} 
-        label="Kerr Metric" />
+        label="Kerr Metric (Very complicated!)" />
         <FormControlLabel 
         value="example-7" 
         control={<Radio />} 

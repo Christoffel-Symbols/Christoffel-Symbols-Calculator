@@ -53,6 +53,7 @@ const CalculateOptions = ({values, ...props}) => {
         }
         />
         <FormControlLabel 
+        disabled={props.disabled}
         value="option_2" 
         control={<Radio />}
         label={
@@ -145,6 +146,7 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
 
   return (
     <>
+    {console.log(myInitialValues)}
      <Formik
           initialValues={myInitialValues}
           enableReinitialize={true}
@@ -191,6 +193,7 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                   <CalculateOptions 
                   name="onlyCS"
                   values={values}
+                  disabled={myInitialValues.value === "example-6"}
                   />
                   <div style={{
                     display: 'flex',
