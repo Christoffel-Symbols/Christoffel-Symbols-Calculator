@@ -197,7 +197,6 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                   <div style={{
                     display: 'flex',
                     gap: '1rem',
-                    width: '40%'
                   }}>
                   <CalculateButton 
                   isValid={isValid}
@@ -205,9 +204,10 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                   />
                   <Button 
                     sx={styleButton}
+                    disabled={isSubmitting}
                     style={{
                       borderRadius: '1rem',
-                      width: '50%'
+                      width: '100%'
                     }}
                     onClick={handleClickReset}
                     >Reset

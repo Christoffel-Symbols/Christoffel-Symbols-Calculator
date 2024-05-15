@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MatrixComponent } from '../CommonFormElements';
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { MathJax } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import WarningIcon from '@mui/icons-material/Warning';
-import { TextField } from '@mui/material';
+import FormLabel from '@mui/material/FormLabel';
+import { Link } from '@mui/material';
 
 const chipStyle={
         marginBottom: '0.5rem',
@@ -27,8 +28,6 @@ const config = {
 
 
 const MetricTensor = ({myInitialValues}) => {
-
-  const [expression, setExpression] = useState('');
 
   const dummyList = ['t','x','y','z'];
   var coordList = dummyList.splice(0,myInitialValues.num_coordinates);
@@ -54,6 +53,18 @@ const MetricTensor = ({myInitialValues}) => {
 
 
   return (
+    <div style={{
+      alignItems: 'center'
+    }}>
+    <div style={{
+      fontSize: '2rem',
+      textAlign: 'center',
+      marginTop: '0.5rem'
+    }}>
+          <article className='panelHeading'>
+        Metric Tensor
+          </article>
+    </div>
       <div className='metricTensor'>
         <div style={{
           display: 'flex',
@@ -181,7 +192,7 @@ const MetricTensor = ({myInitialValues}) => {
           fontSize: '1.2rem',
           marginTop:'0.1rem'
       }}>
-        Use <b>Python Syntax</b> and <b>Mathematical operators</b> to fill the Metric Tensor.
+        Use <b>Python Syntax</b> and <b>Mathematical Operators</b> to fill the Metric Tensor.
         </span>
       </article>
       </div>
@@ -197,19 +208,17 @@ const MetricTensor = ({myInitialValues}) => {
             <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
         </div>
         :
-        <div style={{
-        border: '3px solid',
-        padding: '1rem',
-        backgroundColor: 'white',
-        borderRadius: '2rem',
-        height: '100%',
-        width:'30%'
-        }}>
-        LaTeX version of the Metric Tensor will be displayed here after a request is submitted.
+        <div className='metricTensorDisplayMessage'>
+        LaTeX version 
+        (supported by <Link href="https://github.com/fast-reflexes/better-react-mathjax">
+        MathJax
+        </Link>
+        ) of the Metric Tensor will be displayed here after a request is submitted.
         </div>
 
       }
     </div>
+        </div>
   )
 }
 

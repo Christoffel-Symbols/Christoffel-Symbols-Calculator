@@ -60,6 +60,7 @@ export const CommonTextField = ({placeholder, label, disabled=false, required=fa
             fontFamily: "Roboto,sans-serif",
             fontSize: '1.5rem',
             fontWeight: '200',
+            backgroundColor: 'white'
           }
         }}
         placeholder={placeholder}
@@ -111,7 +112,8 @@ export const CommonSelect = ({values, label, ...props}) => {
             <Box 
             sx={{ 
               minWidth: 120, 
-              padding: '1rem'
+              padding: '1rem',
+              backgroundColor: 'white'
               }}>
           <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
@@ -172,7 +174,7 @@ export const CalculateButton = ({isSubmitting, isValid}) => {
     style={{ 
     fontSize: 24, 
     borderRadius: '1rem',
-    width: '100%'
+    width: '200%'
     }}
     loading={isSubmitting}
     loadingIndicator="Calculating..."

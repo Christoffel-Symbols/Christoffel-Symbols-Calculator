@@ -43,7 +43,7 @@ const App = () => {
   };
 
   return (
-    <div className='app'>
+    <div className='app paperGrid'>
       <MathJaxContext
       version={2}
       config={config}
