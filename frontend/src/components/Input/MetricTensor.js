@@ -205,7 +205,7 @@ const MetricTensor = ({myInitialValues}) => {
         height: '100%',
         width:'30%'
         }}>
-        A LaTeX version of the Metric Tensor will be displayed once a request is submitted.
+        LaTeX version of the Metric Tensor will be displayed here after a request is submitted.
         </div>
 
       }
