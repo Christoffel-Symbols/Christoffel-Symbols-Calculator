@@ -146,7 +146,6 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
 
   return (
     <>
-    {console.log(myInitialValues)}
      <Formik
           initialValues={myInitialValues}
           enableReinitialize={true}

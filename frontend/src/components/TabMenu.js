@@ -133,7 +133,7 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         <FormControlLabel 
         value="example-6" 
         control={<Radio />} 
-        label="Kerr Metric (Very complicated!)" />
+        label="Kerr Metric (very complicated!)" />
         <FormControlLabel 
         value="example-7" 
         control={<Radio />} 
