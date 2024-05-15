@@ -16,7 +16,7 @@ source ${SCRIPT_DIR}/Docker_env
 CACHEBUST_PyCSC=${1:-1}
 CACHEBUST_BACKEND=${2:-1}
 CACHEBUST_FRONTEND=${3:-1}
-RUN=${4:-true}
+RUN=${4:-false}
 #
 # Build the project
 #
