@@ -3,6 +3,7 @@ import { Button } from '@mui/material'
 import { MathJax } from "better-react-mathjax";
 import { styleButton } from '../CommonFormElements';
 import InfoIcon from '@mui/icons-material/Info';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const Result = ({numChristoffelCalculated, resultRef}) => {
 
@@ -246,6 +247,24 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             >{"$$" + einstein_tensor + "$$"}</MathJax>
             </div>
             </div>
+          </div>
+          <div style={{
+            textAlign: 'right'
+          }}>
+            <ArrowUpwardIcon sx={{
+              background: 'black',
+              color: 'white',
+              borderRadius: '0.3rem',
+              "&:hover": {
+                cursor: 'pointer'
+              }
+            }}
+            fontSize='large'
+            onClick={()=> {
+              resultRef.current.scrollTop = 0;
+            }}
+
+            />
           </div>
             </>
             :

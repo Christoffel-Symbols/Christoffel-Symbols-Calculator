@@ -76,4 +76,15 @@ export const examplesData = [
     metric_tensor: [['-(1 + (2*alpha)/(c**2))',0,0,0], [0,'1- (2*alpha)/(c**2)',0,0], [0,0,'(1 - (2*alpha)/c**2)*(x**2)',0], [0,0,0,'(1-(2*alpha)/(c**2))*(x**2)*(sin(y)**2)']],
     onlyCS: 'option_1'
     },
+    {
+    value: "example-8",
+    num_coordinates: 4,
+    variable_parameters: {
+      alpha: '',
+      delta: '',
+      epsilon: ''
+    },
+    metric_tensor: [['rho(t)',0,0,0], [0,'((-k*x**2+ 1)*P(t))/a(t)**2',0,0], [0,0,'P(t)/(x**2*a(t)**2)',0], [0,0,0,'P(t)/(x**2*a(t)**2*sin(y)**2)']],
+    onlyCS: 'option_1'
+    },
 ];

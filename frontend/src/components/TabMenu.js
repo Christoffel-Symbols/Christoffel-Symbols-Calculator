@@ -138,6 +138,10 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         value="example-7" 
         control={<Radio />} 
         label="Weak-Field Metric" />
+        <FormControlLabel 
+        value="example-8" 
+        control={<Radio />} 
+        label="Pressure-density Metric" />
       </RadioGroup>
     </FormControl>
     );
