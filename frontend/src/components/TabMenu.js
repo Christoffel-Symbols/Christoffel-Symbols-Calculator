@@ -7,21 +7,25 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { examplesData } from '../data/examples';
+import { Link } from '@mui/material';
 
 
 const aboutDescription = () => {
     return(
       <>
-        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate Christoffel Symbols (both first and second kind) along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
+        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate <b>torsion-free</b> Christoffel Symbols (both first and second kind) along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
         <br/>
         <br/>
-        You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (for example <b>a(t)</b>, which is most popularly known as the scale factor in cosmology, or pressure as a function of time <b>p(t)</b>).
+        You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (for example <b>a(t)</b>, which is most popularly known as the scale factor in cosmology, or pressure as a function of time <b>p(t)</b>, and etcetera).
         <br/>
         <br/>
-        If you are a first-time user, please check the <b>EXAMPLES</b> section. It has a bunch of pre-defined space-time metrics that are popular in relativistic and gravitational astrophysics. Moreover, you can use the <b>QUICK GUIDE</b> section to get a detailed step-by-step overview on how to use this tool. 
+        If you are a first-time user, please check the <b>EXAMPLES</b> section. It has a bunch of pre-defined space-time metrics that are popular in relativistic and gravitational astrophysics. To understand how they came to be, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.        
         <br/>
         <br/>
-        This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. I hope you find this tool useful!
+        Moreover, you can also use the <b>QUICK GUIDE</b> section to get a detailed step-by-step overview on how to use this tool. 
+        <br/>
+        <br/>
+        This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. Happy Calculating!
       </>
     )
   }
