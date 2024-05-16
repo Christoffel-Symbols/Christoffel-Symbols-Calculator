@@ -160,7 +160,7 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
               .then((response)=>
                 sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response)))
               .then(()=>{
-                sessionStorage.setItem(FORM_SESSION, JSON.stringify({...data, value: ''}))
+                sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
                 incrNumChristoffelCalculated();
                 setTimeout(()=>{
                   resultRef.current.scrollIntoView();

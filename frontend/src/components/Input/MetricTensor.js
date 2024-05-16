@@ -15,18 +15,6 @@ const chipStyle={
         justifyContent: 'center'
 }
 
-const config = {
-  loader: { load: ["input/asciimath"] },
-  asciimath: {
-    displaystyle: true,
-    delimiters: [
-      ["$", "$"],
-      ["`", "`"],
-    ],
-  },
-};
-
-
 const MetricTensor = ({myInitialValues}) => {
 
   const dummyList = ['t','x','y','z'];
@@ -59,7 +47,7 @@ const MetricTensor = ({myInitialValues}) => {
     <div style={{
       fontSize: '2rem',
       textAlign: 'center',
-      marginTop: '0.5rem'
+      marginTop: '0.5rem',
     }}>
           <article className='panelHeading'>
         Metric Tensor
@@ -204,7 +192,7 @@ const MetricTensor = ({myInitialValues}) => {
         <div style={{
         border: '3px solid',
         padding: '1rem',
-         backgroundColor: 'white'
+        backgroundColor: 'white'
       }}>
             <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
         </div>

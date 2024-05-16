@@ -13,18 +13,13 @@ REPO_DIR="$(dirname "$SCRIPT_DIR")"
 # Load custom parameters
 #
 source ${SCRIPT_DIR}/Docker_env
-CACHEBUST_PyCSC=${1:-1}
-CACHEBUST_BACKEND=${2:-1}
-CACHEBUST_FRONTEND=${3:-1}
-RUN=${4:-false}
+
+RUN=${1:-true}
 #
 # Build the project
 #
 cd ${REPO_DIR}  # necessary so Docker can access other folders within the repo
-docker build --build-arg CACHEBUST_PyCSC=${CACHEBUST_PyCSC} \
-        --build-arg CACHEBUST_BACKEND=${CACHEBUST_BACKEND} \
-        --build-arg CACHEBUST_FRONTEND=${CACHEBUST_FRONTEND} \
-        -t pycsc_gui:${VERSION} \
+docker build -t pycsc_gui:${VERSION} \
         -f docker/Dockerfile .
 #
 echo "Finishing building pycsc_gui:${VERSION}"
