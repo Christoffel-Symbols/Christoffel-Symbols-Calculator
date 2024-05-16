@@ -70,7 +70,7 @@ def put_christoffel_symbols_json():
 
             # logging request data
             f = open("requestData.log", "a")
-            f.write(str(request_data))
+            f.write(str(request_data) + "\n")
             f.close()
             
 
