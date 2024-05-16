@@ -42,12 +42,13 @@ const MetricTensor = ({myInitialValues}) => {
 
   return (
     <div style={{
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '90%'
     }}>
     <div style={{
       fontSize: '2rem',
       textAlign: 'center',
-      marginTop: '0.5rem',
+      marginTop: '0.5rem'
     }}>
           <article className='panelHeading'>
         Metric Tensor
@@ -192,7 +193,8 @@ const MetricTensor = ({myInitialValues}) => {
         <div style={{
         border: '3px solid',
         padding: '1rem',
-        backgroundColor: 'white'
+         backgroundColor: 'white',
+         overflow: 'scroll'
       }}>
             <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
         </div>

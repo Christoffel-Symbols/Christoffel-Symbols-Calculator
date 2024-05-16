@@ -112,7 +112,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                     padding: '1rem',
                   }}
                   key={keyName}>
-                    <MathJax 
+                    <MathJax className='mathJax'
                     >{"$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + "$$"}</MathJax>
                     =
                     <MathJax 
@@ -141,7 +141,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                     padding: '1rem'
                   }}
                   key={keyName}>
-                    <MathJax>{"$$" + "\\Gamma_{" + keyName + "}" + "$$"}</MathJax>
+                    <MathJax className='mathJax'>{"$$" + "\\Gamma_{" + keyName + "}" + "$$"}</MathJax>
                     =
                     <MathJax 
                     className='mathJax'
@@ -173,7 +173,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                     padding: '1rem'
                   }}
                   key={keyName}>
-                    <MathJax>{"$$" + "R^{" + keyName[0] + "}_{" + keyName.slice(1,4) + "}" + "$$"}</MathJax>
+                    <MathJax className='mathJax'>{"$$" + "R^{" + keyName[0] + "}_{" + keyName.slice(1,4) + "}" + "$$"}</MathJax>
                     =
                     <MathJax 
                     className='mathJax'
@@ -195,7 +195,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <MathJax>{"$$" + "R_{\\mu\\nu}" + "$$"}</MathJax>
+            <MathJax className='mathJax'>{"$$" + "R_{\\mu\\nu}" + "$$"}</MathJax>
             =
             <MathJax 
             className='mathJax'
@@ -217,7 +217,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-            <MathJax>{"$$" + "R" + "$$"}</MathJax>
+            <MathJax className='mathJax'>{"$$" + "R" + "$$"}</MathJax>
               =
             <div className='resultMathJax'>
             <MathJax 
@@ -239,7 +239,7 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <MathJax>{"$$" + "G_{\\mu\\nu}" + "$$"}</MathJax>
+            <MathJax className='mathJax'>{"$$" + "G_{\\mu\\nu}" + "$$"}</MathJax>
             =
             <MathJax 
             className='mathJax'

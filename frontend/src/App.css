@@ -177,7 +177,7 @@ html, body {
 }
 
 .mathJax {
-  
+  font-size: 1.5rem;
 }
 
 .calculateOptions {
@@ -263,4 +263,3 @@ html, body {
     align-items: center;
   }
 }
-
