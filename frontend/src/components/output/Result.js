@@ -188,10 +188,19 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Ricci Tensor
             </article>
             <div className='resultMathJax'>
+            <div style={{
+              display: 'flex',
+              gap: '0.2rem',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <MathJax>{"$$" + "R_{\\mu\\nu}" + "$$"}</MathJax>
+            =
             <MathJax 
             className='mathJax'
             dynamic
             >{"$$" + ricci_tensor + "$$"}</MathJax>
+            </div>
             </div>
           </div>
           <div style={{
@@ -200,11 +209,22 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             <article className='resultHeading' ref={ricciScalarRef}>
             Ricci Scalar
             </article>
+            <div className='resultMathJax'>  
+              <div style={{
+                display: 'flex',
+                gap: '0.2rem',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+            <MathJax>{"$$" + "R" + "$$"}</MathJax>
+              =
             <div className='resultMathJax'>
             <MathJax 
             className='mathJax'
             dynamic
             >{"$$" + ricci_scalar + "$$"}</MathJax>
+            </div>
+            </div>
             </div>  
           </div>
           <div>
@@ -212,10 +232,19 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
             Einstein Tensor
             </article>
             <div className='resultMathJax'>
+            <div style={{
+              display: 'flex',
+              gap: '0.2rem',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <MathJax>{"$$" + "G_{\\mu\\nu}" + "$$"}</MathJax>
+            =
             <MathJax 
             className='mathJax'
             dynamic
             >{"$$" + einstein_tensor + "$$"}</MathJax>
+            </div>
             </div>
           </div>
             </>

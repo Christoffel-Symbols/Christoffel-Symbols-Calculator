@@ -130,7 +130,7 @@ def put_christoffel_symbols_json():
             christoffel_symbols_fk = cs_fk_dict,
             riemann_tensor = riemann_dict,
             ricci_tensor = sym.latex(PyCSCObj.ricci_tensor),
-            ricci_scalar = sym.latex(PyCSCObj.ricci_scalar),
+            ricci_scalar = sym.latex(sym.simplify(PyCSCObj.ricci_scalar)),
             einstein_tensor = sym.latex(einstein_tensor)
         ) 
         else:

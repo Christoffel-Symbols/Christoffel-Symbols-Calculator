@@ -79,12 +79,13 @@ const MetricTensor = ({myInitialValues}) => {
           return(
              <Chip sx={{
             backgroundColor: 'green',
-            color: 'white'
+            color: 'white',
+            padding: '0.3rem 0 0.5rem'
           }} key={coord} label={
           <span style={{
             fontSize: '1.2rem'
           }}>
-            {coord}
+             <MathJax>{"$$" + "x^{" + index + "} = " + coord + "$$"}</MathJax>
           </span>
           } />
           )
