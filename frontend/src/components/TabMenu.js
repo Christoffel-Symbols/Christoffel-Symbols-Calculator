@@ -19,10 +19,7 @@ const aboutDescription = () => {
         You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (for example <b>a(t)</b>, which is most popularly known as the scale factor in cosmology, or pressure as a function of time <b>p(t)</b>, and etcetera).
         <br/>
         <br/>
-        If you are a first-time user, please check the <b>EXAMPLES</b> section. It has a bunch of pre-defined space-time metrics that are popular in relativistic and gravitational astrophysics. To understand how they came to be, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.        
-        <br/>
-        <br/>
-        Moreover, you can also use the <b>QUICK GUIDE</b> section to get a detailed step-by-step overview on how to use this tool. 
+        If you are a first-time user, please use the <b>QUICK GUIDE</b> section to get a detailed step-by-step overview on how to use this tool. You can also try working with some pre-defined metric tensors in the <b>EXAMPLES</b> section. To understand the physics behind their origin, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.        
         <br/>
         <br/>
         This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. Happy Calculating!
@@ -145,7 +142,7 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         <FormControlLabel 
         value="example-8" 
         control={<Radio />} 
-        label="Pressure-density Metric" />
+        label="Pressure-density Metric (very complicated!)" />
       </RadioGroup>
     </FormControl>
     );

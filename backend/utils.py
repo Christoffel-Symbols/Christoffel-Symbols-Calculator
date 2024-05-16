@@ -49,6 +49,9 @@ def bad_request(message):
     Return a 400 error with the given message a JSON.
     """
     response = jsonify({"error": message})
+    f = open("requestData.log", "a")
+    f.write(response + "\n")
+    f.close()
     response.status_code = 400
     return response
 
@@ -57,6 +60,9 @@ def server_error(message):
     Return a 500 error with the given message as JSON.
     """
     response = jsonify({"error": message})
+    f = open("requestData.log", "a")
+    f.write(response + "\n")
+    f.close()
     response.status_code = 500
     return response
 
