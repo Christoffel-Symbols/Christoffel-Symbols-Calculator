@@ -30,6 +30,8 @@ from pyCSC.pyCSC import PyCSC
 from flask import jsonify, request
 import sympy as sym
 
+import uuid
+
 from utils import app, logger, log_tracebook, bad_request, server_error
 
 @app.route("/christoffelsymbols", methods=["PUT"])
@@ -66,7 +68,11 @@ def put_christoffel_symbols_json():
             onlyCS = str(request_data["onlyCS"])
             logger.info("onlyCS: " + str(onlyCS))
 
-
+            # logging request data
+            f = open("requestData.log", "a")
+            f.write(str(request_data))
+            f.close()
+            
 
         except Exception as e:
             log_tracebook(e)
