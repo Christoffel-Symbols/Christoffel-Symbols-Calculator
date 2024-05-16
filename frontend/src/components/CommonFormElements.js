@@ -174,7 +174,6 @@ export const CalculateButton = ({isSubmitting, isValid}) => {
     style={{ 
     fontSize: 24, 
     borderRadius: '1rem',
-    width: '100%'
     }}
     loading={isSubmitting}
     loadingIndicator="Calculating..."
