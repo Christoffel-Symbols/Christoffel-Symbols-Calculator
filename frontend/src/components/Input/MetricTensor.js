@@ -85,7 +85,7 @@ const MetricTensor = ({myInitialValues}) => {
           <span style={{
             fontSize: '1.2rem'
           }}>
-             <MathJax>{"$$" + "x^{" + index + "} = " + coord + "$$"}</MathJax>
+             <MathJax dynamic>{"$$" + "x^{" + index + "} = " + coord + "$$"}</MathJax>
           </span>
           } />
           )
