@@ -13,7 +13,7 @@ import { Link } from '@mui/material';
 const aboutDescription = () => {
     return(
       <>
-        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate <b>torsion-free</b> Christoffel Symbols (both first and second kind) along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
+        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate <b>torsion-free</b> Christoffel Symbols (both first and second kinds) along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
         <br/>
         <br/>
         You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (for example <b>a(t)</b>, which is most popularly known as the scale factor in cosmology, or pressure as a function of time <b>p(t)</b>, and etcetera).
