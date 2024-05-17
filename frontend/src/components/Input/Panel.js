@@ -167,7 +167,6 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                 },1000)
               })
               .catch((error)=>{
-                console.log(error);
                 setIsError(true);
                 if(error.code === 'ECONNABORTED'){
                   setErrorMessage("Timeout exceeded. The inputted metric tensor is too complicated.")
@@ -192,7 +191,7 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                   <CalculateOptions 
                   name="onlyCS"
                   values={values}
-                  disabled={myInitialValues.value === "example-6"}
+                  disabled={myInitialValues.value === "example-6" || myInitialValues.value === "example-8"}
                   />
                   <div style={{
                     display: 'flex',
