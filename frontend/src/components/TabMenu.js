@@ -134,7 +134,7 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         <FormControlLabel 
         value="example-6" 
         control={<Radio />} 
-        label="Kerr Metric (very complicated!)" />
+        label="Kerr Metric (response time ~ 40 sec)" />
         <FormControlLabel 
         value="example-7" 
         control={<Radio />} 
@@ -142,7 +142,7 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
         <FormControlLabel 
         value="example-8" 
         control={<Radio />} 
-        label="Pressure-density Metric (very complicated!)" />
+        label="Pressure-density Metric" />
       </RadioGroup>
     </FormControl>
     );
