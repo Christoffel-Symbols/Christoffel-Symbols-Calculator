@@ -10,7 +10,9 @@ const Header = () => {
         marginLeft: '1rem'
       }}/>
         <div className='heading'>
-        Christoffel Symbols Calculator
+        <h1>
+          Christoffel Symbols Calculator
+          </h1>
         </div>
     </div>
   )
