@@ -96,7 +96,15 @@ const MetricTensor = ({myInitialValues}) => {
               <span>Input </span>
               <span style={{
                 fontSize: '1.2rem'
-              }}>&#120572;</span>
+              }}>&#120572;({
+                coordList.map((coord, index)=>
+                      index === coordList.length - 1
+                      ?
+                      coord
+                      :
+                      coord + ','
+                      )
+              })</span>
               <span> as alpha</span>
               </>
               :
@@ -106,7 +114,15 @@ const MetricTensor = ({myInitialValues}) => {
               <span>Input </span>
                <span style={{
                 fontSize: '1rem'
-              }}>&delta;</span>
+              }}>&delta;({
+                coordList.map((coord, index)=>
+                      index === coordList.length - 1
+                      ?
+                      coord
+                      :
+                      coord + ','
+                      )
+              })</span>
               <span> as delta</span>
               </>
               :
@@ -114,7 +130,15 @@ const MetricTensor = ({myInitialValues}) => {
               <span>Input </span>
                <span style={{
                 fontSize: '1.2rem'
-              }}>&#949;</span>
+              }}>&#949;({
+                coordList.map((coord, index)=>
+                      index === coordList.length - 1
+                      ?
+                      coord
+                      :
+                      coord + ','
+                      )
+              })</span>
               <span> as epsilon</span>
               </>
               }
