@@ -1,6 +1,7 @@
 import React from 'react';
 import { CommonTextField } from '../CommonFormElements';
 import Box from '@mui/material/Box';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const CoordList = ({numCoords}) => {
 
@@ -67,6 +68,25 @@ const VariableParameters = ({myInitialValues}) => {
           />
           </span>
         </Box>
+             <article style={{
+        marginTop: '0.8rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.2rem',
+        fontFamily: 'Roboto',
+        textWrap: 'wrap',
+      }}>
+      <WarningIcon sx={{
+        color: 'red',
+        fontSize: '1.4rem'
+      }}/> 
+      <span style={{
+          fontSize: '1.2rem',
+          marginTop:'0.1rem'
+      }}>
+        Use <b>Python Syntax</b> and <b>Mathematical Operators</b>.
+        </span>
+      </article>
       </div>
   )
 }

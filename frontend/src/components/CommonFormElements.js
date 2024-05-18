@@ -239,7 +239,7 @@ export const AlertError = ({isError, setIsError, errorMessage, setErrorMessage})
         <AlertTitle>
           Error</AlertTitle> 
         {errorMessage} <br/>
-        Please revise your inputs and submit a new request.
+        Revise your inputs and submit a new request.
       </Alert>
     </Snackbar>
   );

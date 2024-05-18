@@ -4,7 +4,6 @@ import { MathJax } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import WarningIcon from '@mui/icons-material/Warning';
-import FormLabel from '@mui/material/FormLabel';
 import { Link } from '@mui/material';
 
 const chipStyle={

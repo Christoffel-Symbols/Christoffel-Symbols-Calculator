@@ -170,6 +170,8 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                 setIsError(true);
                 if(error.code === 'ECONNABORTED'){
                   setErrorMessage("Timeout exceeded. The inputted metric tensor is too complicated.")
+                } else if (error.code = 'ERR_BAD_RESPONSE') {
+                  setErrorMessage('Please make sure you are using Python syntax.')
                 } else {
                   setErrorMessage(error.message);
                 }
