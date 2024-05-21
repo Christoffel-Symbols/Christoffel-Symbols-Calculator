@@ -83,6 +83,13 @@ def redirect(path):
         
         return app.send_static_file("robots.txt")
     
+    elif re.search(r"\bsitemap.xml\b", path) is not None:
+        logger.info("Serving sitemap.xml")
+        if request.method != "GET":
+            abort(405)
+
+        return app.send_static_file("sitemap.xml")
+    
     else:
         filename = re.search(r"[^/?]*\.(?:gif|png|jpeg|jpg|ico|js|css)$", path)
         if app.static_folder is not None and filename is not None:
@@ -98,4 +105,4 @@ def redirect(path):
 
 if __name__== "__main__":
     cors.init_app(app)
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0",port=5000, debug=True)
