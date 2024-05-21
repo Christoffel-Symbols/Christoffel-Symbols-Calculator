@@ -42,7 +42,7 @@ const VariableParameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.alpha"
             value={myInitialValues.variable_parameters.alpha}
-            placeholder={"Example: x**2 + y**2"}
+            placeholder={"Example: sin(pi*x) + e**y"}
           />
           </span>
 
@@ -54,7 +54,7 @@ const VariableParameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.delta"
             value={myInitialValues.variable_parameters.delta}
-            placeholder={"Example: x**2 + 2*y"}
+            placeholder={"Example: z**(1/2) + abs(t)"}
           />
           </span>
 
@@ -64,7 +64,7 @@ const VariableParameters = ({myInitialValues}) => {
           <CommonTextField
             name="variable_parameters.epsilon"
             value={myInitialValues.variable_parameters.epsilon}
-            placeholder={"Example: 2*x + 2*y"}
+            placeholder={"Example: log10(x**10)"}
           />
           </span>
         </Box>
