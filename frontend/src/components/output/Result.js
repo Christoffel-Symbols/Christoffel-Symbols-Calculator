@@ -5,6 +5,21 @@ import { styleButton } from '../CommonFormElements';
 import InfoIcon from '@mui/icons-material/Info';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
+const NavigationButton = ({tensorRef,name}) =>{
+  
+  const executeScroll = (ref) => ref.current.scrollIntoView();
+
+  return (
+    <Button 
+      variant='contained' 
+      onClick={()=> executeScroll(tensorRef)}
+      sx={styleButton}
+      >
+      {name}
+    </Button>
+  )
+}
+
 const Result = ({numChristoffelCalculated, resultRef}) => {
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
@@ -13,14 +28,24 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
   let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
   let submittedValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
 
+  
   const christoffel_skRef = useRef(null);
   const christoffel_fkRef = useRef(null);
   const riemannaTensorRef = useRef(null);
   const ricciTensorRef = useRef(null);
   const ricciScalarRef = useRef(null);
   const einsteinTensorRef = useRef(null);
-  
-  const executeScroll = (ref) => ref.current.scrollIntoView();
+
+  const resultRefOption1 = {
+    "Christoffel Symbols": christoffel_skRef,
+    "Christoffel Symbols (First Kind)": christoffel_fkRef,
+  }
+  const resultRefOption2 = {
+    "Riemann Tensor": riemannaTensorRef,
+    "Ricci Tensor": ricciTensorRef,
+    "Ricci Scalar": ricciScalarRef,
+    "Einstein Tensor": einsteinTensorRef,
+  }
   
   if (christoffelParams){
 
@@ -44,51 +69,20 @@ const Result = ({numChristoffelCalculated, resultRef}) => {
     </div>
       <div id={numChristoffelCalculated} className='result' ref={resultRef}>
         <div className='resultMenuBar'>
-          <Button 
-          variant='contained' 
-          onClick={()=> executeScroll(christoffel_skRef)}
-          sx={styleButton}
-          >
-          Christoffel Symbols
-          </Button>
-          <Button 
-          variant='contained'
-          onClick={()=> executeScroll(christoffel_fkRef)}
-          sx={styleButton}
-          >Christoffel Symbols (First Kind)
-          </Button>    
+          {Object.keys(resultRefOption1).map((name,index)=>{
+            return (
+              <NavigationButton key={index} tensorRef={resultRefOption1[name]} name={name}/>
+            )
+          })}
           {
-          submittedValues.onlyCS === 'option_2'
-          ?
-          <>
-          <Button 
-          variant='contained'
-          onClick={()=> executeScroll(riemannaTensorRef)}
-          sx={styleButton}
-          >
-            Riemann Tensor
-          </Button>
-          <Button 
-          variant='contained'
-          onClick={()=> executeScroll(ricciTensorRef)}
-          sx={styleButton}
-          >
-          Ricci Tensor
-          </Button>
-          <Button
-          variant='contained'
-          onClick={()=> executeScroll(ricciScalarRef)}
-          sx={styleButton}
-          >
-          Ricci Scalar
-          </Button>
-          <Button 
-          variant='contained'
-          onClick={()=> executeScroll(einsteinTensorRef)}
-          sx={styleButton}
-          >
-          Einstein Tensor
-          </Button>
+            submittedValues.onlyCS === 'option_2'
+            ?
+            <>
+            {Object.keys(resultRefOption2).map((key,index)=>{
+              return (
+                <NavigationButton key={index} tensorRef={resultRefOption2[key]} name={key}/>
+              )
+            })}
           </>
           :
           null
