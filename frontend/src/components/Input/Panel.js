@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MetricTensor from './MetricTensor';
 import Parameters from './Parameters';
 import axios from "axios";
-import {API_URL} from '../../env'
+import { API_URL } from '../../env'
 import { Formik, Form, useFormikContext, useField } from 'formik';
 import { AlertError, CalculateButton } from '../CommonFormElements';
 import * as Yup from "yup";
@@ -20,124 +20,167 @@ const radioStyle = {
 }
 
 
-const CalculateOptions = ({values, ...props}) => {
+const CalculateOptions = ({ values, ...props }) => {
 
-  const {setFieldValue} = useFormikContext();
+  const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
 
   return (
     <div>
-    <FormControl>
-    <FormLabel className='calculateOptions' sx={{
-      fontSize: '2rem',
-      color: 'white',
-      fontFamily: 'Roboto',
-      "&.Mui-focused": { color: "white" },
-    }}>Calculate Options</FormLabel>
-     <RadioGroup
-        row
-        name={field.name}
-        value={values.onlyCS}
-        defaultValue='option_1'
-        onChange={(e)=>{
-          setFieldValue(field.name, e.target.value)
-        }}
+      <FormControl>
+        <FormLabel className='calculateOptions' sx={{
+          fontSize: '2rem',
+          color: 'white',
+          fontFamily: 'Roboto',
+          "&.Mui-focused": { color: "white" },
+        }}>Calculate Options</FormLabel>
+        <RadioGroup
+          row
+          name={field.name}
+          value={values.onlyCS}
+          defaultValue='option_1'
+          onChange={(e) => {
+            setFieldValue(field.name, e.target.value)
+          }}
         >
-        <FormControlLabel
-        value="option_1" 
-        control={<Radio />} 
-        label={
-          <span style={radioStyle}>
-            Christoffel Symbols
-          </span>
-        }
-        />
-        <FormControlLabel 
-        disabled={props.disabled}
-        value="option_2" 
-        control={<Radio />}
-        label={
-          <span style={radioStyle}>
-            Christoffel Symbols + Tensors (i.e., Riemann, Ricci, Einstein)
-          </span>
-        }
-        />
-      </RadioGroup>
-    </FormControl>
+          <FormControlLabel
+            value="option_1"
+            control={<Radio />}
+            label={
+              <span style={radioStyle}>
+                Christoffel Symbols
+              </span>
+            }
+          />
+          <FormControlLabel
+            disabled={props.disabled}
+            value="option_2"
+            control={<Radio />}
+            label={
+              <span style={radioStyle}>
+                Christoffel Symbols + Tensors (i.e., Riemann, Ricci, Einstein)
+              </span>
+            }
+          />
+        </RadioGroup>
+      </FormControl>
     </div>
   )
 }
 
 const christoffelSymbolsValidationSchema = Yup.object({
-  num_coordinates: Yup.number()
-  .required("num_coordinates is a required field")
-  .typeError("num_coordinates must be a number > 0")
-  .positive("num_coordinates must be a number > 0"),
+  coordinates: Yup.object({
+    num_coordinates: Yup.number()
+      .required("num_coordinates is a required field")
+      .typeError("num_coordinates must be a number > 0")
+      .positive("num_coordinates must be a number > 0"),
+    coordinate0: Yup.string()
+      .required('Coordinate is required')
+      .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
+      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
+    ,
+    coordinate1: Yup.string()
+      .required('Coordinate is required')
+      .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
+      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
+    coordinate2: Yup.string()
+      .when('num_coordinates', {
+        is: (val) => (val === 3 || val === 4),
+        then: () => Yup.string()
+          .required('Coordinate is required')
+          .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
+          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
+          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved"),
+        otherwise: () => Yup.string()
+      }),
+    coordinate3: Yup.string()
+      .when('num_coordinates', {
+        is: (val) => val === 4,
+        then: () => Yup.string()
+          .required('Coordinate is required')
+          .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
+          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
+          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved"),
+        otherwise: () => Yup.string()
+      })
+
+  }),
   variable_parameters: Yup.object({
     alpha: Yup.string()
-    .notRequired()
-    .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character"),
+      .notRequired()
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
     delta: Yup.string()
-    .notRequired()
-    .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character"),
+      .notRequired()
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
     epsilon: Yup.string()
-    .notRequired()
-    .matches("^[a-zA-Z0-9*(),_\/+. -]*$","Not a valid special character"),
+      .notRequired()
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
   }),
   metric_tensor: Yup.array().test("zeroMatrix", "", (value) => {
     let zeroCounter = 0; // keeps track of zeros
     let numCounter = 0; // keeps track of zeros and other numbers
-    for(let i =0; i < value.length; i++){
-      for (let j=0; j < value.length; j++){
-        if (value[i][j] === '0'){
+    for (let i = 0; i < value.length; i++) {
+      for (let j = 0; j < value.length; j++) {
+        if (value[i][j] === '0') {
           zeroCounter += 1;
           numCounter += 1;
-        } else{
-          numCounter -=1;
+        } else {
+          numCounter -= 1;
         }
       }
     }
-    if (zeroCounter === numCounter){
-        return false; // zero matrix therefore test failed
-    } else{
-        return true; // not a zero matrix therefore test passed
+    if (zeroCounter === numCounter) {
+      return false; // zero matrix therefore test failed
+    } else {
+      return true; // not a zero matrix therefore test passed
     }
   })
-  .of(Yup.array().of(Yup.string().matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character").required())),
+    .of(Yup.array().of(Yup.string().matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character").matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol").required())),
   onlyCS: Yup.string()
-  .required("onlyCS must be either true or false")
-  .typeError("onlyCS must either be true or false")
-  
+    .required("onlyCS must be either true or false")
+    .typeError("onlyCS must either be true or false")
+
 })
 
-const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
+const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
-  
+
   const handleClickReset = () => {
     sessionStorage.removeItem(FORM_PARAMS);
     sessionStorage.removeItem(FORM_SESSION);
-    setReset((prevState)=>{
+    setReset((prevState) => {
       return prevState + 1
     })
   }
-   
+
   let myInitialValues = {}
 
-  if (sessionStorage.getItem(FORM_SESSION) === null){
+  if (sessionStorage.getItem(FORM_SESSION) === null) {
     myInitialValues = {
-    num_coordinates: 2,
-    variable_parameters: {
-      alpha: '',
-      delta: '',
-      epsilon: ''
-    },
-    metric_tensor: [['0','0'], ['0','0']],
-    onlyCS: 'option_1'
+      coordinates: {
+        num_coordinates: 2,
+        coordinate0: 'r',
+        coordinate1: 'theta',
+        coordinate2: '',
+        coordinate3: ''
+      },
+      variable_parameters: {
+        alpha: '',
+        delta: '',
+        epsilon: ''
+      },
+      metric_tensor: [['0', '0'], ['0', '0']],
+      onlyCS: 'option_1'
     }
   } else {
     myInitialValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
@@ -146,29 +189,29 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
 
   return (
     <>
-     <Formik
-          initialValues={myInitialValues}
-          enableReinitialize={true}
-          onSubmit={
-            async (data, { setSubmitting }) => {
-              setSubmitting(true);
+      <Formik
+        initialValues={myInitialValues}
+        enableReinitialize={true}
+        onSubmit={
+          async (data, { setSubmitting }) => {
+            setSubmitting(true);
 
-              // Make async call
-              await axios
-              .put(API_URL + "christoffelsymbols", data, {timeout: 60000})
-              .then((response)=>response.data)
-              .then((response)=>
+            // Make async call
+            await axios
+              .put(API_URL + "christoffelsymbols", data, { timeout: 60000 })
+              .then((response) => response.data)
+              .then((response) =>
                 sessionStorage.setItem(FORM_PARAMS, JSON.stringify(response)))
-              .then(()=>{
+              .then(() => {
                 sessionStorage.setItem(FORM_SESSION, JSON.stringify(data))
                 incrNumChristoffelCalculated();
-                setTimeout(()=>{
+                setTimeout(() => {
                   resultRef.current.scrollIntoView();
-                },1000)
+                }, 1000)
               })
-              .catch((error)=>{
+              .catch((error) => {
                 setIsError(true);
-                if(error.code === 'ECONNABORTED'){
+                if (error.code === 'ECONNABORTED') {
                   setErrorMessage("Timeout exceeded. The inputted metric tensor is too complicated.")
                 } else if (error.code = 'ERR_BAD_RESPONSE') {
                   setErrorMessage('Please make sure you are using correct Python syntax. Do not use external libraries (i.e., Math, numpy).')
@@ -177,53 +220,53 @@ const Panel = ({incrNumChristoffelCalculated, resultRef, setReset}) => {
                 }
               })
               .finally(() => {
-                  setSubmitting(false)
-                })
-            }
+                setSubmitting(false)
+              })
           }
-          validateOnChange={true}
-          validationSchema={christoffelSymbolsValidationSchema}
-          validateOnMount={true}
-          >
-             {({ values, isSubmitting, isValid }) => (
-                <Form>
-               <div className='input'>
-                  <Parameters myInitialValues={values}/>
-                  <MetricTensor myInitialValues={values}/>
-                  <CalculateOptions 
-                  name="onlyCS"
-                  values={values}
-                  disabled={myInitialValues.value === "example-6" || myInitialValues.value === "example-8"}
-                  />
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    gap: '1rem',
-                  }}>
-                  <CalculateButton 
+        }
+        validateOnChange={true}
+        validationSchema={christoffelSymbolsValidationSchema}
+        validateOnMount={true}
+      >
+        {({ values, isSubmitting, isValid }) => (
+          <Form>
+            <div className='input'>
+              <Parameters myInitialValues={values} />
+              <MetricTensor myInitialValues={values} />
+              <CalculateOptions
+                name="onlyCS"
+                values={values}
+                disabled={myInitialValues.value === "example-6" || myInitialValues.value === "example-8"}
+              />
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                gap: '1rem',
+              }}>
+                <CalculateButton
                   isValid={isValid}
                   isSubmitting={isSubmitting}
-                  />
-                  <Button 
-                    sx={styleButton}
-                    disabled={isSubmitting}
-                    style={{
-                      borderRadius: '1rem',
-                    }}
-                    onClick={handleClickReset}
-                    >Reset
-                  </Button>
-                  </div>
-               <AlertError
-               isError={isError}
-               setIsError={setIsError}
-               errorMessage={errorMessage}
-               setErrorMessage={setErrorMessage}
-               />
-               </div>
-                </Form>
-             )}
-          </Formik>
+                />
+                <Button
+                  sx={styleButton}
+                  disabled={isSubmitting}
+                  style={{
+                    borderRadius: '1rem',
+                  }}
+                  onClick={handleClickReset}
+                >Reset
+                </Button>
+              </div>
+              <AlertError
+                isError={isError}
+                setIsError={setIsError}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+              />
+            </div>
+          </Form>
+        )}
+      </Formik>
     </>
   )
 }
