@@ -77,22 +77,42 @@ const christoffelSymbolsValidationSchema = Yup.object({
     coordinate0: Yup.string()
       .required('Coordinate is required')
       .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
-      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved")
-      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
-    ,
+      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved as variable parameters")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     coordinate1: Yup.string()
       .required('Coordinate is required')
       .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
-      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved")
-      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
+      .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved as variable parameters")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     coordinate2: Yup.string()
       .when('num_coordinates', {
         is: (val) => (val === 3 || val === 4),
         then: () => Yup.string()
           .required('Coordinate is required')
           .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
-          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
-          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved"),
+          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved as variable parameters")
+          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+          .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+          .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+          .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+          .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+          .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+          .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+          .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
         otherwise: () => Yup.string()
       }),
     coordinate3: Yup.string()
@@ -101,8 +121,15 @@ const christoffelSymbolsValidationSchema = Yup.object({
         then: () => Yup.string()
           .required('Coordinate is required')
           .matches("^[a-zA-Z]{0,10}$", "Not a valid coordinate")
-          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol")
-          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved"),
+          .matches("^((?!alpha|delta|epsilon).)*$", "alpha/delta/epslion are reserved as variable parameters")
+          .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+          .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+          .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+          .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+          .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+          .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+          .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+          .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
         otherwise: () => Yup.string()
       })
 
@@ -110,16 +137,37 @@ const christoffelSymbolsValidationSchema = Yup.object({
   variable_parameters: Yup.object({
     alpha: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
-      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
+      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     delta: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
-      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
+      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     epsilon: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
-      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol"),
+      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
   }),
   metric_tensor: Yup.array().test("zeroMatrix", "", (value) => {
     let zeroCounter = 0; // keeps track of zeros
@@ -140,7 +188,17 @@ const christoffelSymbolsValidationSchema = Yup.object({
       return true; // not a zero matrix therefore test passed
     }
   })
-    .of(Yup.array().of(Yup.string().matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character").matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is reserved keyword, please use another symbol").required())),
+    .of(Yup.array().of(Yup.string()
+      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
+      .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
+      .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
+      .matches("^((?!gamma|Gamma).)*$", "gamma/Gamma is reserved as gamma function, please use a different symbol")
+      .matches("^((?!Q).)*$", "Q is a reserved character, please use 'q' instead")
+      .matches("^((?!O).)*$", "O is a reserved character, please use 'o' instead")
+      .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
+      .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead")
+      .required())),
   onlyCS: Yup.string()
     .required("onlyCS must be either true or false")
     .typeError("onlyCS must either be true or false")
