@@ -35,19 +35,22 @@ const aboutDescription = () => {
           </b> section. 
         <br/>
         <br/>
-        Step 2: Define at most 3 variable parameters in the <b>Define Variable Parameters</b> section that you want to include in the metric tensor. 
+        step 2: Choose appropriate symbol for each coordinate (r, theta, phi, and etcetera).  
         <br/>
         <br/>
-        Step 3: Fill the metric tensor with the appropriate expressions and values. 
+        Step 3: Define at most 3 variable parameters in the <b>Define Variable Parameters</b> section that would like to include in the metric tensor. 
         <br/>
         <br/>
-        Step 4: In the <b>Calculate Options</b>, choose whether you want to calculate only Christoffel Symbols (both first and second kinds) or calculate tensors along with Christoffel Symbols.
+        Step 4: Fill the metric tensor with the appropriate expressions and values. 
         <br/>
         <br/>
-        Step 5 (a): After the inputted values and expressions have been validated, click on <b>Calculate</b>. 
+        Step 5: In the <b>Calculate Options</b>, choose whether you want to calculate only Christoffel Symbols (both first and second kinds) or calculate tensors along with Christoffel Symbols.
         <br/>
         <br/>
-        Step 5 (b): If you want to start all over again, you can click on the <b>Reset</b> button. 
+        Step 6 (a): After the inputted values and expressions have been validated, click on <b>Calculate</b>. 
+        <br/>
+        <br/>
+        Step 6 (b): If you want a clean slate after a calculation, please click on the <b>Reset</b> button. 
       </>
     )
   }
