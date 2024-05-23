@@ -1,6 +1,7 @@
 import React from 'react';
 import { CommonSelect } from '../CommonFormElements';
 const Dimensions = ({myInitialValues}) => {
+
   return (
     <div>
           <article className='panelHeading' style={{
@@ -10,8 +11,8 @@ const Dimensions = ({myInitialValues}) => {
         Number of Dimensions
           </article>
        <CommonSelect
-          name="num_coordinates"
-          values={myInitialValues}
+          name="coordinates.num_coordinates"
+          values={myInitialValues.coordinates}
           label="Dimensions"
           options={[2,3,4]}
        />
