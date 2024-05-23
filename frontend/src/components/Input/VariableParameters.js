@@ -52,7 +52,7 @@ const VariableParameters = ({ myInitialValues }) => {
           name='delta'
           coordList={coordList}
           myInitialValues={myInitialValues}
-          placeholder={'Example: e**(1/2) + abs(t) '}
+          placeholder={'Example: e^(1/2) + abs(t) '}
         />
         <Variable
           symbol={'\u03B5'}
