@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef } from 'react';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -37,7 +37,7 @@ const App = () => {
   const [numChristoffelCalculated, setNumChristoffelCalculated] = useState(0);
 
   const incrNumChristoffelCalculated = () => {
-    setNumChristoffelCalculated((prevState)=>{
+    setNumChristoffelCalculated((prevState) => {
       return prevState + 1;
     })
   };
@@ -45,24 +45,24 @@ const App = () => {
   return (
     <div className='app paperGrid'>
       <MathJaxContext
-      version={2}
-      config={config}
-      onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
+        version={2}
+        config={config}
+        onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
       >
-      <Header/>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        gap: '1rem',
-        padding: '0.5rem'
-      }}>
-        <TabMenu incrNumChristoffelCalculated={incrNumChristoffelCalculated}/>
-        <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated} resultRef={resultRef} setReset={setReset}/>
-      </div>
-      <Result numChristoffelCalculated={numChristoffelCalculated} resultRef={resultRef}/>
+        <Header />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: '1rem',
+          padding: '0.5rem'
+        }}>
+          <TabMenu incrNumChristoffelCalculated={incrNumChristoffelCalculated} />
+          <Panel incrNumChristoffelCalculated={incrNumChristoffelCalculated} resultRef={resultRef} setReset={setReset} />
+        </div>
+        <Result numChristoffelCalculated={numChristoffelCalculated} resultRef={resultRef} />
       </MathJaxContext>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
