@@ -1,5 +1,5 @@
 import React from 'react'
-import { MatrixComponent } from '../CommonFormElements';
+import { MatrixComponent, coordObjectToList } from '../CommonFormElements';
 import { MathJax } from "better-react-mathjax";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -14,30 +14,35 @@ const chipStyle={
         justifyContent: 'center'
 }
 
+const VariableParameter = ({symbol, name, coordList}) => {
+  return (
+    <>
+      <span>Input </span>
+      <span style={{
+        fontSize: '1.2rem'
+      }}>
+      {symbol}
+      ({
+        coordList.map((coord, index)=>
+          index === coordList.length - 1
+          ?
+          coord
+          :
+          coord + ','
+          )
+      })</span>
+      <span> as {name}</span>
+    </>
+  )
+}
+
 const MetricTensor = ({myInitialValues}) => {
 
-  const dummyList = ['t','x','y','z'];
-  var coordList = dummyList.splice(0,myInitialValues.num_coordinates);
-
-  if(myInitialValues.num_coordinates !==4){
-     coordList = ['t','x','y','z'].splice(1,myInitialValues.num_coordinates);
-  }
+  var coordList = coordObjectToList(myInitialValues.coordinates)
 
   const FORM_PARAMS = "christoffelParams"; // key for sessionStorage (API results)
 
   let christoffelParams = JSON.parse(`${sessionStorage.getItem(FORM_PARAMS)}`);
-
-  // const handleClick = () => {
-
-  //   coordList.map((coord,index)=>{
-  //     let row = index;
-  //         {coordList.map((coord,index)=>{
-  //           let col = index;
-  //               setFieldValue(`metric_tensor${'[' + String(row) + ']' + '[' + String(col) + ']'}]`, '0')
-  //         })}
-  //   })
-  // };
-
 
   return (
     <div style={{
@@ -63,20 +68,27 @@ const MetricTensor = ({myInitialValues}) => {
       <div>
       <Stack direction="row" spacing={1} sx={chipStyle}>
       {
-        coordList.map((coord, index)=>{
-          return(
-             <Chip sx={{
-            backgroundColor: 'green',
-            color: 'white',
-            padding: '0.3rem 0 0.5rem'
-          }} key={coord} label={
-          <span style={{
-            fontSize: '1.2rem'
-          }}>
-             <MathJax dynamic>{"$$" + "x^{" + index + "} = " + coord + "$$"}</MathJax>
-          </span>
-          } />
-          )
+        Object.keys(myInitialValues.coordinates).map((key, index)=>{
+          if (myInitialValues.coordinates[key] !== '' && typeof myInitialValues.coordinates[key] !== 'number'){
+            return(
+               <Chip sx={{
+              backgroundColor: 'green',
+              color: 'white',
+              padding: '0.3rem 0 0.5rem'
+            }} key={index} label={
+            <span style={{
+              fontSize: '1.2rem'
+            }}>
+               {myInitialValues.coordinates[key].length > 1
+               ?
+               <MathJax dynamic>{"$$" + "x^{" + index + "} = " + "{\\" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
+               :
+               <MathJax dynamic>{"$$" + "x^{" + index + "} = " + "{" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
+               }
+            </span>
+            } />
+            )
+          }
         })
       }
       {
@@ -92,55 +104,14 @@ const MetricTensor = ({myInitialValues}) => {
               {
               keyName === 'alpha'
               ?
-              <>
-              <span>Input </span>
-              <span style={{
-                fontSize: '1.2rem'
-              }}>&#120572;({
-                coordList.map((coord, index)=>
-                      index === coordList.length - 1
-                      ?
-                      coord
-                      :
-                      coord + ','
-                      )
-              })</span>
-              <span> as alpha</span>
-              </>
+                <VariableParameter symbol={'\u03B1'} name={'alpha'} coordList={coordList}/>
               :
               keyName === 'delta'
               ?
-              <>
-              <span>Input </span>
-               <span style={{
-                fontSize: '1rem'
-              }}>&delta;({
-                coordList.map((coord, index)=>
-                      index === coordList.length - 1
-                      ?
-                      coord
-                      :
-                      coord + ','
-                      )
-              })</span>
-              <span> as delta</span>
-              </>
+                <VariableParameter symbol={'\u03B4'} name={'delta'} coordList={coordList}/>
+              
               :
-              <>
-              <span>Input </span>
-               <span style={{
-                fontSize: '1.2rem'
-              }}>&#949;({
-                coordList.map((coord, index)=>
-                      index === coordList.length - 1
-                      ?
-                      coord
-                      :
-                      coord + ','
-                      )
-              })</span>
-              <span> as epsilon</span>
-              </>
+            <VariableParameter symbol={'\u03B5'} name={'epsilon'} coordList={coordList}/>
               }
             </span>
           
@@ -162,7 +133,7 @@ const MetricTensor = ({myInitialValues}) => {
       }}>
         <div>
         {
-          coordList.map((coord,index)=>{
+          Array.from({length: myInitialValues.coordinates.num_coordinates}, (_,index)=>{
             let row = index;
             return(
               <div style={{
@@ -172,7 +143,7 @@ const MetricTensor = ({myInitialValues}) => {
               }}
               key={row}
               >
-                {coordList.map((coord,index)=>{
+                {Array.from({length: myInitialValues.coordinates.num_coordinates},(_,index)=>{
                   let col = index;
                   return(
                     <MatrixComponent
