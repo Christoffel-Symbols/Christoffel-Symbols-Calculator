@@ -30,8 +30,6 @@ from pyCSC.pyCSC import PyCSC
 from flask import jsonify, request
 import sympy as sym
 
-import uuid
-
 from utils import app, logger, log_tracebook, bad_request, server_error
 
 @app.route("/christoffelsymbols", methods=["PUT"])
@@ -57,8 +55,10 @@ def put_christoffel_symbols_json():
         try:
             request_data = request.get_json()
             logger.info("PyCSC request_data: " + str(request_data))
-            num_coordinates = int(request_data["num_coordinates"])
-            logger.info("Number of Dimension: " + str(num_coordinates))
+            coordinates = request_data["coordinates"]
+            for item in coordinates:
+                coordinates[item] = str(coordinates[item])
+            logger.info("Coordinates Information: " + str(coordinates))
             variable_parameters = request_data["variable_parameters"]
             for parameter in variable_parameters:
                 variable_parameters[parameter] = str(variable_parameters[parameter])
@@ -84,8 +84,14 @@ def put_christoffel_symbols_json():
                 "Inputs to initialize the `PyCSC` object " + "do not match required inputs."
             )
         
+        coordinate_list = []
+
+        for key in coordinates:
+            if key != 'num_coordinates' and coordinates[key] != '':
+                coordinate_list.append(coordinates[key])
+        
         PyCSCObj = PyCSC(
-            num_coordinates = num_coordinates
+            coordinates = coordinate_list
         )
 
         cs_sk_dict = dict()
@@ -101,7 +107,7 @@ def put_christoffel_symbols_json():
 
         PyCSCObj.calculate_christoffel_symbol(show_symbols=False) #self.christoffel_sk
 
-        for index in range(num_coordinates):
+        for index in range(len(coordinate_list)):
             cs_sk_dict[str(index)] = sym.latex(sym.simplify(PyCSCObj.christoffel_sk[index]))
 
         PyCSCObj.calculate_christoffel_symbol_fk(show_symbols=False)
