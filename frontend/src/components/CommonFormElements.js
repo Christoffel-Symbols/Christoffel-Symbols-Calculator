@@ -2,8 +2,6 @@ import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Field, useField, useFormikContext } from "formik";
 import { Alert, AlertTitle, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from "@mui/material";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,6 +10,18 @@ import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
 import '../App.css'
+
+export function coordObjectToList(coordObject) {
+
+  var dummyList = [];
+  Object.keys(coordObject).map((key)=>{
+    if(coordObject[key] !== '' && typeof coordObject[key] !== 'number'){
+      dummyList.push(coordObject[key]);
+    }
+  })
+
+  return dummyList;
+}
 
 function createMatrix(numCoords) {
 
@@ -77,36 +87,11 @@ export const CommonTextField = ({placeholder, label, disabled=false, required=fa
     );
 };
 
-export const CommonCheckBox = ({values, label, ...props}) => {
     
-    const { setFieldValue } = useFormikContext();
-    const [field] = useField(props);
-    
-    return (
-        <FormControlLabel 
-        name={field.name}
-        onChange={(e)=>{
-            setFieldValue(String(field.name), e.currentTarget.checked);
-        }}
-        control={<Checkbox checked={values}/>} 
-        label={
-        <article style={{
-          fontFamily: "Roboto,sans-serif",
-          fontSize: '1rem',
-          fontWeight: '100',
-          textAlign: 'left'
-        }}>
-          {label}
-        </article>}
-        />
-        )
+export const CommonSelect = ({options, label, ...props}) => {
         
-}
-    
-export const CommonSelect = ({values, label, ...props}) => {
-        
-        const { setFieldValue } = useFormikContext();
         const [field] = useField(props);
+        const { setFieldValue } = useFormikContext();
         
         return (
             <Box 
@@ -118,16 +103,16 @@ export const CommonSelect = ({values, label, ...props}) => {
           <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
             <Select
-              name={field.name}
-              value={values.num_coordinates}
-              onChange={(e)=> {
-                  setFieldValue(String(field.name), e.target.value)
+                {...field}
+                onChange={(e)=>{
+                  setFieldValue(field.name, e.target.value);
                   setFieldValue('metric_tensor', createMatrix(e.target.value))
-                }}
+                }
+                }
                 label={label}
                 autoWidth
                 >
-              {props.options.map((option)=>{
+              {options.map((option)=>{
                   return(
                       <MenuItem value={option} key={option}>{option}</MenuItem>
                       )
