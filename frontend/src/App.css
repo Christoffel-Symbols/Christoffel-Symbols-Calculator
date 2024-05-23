@@ -46,7 +46,7 @@ html, body {
 }
 
 .heading {
-    font-size: 2rem;
+    font-size: 200%;
     letter-spacing: 3px;
     text-align: center;
     font-family:Georgia, 'Times New Roman', Times, serif;
@@ -59,7 +59,7 @@ html, body {
   gap: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 5%;
 }
 
 .panelHeading {
@@ -92,6 +92,7 @@ html, body {
   padding: 1rem;
   font-size: 2rem;
   text-align: center;
+  align-self: flex-start;
 }
 
 .input {
@@ -223,7 +224,7 @@ html, body {
   }
   
   .menu {
-    margin-top: 5rem;
+    margin-top: 12%;
   }
 }
 
@@ -239,7 +240,7 @@ html, body {
 
   .heading {
     font-size: 1.3rem;
-    margin-top: 15px;
+    margin-top: 1px;
   }
 
   .metricTensorDisplayMessage {
