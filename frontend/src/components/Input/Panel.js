@@ -137,7 +137,7 @@ const christoffelSymbolsValidationSchema = Yup.object({
   variable_parameters: Yup.object({
     alpha: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
       .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
       .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
       .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
@@ -148,7 +148,7 @@ const christoffelSymbolsValidationSchema = Yup.object({
       .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     delta: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
       .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
       .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
       .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
@@ -159,7 +159,7 @@ const christoffelSymbolsValidationSchema = Yup.object({
       .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead"),
     epsilon: Yup.string()
       .notRequired()
-      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
       .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
       .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
       .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
@@ -189,7 +189,7 @@ const christoffelSymbolsValidationSchema = Yup.object({
     }
   })
     .of(Yup.array().of(Yup.string()
-      .matches("^[a-zA-Z0-9*(),_^\/+. -]*$", "Not a valid special character")
+      .matches("^[a-zA-Z0-9*(),_\/+. -]*$", "Not a valid special character")
       .matches("^((?!lambda|Lambda).)*$", "lambda/Lambda is a reserved keyword, use 'lamda/Lamda' instead")
       .matches("^((?!zeta|Zeta).)*$", "zeta/Zeta is reserved as zeta function, please use a different symbol")
       .matches("^((?!beta|Beta).)*$", "beta/Beta is reserved as beta function, please use a different symbol")
@@ -270,7 +270,7 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
               .catch((error) => {
                 setIsError(true);
                 if (error.code === 'ECONNABORTED') {
-                  setErrorMessage("Timeout exceeded. The inputted metric tensor is too complicated.")
+                  setErrorMessage("Timeout exceeded. The inputted metric tensor is terribly complicated!")
                 } else if (error.code = 'ERR_BAD_RESPONSE') {
                   setErrorMessage('Please make sure you are using correct Python syntax. Do not use external libraries (i.e., Math, numpy).')
                 } else {
