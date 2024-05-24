@@ -3,23 +3,23 @@ import { MathJax } from "better-react-mathjax";
 import { CommonTextField } from '../CommonFormElements';
 
 
-const DefineCoordinates = ({myInitialValues}) => {
+const DefineCoordinates = ({ myInitialValues }) => {
   return (
-        <div>
-          <article className='panelHeading' style={{
-            paddingLeft: '0.5rem',
-            paddingRight: '0.5rem'
-          }}>
-        Declare Coordinates
-          </article>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
-          {
-            Array.from({length: myInitialValues.coordinates.num_coordinates},(_,index)=>{
-              return (
-                <span 
+    <div>
+      <article className='panelHeading' style={{
+        paddingLeft: '0.5rem',
+        paddingRight: '0.5rem'
+      }}>
+        Choose Coordinates
+      </article>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        {
+          Array.from({ length: myInitialValues.coordinates.num_coordinates }, (_, index) => {
+            return (
+              <span
                 key={index}
                 style={{
                   display: 'flex',
@@ -31,13 +31,13 @@ const DefineCoordinates = ({myInitialValues}) => {
                   name={`coordinates.coordinate${index}`}
                   value={`myInitialValues.coorindates.coordinate${index}`}
                   placeholder={"Example: r, x, theta, y"}
-                  />
+                />
               </span>
-              )
-            })
-          }
-          </div>
-        </div>
+            )
+          })
+        }
+      </div>
+    </div>
   )
 }
 
