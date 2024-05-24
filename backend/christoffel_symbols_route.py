@@ -108,7 +108,11 @@ def put_christoffel_symbols_json():
         PyCSCObj.calculate_christoffel_symbol(show_symbols=False) #self.christoffel_sk
 
         for index in range(len(coordinate_list)):
-            cs_sk_dict[str(index)] = sym.latex(sym.simplify(PyCSCObj.christoffel_sk[index]))
+            try:
+                cs_sk_dict[str(index)] = sym.latex(sym.simplify(PyCSCObj.christoffel_sk[index]))
+            except:
+                cs_sk_dict[str(index)] = sym.latex(PyCSCObj.christoffel_sk[index])
+
 
         PyCSCObj.calculate_christoffel_symbol_fk(show_symbols=False)
 
@@ -136,13 +140,17 @@ def put_christoffel_symbols_json():
 
 
         if onlyCS == "option_2":
+            try:
+                ricci_scalar = sym.simplify(PyCSCObj.ricci_scalar)
+            except:
+                ricci_scalar = PyCSCObj.ricci_scalar
             return jsonify(
             metric_tensor = sym.latex(PyCSCObj.metric),
             christoffel_symbols = cs_sk_dict,
             christoffel_symbols_fk = cs_fk_dict,
             riemann_tensor = riemann_dict,
             ricci_tensor = sym.latex(PyCSCObj.ricci_tensor),
-            ricci_scalar = sym.latex(sym.simplify(PyCSCObj.ricci_scalar)),
+            ricci_scalar = sym.latex(ricci_scalar),
             einstein_tensor = sym.latex(einstein_tensor)
         ) 
         else:
