@@ -148,7 +148,8 @@ const christoffelSymbolsValidationSchema = Yup.object({
     } else {
       return true
     }
-  })
+  }),
+  simplify: Yup.bool().required('')
 })
 
 const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
@@ -184,7 +185,8 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
         epsilon: ''
       },
       metric_tensor: [['0', '0'], ['0', '0']],
-      calculate_options: ['Christoffel Symbols first kind']
+      calculate_options: ['Christoffel Symbols first kind'],
+      simplify: false
     }
   } else {
     myInitialValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);

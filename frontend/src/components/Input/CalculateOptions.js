@@ -3,6 +3,11 @@ import { useField, useFormikContext } from "formik";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import InfoIcon from '@mui/icons-material/Info';
+import Tooltip from '@mui/material/Tooltip';
+import Fade from '@mui/material/Fade';
 
 const CalculateOptionSelect = ({ options, label, ...props }) => {
 
@@ -67,6 +72,57 @@ const CalculateOptionSelect = ({ options, label, ...props }) => {
     )
 }
 
+const CalculateSimplifyCheckBox = ({ ...props }) => {
+
+    const [field] = useField(props);
+    const { setFieldValue } = useFormikContext();
+
+    return (
+        <FormControlLabel
+            checked={field.value}
+            onChange={(e) => {
+                setFieldValue(field.name, e.target.checked)
+            }}
+            control={
+                <Checkbox
+                    sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
+            label={<article
+                style={{
+                    fontSize: '1.7rem',
+                    fontFamily: 'Roboto',
+                    display: 'flex',
+                    gap: '0.5rem',
+                    alignItems: 'center'
+                }}>
+                Simplify
+                <Tooltip
+                    TransitionComponent={Fade}
+                    TransitionProps={{ timeout: 600 }}
+                    title={<span style={{
+                        fontSize: '1.2rem'
+                    }}>Takes longer to compute!</span>}
+                    arrow
+                    slotProps={{
+                        popper: {
+                            modifiers: [
+                                {
+                                    name: 'offset',
+                                    options: {
+                                        offset: [0, -10],
+                                    },
+                                },
+                            ],
+                        },
+                    }}
+                >
+                    <InfoIcon sx={{ fontSize: '1.8rem', color: 'red' }} />
+                </Tooltip>
+            </article>}
+            labelPlacement="end"
+        />
+    )
+}
+
 const CalculateOptions = ({ myInitialValues }) => {
 
     return (
@@ -81,11 +137,21 @@ const CalculateOptions = ({ myInitialValues }) => {
             }}>
                 Calculate Options
             </article>
-            <CalculateOptionSelect
-                name="calculate_options"
-                values={myInitialValues.calculate_options}
-                options={['Christoffel Symbols first kind', 'Christoffel Symbols second kind', 'Riemann Tensor first kind', 'Riemann Tensor second kind', 'Ricci Tensor', 'Ricci scalar', 'Einstein Tensor']}
-            />
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}>
+                <CalculateOptionSelect
+                    name="calculate_options"
+                    values={myInitialValues.calculate_options}
+                    options={['Christoffel Symbols first kind', 'Christoffel Symbols second kind', 'Riemann Tensor first kind', 'Riemann Tensor second kind', 'Ricci Tensor', 'Ricci scalar', 'Einstein Tensor']}
+                />
+                <CalculateSimplifyCheckBox
+                    name="simplify"
+                    values={myInitialValues.simplify}
+                />
+            </div>
         </div>
     )
 }
