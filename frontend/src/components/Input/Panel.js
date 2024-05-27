@@ -3,70 +3,13 @@ import MetricTensor from './MetricTensor';
 import Parameters from './Parameters';
 import axios from "axios";
 import { API_URL } from '../../env'
-import { Formik, Form, useFormikContext, useField } from 'formik';
+import { Formik, Form } from 'formik';
 import { AlertError, CalculateButton } from '../CommonFormElements';
 import * as Yup from "yup";
 import { styleButton } from '../CommonFormElements';
-import { Button, FormControl } from '@mui/material';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
+import { Button } from '@mui/material';
+import CalculateOptions from './CalculateOptions';
 
-const radioStyle = {
-  fontFamily: 'Roboto',
-  fontSize: '1.5rem',
-  fontWeight: 'light'
-}
-
-
-const CalculateOptions = ({ values, ...props }) => {
-
-  const { setFieldValue } = useFormikContext();
-  const [field] = useField(props);
-
-  return (
-    <div>
-      <FormControl>
-        <FormLabel className='calculateOptions' sx={{
-          fontSize: '2rem',
-          color: 'white',
-          fontFamily: 'Roboto',
-          "&.Mui-focused": { color: "white" },
-        }}>Calculate Options</FormLabel>
-        <RadioGroup
-          row
-          name={field.name}
-          value={values.onlyCS}
-          defaultValue='option_1'
-          onChange={(e) => {
-            setFieldValue(field.name, e.target.value)
-          }}
-        >
-          <FormControlLabel
-            value="option_1"
-            control={<Radio />}
-            label={
-              <span style={radioStyle}>
-                Christoffel Symbols
-              </span>
-            }
-          />
-          <FormControlLabel
-            disabled={props.disabled}
-            value="option_2"
-            control={<Radio />}
-            label={
-              <span style={radioStyle}>
-                Christoffel Symbols + Tensors (i.e., Riemann, Ricci, Einstein)
-              </span>
-            }
-          />
-        </RadioGroup>
-      </FormControl>
-    </div>
-  )
-}
 
 const christoffelSymbolsValidationSchema = Yup.object({
   coordinates: Yup.object({
@@ -199,10 +142,13 @@ const christoffelSymbolsValidationSchema = Yup.object({
       .matches("^((?!S).)*$", "S is a reserved character, please use 's' instead")
       .matches("^((?!N).)*$", "N is a reserved character, please use 'n' instead")
       .required())),
-  onlyCS: Yup.string()
-    .required("onlyCS must be either true or false")
-    .typeError("onlyCS must either be true or false")
-
+  calculate_options: Yup.array().of(Yup.string()).required("Cannot be empty").test('ZeroOptions', "Cannot be empty", (value) => {
+    if (value.length === 0) {
+      return false // Zero length therefore test failed
+    } else {
+      return true
+    }
+  })
 })
 
 const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
@@ -238,7 +184,7 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
         epsilon: ''
       },
       metric_tensor: [['0', '0'], ['0', '0']],
-      onlyCS: 'option_1'
+      calculate_options: ['Christoffel Symbols first kind']
     }
   } else {
     myInitialValues = JSON.parse(`${sessionStorage.getItem(FORM_SESSION)}`);
@@ -291,11 +237,7 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
             <div className='input'>
               <Parameters myInitialValues={values} />
               <MetricTensor myInitialValues={values} />
-              <CalculateOptions
-                name="onlyCS"
-                values={values}
-                disabled={myInitialValues.value === "example-6" || myInitialValues.value === "example-8"}
-              />
+              <CalculateOptions myInitialValues={values} />
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-evenly',

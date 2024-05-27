@@ -44,12 +44,13 @@ const ExportToLatex = ({ name, result }) => {
     const resultDisplay = (keyName) => {
         return (
             {
-                'christoffel_sk': ["$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + " = $$"],
-                'christoffel_fk': ["$$" + "\\Gamma_{" + keyName + "}" + " = $$"],
-                'riemann_tensor': ["$$" + "R^{" + keyName[0] + "}_{" + keyName.slice(1, 4) + "}" + " = $$"],
-                'ricci_tensor': ["$$" + "R_{\\mu\\nu}" + " = $$"],
-                'ricci_scalar': ["$$" + "R" + " = $$"],
-                'einstein_tensor': ["$$" + "G_{\\mu\\nu}" + " = $$"]
+                'christoffelFk': ["$$" + "\\Gamma_{" + keyName + "}" + " = $$"],
+                'christoffelSk': ["$$" + "\\Gamma^{" + keyName + "}_{\\mu\\nu}" + " = $$"],
+                'riemannTensorFk': ["$$" + "R_{" + keyName + "}" + " = $$"],
+                'riemannTensorSk': ["$$" + "R^{" + keyName[0] + "}_{" + keyName.slice(1, 4) + "}" + " = $$"],
+                'ricciTensor': ["$$" + "R_{\\mu\\nu}" + " = $$"],
+                'ricciScalar': ["$$" + "R" + " = $$"],
+                'einsteinTensor': ["$$" + "G_{\\mu\\nu}" + " = $$"]
 
             }
         )
@@ -123,7 +124,7 @@ const ExportToLatex = ({ name, result }) => {
                         justifyContent: 'center'
                     }}>
                         {
-                            name === 'ricci_tensor' || name === 'ricci_scalar' || name === 'einstein_tensor'
+                            name === 'ricciTensor' || name === 'ricciScalar' || name === 'einsteinTensor'
                                 ?
                                 <div style={{
                                     display: 'flex',
