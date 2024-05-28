@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { CommonAlertDialog } from './CommonFormElements';
 import '../App.css'
 import Radio from '@mui/material/Radio';
@@ -11,52 +11,52 @@ import { Link } from '@mui/material';
 
 
 const aboutDescription = () => {
-    return(
-      <>
-        Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that helps you calculate <b>torsion-free</b> Christoffel Symbols (both first and second kinds) along with non-zero components of the Riemann Tensor, Ricci Tensor, Ricci Scalar, and Einstein Tensor. 
-        <br/>
-        <br/>
-        You can work with a 2,3, or 4-Dimensional coordinate system and specify at most 3 variable parameters that you want to include in the metric tensor. You can also include any implicit function in the Metric Tensor (for example <b>a(t)</b>, which is most popularly known as the scale factor in cosmology, or pressure as a function of time <b>p(t)</b>, and etcetera).
-        <br/>
-        <br/>
-        If you are a first-time user, please use the <b>QUICK GUIDE</b> section to get a detailed step-by-step overview on how to use this tool. You can also try working with some pre-defined metric tensors in the <b>EXAMPLES</b> section. To understand the physics behind their origin, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.        
-        <br/>
-        <br/>
-        This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. Happy Calculating!
-      </>
-    )
-  }
+  return (
+    <>
+      Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that can calculate <b>torsion-free</b> Christoffel Symbols (first and second kinds), Riemann Tensor (first and second kinds), Ricci Tensor, Ricci Scalar, and Einstein Tensor.
+      <br />
+      <br />
+      Users can work with a 2,3, or 4-Dimensional coordinate system of their choice, and specify at most 3 variable parameters to substitute in the metric tensor.
+      <br />
+      <br />
+      For first-time users, please use the <b>QUICK GUIDE</b> section to get familiarized with the software. There are also some cool space-time models listed in the <b>EXAMPLES</b> section to experiment with! To understand the physics behind their origin, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.
+      <br />
+      <br />
+      This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. Happy Calculating!
+    </>
+  )
+}
 
-  const quickGuideDescription = () => {
-    return (
-      <>
-        Step 1: Select the number of dimensions of your space-time from the drop-down menu in the <b>
-          Number of Dimensions
-          </b> section. 
-        <br/>
-        <br/>
-        step 2: Choose appropriate symbol for each coordinate (r, theta, phi, and etcetera).  
-        <br/>
-        <br/>
-        Step 3: Define at most 3 variable parameters in the <b>Define Variable Parameters</b> section that would like to include in the metric tensor. 
-        <br/>
-        <br/>
-        Step 4: Fill the metric tensor with the appropriate expressions and values. 
-        <br/>
-        <br/>
-        Step 5: In the <b>Calculate Options</b>, choose whether you want to calculate only Christoffel Symbols (both first and second kinds) or calculate tensors along with Christoffel Symbols.
-        <br/>
-        <br/>
-        Step 6 (a): After the inputted values and expressions have been validated, click on <b>Calculate</b>. 
-        <br/>
-        <br/>
-        Step 6 (b): If you want a clean slate after a calculation, please click on the <b>Reset</b> button. 
-      </>
-    )
-  }
+const quickGuideDescription = () => {
+  return (
+    <>
+      Step 1: Select the number of dimensions of the space-time from the drop-down menu in <b>
+        Number of Dimensions
+      </b>.
+      <br />
+      <br />
+      step 2: Choose appropriate symbol for each coordinate (i.e., r, theta, phi).
+      <br />
+      <br />
+      Step 3: Define any variable parameters in <b>Define Variable Parameters</b>.
+      <br />
+      <br />
+      Step 4: Fill the metric tensor with the appropriate expressions and values.
+      <br />
+      <br />
+      Step 5: Select the desired expressions to calculate from the menu in <b>Calculate Options</b>.
+      <br />
+      <br />
+      Step 6 (a): Click on <b>Calculate</b>.
+      <br />
+      <br />
+      Step 6 (b): To start over, please click on the <b>Reset</b> button.
+    </>
+  )
+}
 
-const TabMenu = ({incrNumChristoffelCalculated}) => {
-  
+const TabMenu = ({ incrNumChristoffelCalculated }) => {
+
   const [selected, setSelected] = useState('');
 
   const FORM_SESSION = "christoffelForm"; // key for sessionStorage (user inputs)
@@ -75,13 +75,13 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
   const tabMenuRadioButtonsGroup = () => {
 
     const handleRadioChange = (e) => {
-      const data = examplesData.filter((object)=> object.value === e.target.value);
+      const data = examplesData.filter((object) => object.value === e.target.value);
 
       // fills the input parameters and set it in the session storage
       sessionStorage.setItem(FORM_SESSION, JSON.stringify(data[0]));
       handleClose();
-      if(christoffelParams){
-        sessionStorage.setItem(FORM_PARAMS, JSON.stringify({...christoffelParams, "metric_tensor": null}));
+      if (christoffelParams) {
+        sessionStorage.setItem(FORM_PARAMS, JSON.stringify({ ...christoffelParams, "metric_tensor": null }));
       }
 
       // we re-render after setting the parameters in the sessionstorage.
@@ -89,91 +89,91 @@ const TabMenu = ({incrNumChristoffelCalculated}) => {
     }
 
 
-  return (
-    <FormControl>
-      <FormLabel sx={{
-        textAlign: 'center'
-      }}><b>
-        Given below are a bunch of pre-defined 
-        <br/> 
-        metric tensors that are popular in astrophyiscs. 
-        <br/>
-        Please select one.
-        </b>
+    return (
+      <FormControl>
+        <FormLabel sx={{
+          textAlign: 'center'
+        }}><b>
+            Given below are a bunch of pre-defined
+            <br />
+            metric tensors that are popular in astrophyiscs.
+            <br />
+            Please select one.
+          </b>
         </FormLabel>
-      <RadioGroup
-        name="tab-menu-radio-buttons-group"
-        onChange={handleRadioChange}
-        defaultValue={''}
-        sx={{
-         alignContent: 'center'
-        }}
-      >
-        <FormControlLabel 
-        value="example-1" 
-        control={<Radio />} 
-        label="2-Sphere"
-        />
-        <FormControlLabel 
-        value="example-2" 
-        control={<Radio />}
-        label="Spherical Coordinates"
-        />
-        <FormControlLabel 
-        value="example-3" 
-        control={<Radio />} 
-        label="Schwarzschild Metric"
-        />
-        <FormControlLabel 
-        value="example-4" 
-        control={<Radio />} 
-        label="Robertson-Walker Metric"
-        />
-        <FormControlLabel 
-        value="example-5" 
-        control={<Radio />} 
-        label="Reissner-Nordstrom Metric"
-        />
-        <FormControlLabel 
-        value="example-6" 
-        control={<Radio />} 
-        label="Kerr Metric (response time ~ 40 sec)" />
-        <FormControlLabel 
-        value="example-7" 
-        control={<Radio />} 
-        label="Weak-Field Metric" />
-        <FormControlLabel 
-        value="example-8" 
-        control={<Radio />} 
-        label="Pressure-density Metric" />
-      </RadioGroup>
-    </FormControl>
+        <RadioGroup
+          name="tab-menu-radio-buttons-group"
+          onChange={handleRadioChange}
+          defaultValue={''}
+          sx={{
+            alignContent: 'center'
+          }}
+        >
+          <FormControlLabel
+            value="example-1"
+            control={<Radio />}
+            label="2-Sphere"
+          />
+          <FormControlLabel
+            value="example-2"
+            control={<Radio />}
+            label="Spherical Coordinates"
+          />
+          <FormControlLabel
+            value="example-3"
+            control={<Radio />}
+            label="Schwarzschild Metric"
+          />
+          <FormControlLabel
+            value="example-4"
+            control={<Radio />}
+            label="Robertson-Walker Metric"
+          />
+          <FormControlLabel
+            value="example-5"
+            control={<Radio />}
+            label="Reissner-Nordstrom Metric"
+          />
+          <FormControlLabel
+            value="example-6"
+            control={<Radio />}
+            label="Kerr Metric" />
+          <FormControlLabel
+            value="example-7"
+            control={<Radio />}
+            label="Weak-Field Metric" />
+          <FormControlLabel
+            value="example-8"
+            control={<Radio />}
+            label="Pressure-density Metric" />
+        </RadioGroup>
+      </FormControl>
     );
   }
 
   return (
     <div className='menu'>
-        <CommonAlertDialog 
-        name={'ABOUT'} 
-        description={aboutDescription} 
-        open={selected === 'ABOUT'} 
-        handleClose={handleClose} 
+      <CommonAlertDialog
+        name={'ABOUT'}
+        description={aboutDescription}
+        open={selected === 'ABOUT'}
+        handleClose={handleClose}
         handleClickOpen={handleClickOpen}
-       />
-        <CommonAlertDialog 
-        name={'EXAMPLES'} 
-        description={tabMenuRadioButtonsGroup} 
-        open={selected === 'EXAMPLES'} 
-        handleClose={handleClose} 
+      />
+      <CommonAlertDialog
+        name={'EXAMPLES'}
+        description={tabMenuRadioButtonsGroup}
+        open={selected === 'EXAMPLES'}
+        handleClose={handleClose}
         handleClickOpen={handleClickOpen}
-        />
-        <CommonAlertDialog 
-        name={'QUICK GUIDE'} 
-        description={quickGuideDescription} 
+      />
+      <CommonAlertDialog
+        name={'QUICK GUIDE'}
+        description={quickGuideDescription}
         open={selected === 'QUICK GUIDE'}
-        handleClose={handleClose} 
+        handleClose={handleClose}
         handleClickOpen={handleClickOpen}
-        />
+      />
     </div>
   )
 }
