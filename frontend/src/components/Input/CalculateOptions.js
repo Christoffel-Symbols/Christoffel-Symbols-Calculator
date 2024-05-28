@@ -8,8 +8,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InfoIcon from '@mui/icons-material/Info';
 import Tooltip from '@mui/material/Tooltip';
 import Fade from '@mui/material/Fade';
+import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
 
-const CalculateOptionSelect = ({ options, label, ...props }) => {
+const CalculateOptionSelect = ({ options, ...props }) => {
 
     const [field] = useField(props);
     const { setFieldValue } = useFormikContext();
@@ -25,7 +27,7 @@ const CalculateOptionSelect = ({ options, label, ...props }) => {
     };
 
     return (
-        <FormControl sx={{ m: 1, width: 400, mt: 3 }}>
+        <FormControl sx={{ m: 1, width: 400 }}>
             <Select
                 {...field}
                 multiple
@@ -35,17 +37,13 @@ const CalculateOptionSelect = ({ options, label, ...props }) => {
                 sx={{
                     backgroundColor: 'white',
                 }}
-                renderValue={(selected) => {
-                    return (
-                        <span style={{
-                            fontSize: '1.5rem',
-                            fontFamily: 'Roboto',
-                            textAlign: 'center'
-                        }}>
-                            {selected.join(', ')}
-                        </span>
-                    )
-                }}
+                renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                        {selected.map((value) => (
+                            <Chip key={value} label={value} sx={{ fontSize: '1.2rem' }} />
+                        ))}
+                    </Box>
+                )}
             >
                 {options.map((option) => {
                     return (
@@ -88,18 +86,19 @@ const CalculateSimplifyCheckBox = ({ ...props }) => {
                     sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
             label={<article
                 style={{
+                    marginTop: '0.2rem',
                     fontSize: '1.7rem',
                     fontFamily: 'Roboto',
                     display: 'flex',
-                    gap: '0.5rem',
-                    alignItems: 'center'
+                    gap: '0.1rem',
+                    alignItems: 'center',
                 }}>
                 Simplify
                 <Tooltip
                     TransitionComponent={Fade}
                     TransitionProps={{ timeout: 600 }}
                     title={<span style={{
-                        fontSize: '1.2rem'
+                        fontSize: '1rem'
                     }}>Takes longer to compute!</span>}
                     arrow
                     slotProps={{
@@ -115,7 +114,7 @@ const CalculateSimplifyCheckBox = ({ ...props }) => {
                         },
                     }}
                 >
-                    <InfoIcon sx={{ fontSize: '1.8rem', color: 'red' }} />
+                    <InfoIcon sx={{ fontSize: '1.6rem', color: 'red' }} />
                 </Tooltip>
             </article>}
             labelPlacement="end"
@@ -127,7 +126,8 @@ const CalculateOptions = ({ myInitialValues }) => {
 
     return (
         <div style={{
-            padding: '1rem'
+            display: 'flex',
+            flexDirection: 'column'
         }}>
             <article className='panelHeading' style={{
                 fontSize: '2.5rem',
@@ -138,14 +138,19 @@ const CalculateOptions = ({ myInitialValues }) => {
                 Calculate Options
             </article>
             <div style={{
+                border: 'solid #244855',
+                padding: '0.5rem',
+                borderRadius: '1rem',
+                gap: '1rem',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center'
             }}>
                 <CalculateOptionSelect
                     name="calculate_options"
                     values={myInitialValues.calculate_options}
-                    options={['Christoffel Symbols first kind', 'Christoffel Symbols second kind', 'Riemann Tensor first kind', 'Riemann Tensor second kind', 'Ricci Tensor', 'Ricci scalar', 'Einstein Tensor']}
+                    options={['Christoffel Symbols first kind', 'Christoffel Symbols second kind', 'Riemann Tensor first kind', 'Riemann Tensor second kind', 'Ricci Tensor', 'Ricci Scalar', 'Einstein Tensor']}
                 />
                 <CalculateSimplifyCheckBox
                     name="simplify"

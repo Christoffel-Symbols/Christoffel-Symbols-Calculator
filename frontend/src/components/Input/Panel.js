@@ -218,7 +218,7 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
               .catch((error) => {
                 setIsError(true);
                 if (error.code === 'ECONNABORTED') {
-                  setErrorMessage("Timeout exceeded. The inputted metric tensor is terribly complicated!")
+                  setErrorMessage("Timeout exceeded. Uncheck the simplify option and try again!")
                 } else if (error.code = 'ERR_BAD_RESPONSE') {
                   setErrorMessage('Please make sure you are using correct Python syntax. Do not use external libraries (i.e., Math, numpy).')
                 } else {
@@ -236,6 +236,7 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
       >
         {({ values, isSubmitting, isValid }) => (
           <Form>
+            {console.log(values)}
             <div className='input'>
               <Parameters myInitialValues={values} />
               <MetricTensor myInitialValues={values} />
