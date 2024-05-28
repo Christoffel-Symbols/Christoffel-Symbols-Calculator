@@ -208,7 +208,9 @@ const ExportToLatex = ({ name, result }) => {
                                                 overflow: 'scroll',
                                                 justifyContent: 'safe center',
                                                 alignItems: 'safe center'
-                                            }}>
+                                            }}
+                                                key={index}
+                                            >
 
 
                                                 <div

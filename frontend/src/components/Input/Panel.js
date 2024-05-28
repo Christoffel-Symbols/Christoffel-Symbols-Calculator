@@ -218,9 +218,9 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
               .catch((error) => {
                 setIsError(true);
                 if (error.code === 'ECONNABORTED') {
-                  setErrorMessage("Timeout exceeded. Uncheck the simplify option and try again!")
+                  setErrorMessage("Timeout exceeded. Uncheck the simplify option!")
                 } else if (error.code = 'ERR_BAD_RESPONSE') {
-                  setErrorMessage('Please make sure you are using correct Python syntax. Do not use external libraries (i.e., Math, numpy).')
+                  setErrorMessage("Please make sure you're using correct Python syntax. Do not use external libraries (i.e., Math, numpy).")
                 } else {
                   setErrorMessage(error.message);
                 }
@@ -236,7 +236,6 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
       >
         {({ values, isSubmitting, isValid }) => (
           <Form>
-            {console.log(values)}
             <div className='input'>
               <Parameters myInitialValues={values} />
               <MetricTensor myInitialValues={values} />

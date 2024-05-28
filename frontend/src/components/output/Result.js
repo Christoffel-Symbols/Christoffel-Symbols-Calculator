@@ -42,7 +42,7 @@ const Result = ({ numChristoffelCalculated, resultRef }) => {
     "Christoffel Symbols second kind": christoffelSkRef,
     "Christoffel Symbols first kind": christoffelFkRef,
     "Riemann Tensor first kind": riemannTensorFkRef,
-    "Riemann Tensor second kind ": riemannTensorSkRef,
+    "Riemann Tensor second kind": riemannTensorSkRef,
     "Ricci Tensor": ricciTensorRef,
     "Ricci Scalar": ricciScalarRef,
     "Einstein Tensor": einsteinTensorRef,
@@ -72,17 +72,21 @@ const Result = ({ numChristoffelCalculated, resultRef }) => {
         </div>
         <div id={numChristoffelCalculated} className='result' ref={resultRef}>
           <div className='resultMenuBar'>
+
             {Object.keys(resultRefOptions).map((name, index) => {
               return (
-                calculateOptions.filter((option) => name === option
-                  ?
-                  <NavigationButton key={index} tensorRef={resultRefOptions[name]} name={name} />
-                  :
-                  null
-                )
+                <span key={index}>
+                  {
+                    calculateOptions.includes(name)
+                      ?
+                      <NavigationButton tensorRef={resultRefOptions[name]} name={name} />
+                      :
+                      null
+                  }
+                </span>
               )
-
             })}
+
           </div>
 
           <div className='resultOutput' >
