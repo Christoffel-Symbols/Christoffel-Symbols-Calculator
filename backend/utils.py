@@ -32,17 +32,44 @@ from traceback import format_exception
 from flask import Flask, Response, jsonify
 from flask_cors import CORS
 
-app = Flask(
-    __name__,
-    # static_folder="../frontend/build", # For local testing
-    static_folder="/backend/client", # For building inside Docker container
-    static_url_path='/'
-)
-cors = CORS(app=app)
-logger = logging.getLogger("gunicorn.error")
-app.logger.handlers = logger.handlers
-app.logger.setLevel(logger.level)
-logger.debug('Static URL path is set to: /' + str(app.static_url_path))
+local_devel = True
+
+if local_devel:
+    # --- Python ---
+    app = Flask(__name__)
+    cors = CORS(app=app)
+    #
+    # Configure logger
+    #
+    app.logger.handlers.clear()  # prevent double-logging with Flask logger
+    log_handler = logging.StreamHandler()  # log to stdout/stderr
+    # log_handler = logging.FileHandler("etc_frontend.log")  # log to file
+    # Add logger to Flask app (only logs application errors, not HTTP errors)
+    log_formatter = logging.Formatter(
+        "%(asctime)s [%(name)-12s] %(levelname)-8s %(message)s"
+    )
+    log_handler.setFormatter(log_formatter)
+    log_handler.setLevel(logging.DEBUG) # this should allow all error messages to be displayed
+    app.logger.addHandler(log_handler)
+    # Use this logger for manual addition of log messages
+    logger = logging.getLogger("werkzeug")
+    logger.setLevel(logging.DEBUG)
+    # logger.setFormatter(log_formatter)  # this line doesn't work for some reason...
+else:
+    # --- Gunicorn ---
+    app = Flask(
+        __name__,
+        # static_folder="../frontend/build", # For local testing
+        static_folder="/backend/client", #For building inside docker
+        # static_folder="/backend/client", #Different path for server
+        static_url_path="/",  # https://github.com/opencadc/skaha/pull/323
+    )
+    cors = CORS()
+    # Add logger to Flask app (only logs application errors, not HTTP errors)
+    logger = logging.getLogger("gunicorn.error")
+    app.logger.handlers = logger.handlers
+    app.logger.setLevel(logger.level)
+    logger.debug("Static URL path is set to: /" + str(app.static_url_path))
 
 def bad_request(message):
     """

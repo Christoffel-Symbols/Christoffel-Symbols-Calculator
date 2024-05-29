@@ -26,7 +26,13 @@ You should have received a copy of the GNU General Public License along with Chr
 If not, see<http://www.gnu.org/licenses/>.
 """
 
-from pyCSC.pyCSC import PyCSC
+from pyCSC.pycsc import PyCSC
+from pyCSC.metric_tensor import MetricTensor
+from pyCSC.christoffel_symbols import ChristoffelSymbols
+from pyCSC.riemann_tensor import RiemannTensor
+from pyCSC.ricci_tensor import RicciTensor
+from pyCSC.ricci_scalar import RicciScalar
+from pyCSC.einstein_tensor import EinsteinTensor
 from flask import jsonify, request
 import sympy as sym
 
@@ -63,10 +69,15 @@ def put_christoffel_symbols_json():
             for parameter in variable_parameters:
                 variable_parameters[parameter] = str(variable_parameters[parameter])
             logger.info("Variable parameters: " + str(variable_parameters))
-            metric_tensor = str(request_data["metric_tensor"])
-            logger.info("metric_tensor: " + str(metric_tensor))
-            onlyCS = str(request_data["onlyCS"])
-            logger.info("onlyCS: " + str(onlyCS))
+
+            matrix = str(request_data["metric_tensor"])
+            logger.info("metric_tensor: " + str(matrix))
+
+            calculate_options = str(request_data["calculate_options"])
+            logger.info("calculate_options: " + str(calculate_options))
+
+            simplify = str(request_data['simplify'])
+            logger.info('Simplify: ' + str(simplify))
 
             # logging request data
             f = open("requestData.log", "a")
@@ -90,79 +101,253 @@ def put_christoffel_symbols_json():
             if key != 'num_coordinates' and coordinates[key] != '':
                 coordinate_list.append(coordinates[key])
         
-        PyCSCObj = PyCSC(
-            coordinates = coordinate_list
-        )
-
-        cs_sk_dict = dict()
-        cs_fk_dict = dict()
-        riemann_dict = dict()
         variable_dict = dict()
 
         for key in variable_parameters:
             if variable_parameters[key]:
                 variable_dict[key] = variable_parameters[key]
 
-        PyCSCObj.metric_tensor(matrix=metric_tensor, variable_values=variable_dict) #self.metric
+        pycsc = PyCSC(
+            coordinates = coordinate_list
+        )
 
-        PyCSCObj.calculate_christoffel_symbol(show_symbols=False) #self.christoffel_sk
+        metric_tensor = MetricTensor(matrix=matrix, variable_values=variable_dict,PyCSCObj=pycsc)
 
-        for index in range(len(coordinate_list)):
-            try:
-                cs_sk_dict[str(index)] = sym.latex(sym.simplify(PyCSCObj.christoffel_sk[index]))
-            except:
-                cs_sk_dict[str(index)] = sym.latex(PyCSCObj.christoffel_sk[index])
+        christoffel_symbols = ChristoffelSymbols(PyCSCObj=pycsc, MetricTensorObj=metric_tensor)
 
+        riemann_tensor = RiemannTensor(PyCSCObj=pycsc, MetricTensorObj=metric_tensor, ChristoffelSymbolsObj=christoffel_symbols)
 
-        PyCSCObj.calculate_christoffel_symbol_fk(show_symbols=False)
+        ricci_tensor = RicciTensor(MetricTensorObj=metric_tensor, RiemannTensorObj=riemann_tensor, PyCSCObj=pycsc)
 
-        for key in PyCSCObj.christoffel_fk:
-            ans = PyCSCObj.christoffel_fk[key]
-            if ans != 0:
-                cs_fk_dict[key] = sym.latex(PyCSCObj.christoffel_fk[key])
+        ricci_scalar = RicciScalar(PyCSCObj=pycsc, MetricTensorObj=metric_tensor, RicciTensorObj=ricci_tensor)
 
+        einstein_tensor = EinsteinTensor(PyCSCObj=pycsc, MetricTensorObj=metric_tensor, RicciTensorObj=ricci_tensor, RicciScalarObj=ricci_scalar)
 
-        if onlyCS == "option_2":
-
-            PyCSCObj.calculate_riemann_tensor(show_tensor=False) #self.riemann_dict
-
-            PyCSCObj.calculate_ricci_tensor(show_tensor=False) # self.ricci_tensor
-
-            PyCSCObj.calculate_ricci_scalar(show_scalar=False) # self.ricci_scalar
-
-            einstein_tensor = PyCSCObj.calculate_einstein_tensor(show_tensor=False)
-
-
-            for key in PyCSCObj.riemann_dict:
-                ans = PyCSCObj.riemann_dict[key]
-                if ans != 0:
-                    riemann_dict[key] = sym.latex(PyCSCObj.riemann_dict[key])
-
-
-        if onlyCS == "option_2":
-            try:
-                ricci_scalar = sym.simplify(PyCSCObj.ricci_scalar)
-            except:
-                ricci_scalar = PyCSCObj.ricci_scalar
-            return jsonify(
-            metric_tensor = sym.latex(PyCSCObj.metric),
-            christoffel_symbols = cs_sk_dict,
-            christoffel_symbols_fk = cs_fk_dict,
-            riemann_tensor = riemann_dict,
-            ricci_tensor = sym.latex(PyCSCObj.ricci_tensor),
-            ricci_scalar = sym.latex(ricci_scalar),
-            einstein_tensor = sym.latex(einstein_tensor)
-        ) 
+        if simplify == 'True':
+            simplify = True
         else:
+            simplify = False
+
+        if 'Einstein Tensor' in calculate_options:
+            print('einstein')
+            #Calculate Christoffel Symbols
+            christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
+            christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
+
+            #List of matrices
+            christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
+
+            #Calculate Riemann Tensors
+            riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
+            riemann_fk = riemann_tensor.cleaner_riemann_fk
+            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            #Calculate Ricci Tensor
+            ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
+
+            #Calculate Ricci Scalar
+            ricci_scalar_value = ricci_scalar.calculate(show=False, simplify=simplify)
+
+            #Calculate Einstein Tensor
+            einstein_tensor_fk = einstein_tensor.calculate(show=False, simplify=simplify)
+
+            cs_sk_dict = dict()
+            for index in range(len(christoffel_sk)):
+                    cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
+
+            cs_fk_dict = dict()
+            for key,value in christoffel_fk.items():
+                cs_fk_dict[key] = sym.latex(value)
+
+            rm_fk_dict = dict()
+            for key,value in riemann_fk.items():
+                rm_fk_dict[key] = sym.latex(value)
+
+            rm_sk_dict = dict()
+            for key,value in riemann_sk.items():
+                rm_sk_dict[key] = sym.latex(value)
+
+
             return jsonify(
-            metric_tensor = sym.latex(PyCSCObj.metric),
-            christoffel_symbols = cs_sk_dict,
-            christoffel_symbols_fk = cs_fk_dict,
-            riemann_tensor = {},
-            ricci_tensor = "",
-            ricci_scalar = "",
-            einstein_tensor = ""
-            )
+            metric_tensor = sym.latex(metric_tensor.tensor),
+            christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
+            christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
+            riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
+            riemann_tensor_sk = rm_sk_dict if 'Riemann Tensor second kind' in calculate_options else '',
+            ricci_tensor = sym.latex(ricci_fk) if 'Ricci Tensor' in calculate_options else '',
+            ricci_scalar = sym.latex(ricci_scalar_value) if 'Ricci Scalar' in calculate_options else '',
+            einstein_tensor = sym.latex(einstein_tensor_fk)
+            ) 
+        
+        elif 'Ricci Scalar' in calculate_options:
+            print('Ricci Scalar')
+            #Calculate Christoffel Symbols
+            christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
+            christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
+
+            #List of matrices
+            christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
+
+            #Calculate Riemann Tensors
+            riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
+            riemann_fk = riemann_tensor.cleaner_riemann_fk
+            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            #Calculate Ricci Tensor
+            ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
+
+            #Calculate Ricci Scalar
+            ricci_scalar_value = ricci_scalar.calculate(show=False, simplify=simplify)
+
+            cs_sk_dict = dict()
+            for index in range(len(christoffel_sk)):
+                    cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
+
+            cs_fk_dict = dict()
+            for key,value in christoffel_fk.items():
+                cs_fk_dict[key] = sym.latex(value)
+
+            rm_fk_dict = dict()
+            for key,value in riemann_fk.items():
+                rm_fk_dict[key] = sym.latex(value)
+
+            rm_sk_dict = dict()
+            for key,value in riemann_sk.items():
+                rm_sk_dict[key] = sym.latex(value)
+
+
+            return jsonify(
+            metric_tensor = sym.latex(metric_tensor.tensor),
+            christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
+            christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
+            riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
+            riemann_tensor_sk = rm_sk_dict if 'Riemann Tensor second kind' in calculate_options else '',
+            ricci_tensor = sym.latex(ricci_fk) if 'Ricci Tensor' in calculate_options else '',
+            ricci_scalar = sym.latex(ricci_scalar_value),
+            einstein_tensor = ''
+            ) 
+        
+        elif 'Ricci Tensor' in calculate_options:
+            print('Ricci Tensor')
+            #Calculate Christoffel Symbols
+            christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
+            christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
+
+            #List of matrices
+            christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
+
+            #Calculate Riemann Tensors
+            riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
+            riemann_fk = riemann_tensor.cleaner_riemann_fk
+            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            #Calculate Ricci Tensor
+            ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
+
+            cs_sk_dict = dict()
+            for index in range(len(christoffel_sk)):
+                    cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
+
+            cs_fk_dict = dict()
+            for key,value in christoffel_fk.items():
+                cs_fk_dict[key] = sym.latex(value)
+
+            rm_fk_dict = dict()
+            for key,value in riemann_fk.items():
+                rm_fk_dict[key] = sym.latex(value)
+
+            rm_sk_dict = dict()
+            for key,value in riemann_sk.items():
+                rm_sk_dict[key] = sym.latex(value)
+
+
+            return jsonify(
+            metric_tensor = sym.latex(metric_tensor.tensor),
+            christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
+            christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
+            riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
+            riemann_tensor_sk = rm_sk_dict if 'Riemann Tensor second kind' in calculate_options else '',
+            ricci_tensor = sym.latex(ricci_fk),
+            ricci_scalar = '',
+            einstein_tensor = ''
+            ) 
+        
+        elif 'Riemann Tensor second kind' in calculate_options or 'Riemann Tensor first kind' in calculate_options:
+            print('Riemann')
+            #Calculate Christoffel Symbols
+            christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
+            christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
+
+            #List of matrices
+            christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
+
+            #Calculate Riemann Tensors
+            riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
+            riemann_fk = riemann_tensor.cleaner_riemann_fk
+            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            cs_sk_dict = dict()
+            for index in range(len(christoffel_sk)):
+                    cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
+
+            cs_fk_dict = dict()
+            for key,value in christoffel_fk.items():
+                cs_fk_dict[key] = sym.latex(value)
+
+            rm_fk_dict = dict()
+            for key,value in riemann_fk.items():
+                rm_fk_dict[key] = sym.latex(value)
+
+            rm_sk_dict = dict()
+            for key,value in riemann_sk.items():
+                rm_sk_dict[key] = sym.latex(value)
+
+
+            return jsonify(
+            metric_tensor = sym.latex(metric_tensor.tensor),
+            christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
+            christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
+            riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
+            riemann_tensor_sk = rm_sk_dict if 'Riemann Tensor second kind' in calculate_options else '',
+            ricci_tensor = '',
+            ricci_scalar = '',
+            einstein_tensor = ''
+            ) 
+        
+        else:
+            print('Christoffel')
+            #Calculate Christoffel Symbols
+            if 'Christoffel Symbols first kind' in calculate_options:        
+                christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
+
+                christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
+
+                cs_fk_dict = dict()
+                for key,value in christoffel_fk.items():
+                    cs_fk_dict[key] = sym.latex(value)
+
+            if 'Christoffel Symbols second kind' in calculate_options:
+                #List of matrices
+                christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
+
+                cs_sk_dict = dict()
+                for index in range(len(christoffel_sk)):
+                        cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
+
+            return jsonify(
+            metric_tensor = sym.latex(metric_tensor.tensor),
+            christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
+            christoffel_symbols_sk =  cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
+            riemann_tensor_fk = '',
+            riemann_tensor_sk = '',
+            ricci_tensor = '',
+            ricci_scalar = '',
+            einstein_tensor = ''
+            ) 
     
     except Exception as e:
         log_tracebook(e)
