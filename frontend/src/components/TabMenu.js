@@ -13,7 +13,7 @@ import { Link } from '@mui/material';
 const aboutDescription = () => {
   return (
     <>
-      Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that can calculate <b>torsion-free</b> Christoffel Symbols (first and second kinds), Riemann Tensor (first and second kinds), Ricci Tensor, Ricci Scalar, and Einstein Tensor.
+      Christoffel Symbols Calculator is an online mathematical tool with a Graphical User Interface that can calculate <b>torsion-free</b> Christoffel Symbols (first and second kinds), Riemann Tensor (first and second kinds), Ricci Tensor, Ricci Scalar, and Einstein Tensor for a given space-time model.
       <br />
       <br />
       Users can work with a 2,3, or 4-Dimensional coordinate system of their choice, and specify at most 3 variable parameters to substitute in the metric tensor.
@@ -30,7 +30,7 @@ const aboutDescription = () => {
 const quickGuideDescription = () => {
   return (
     <>
-      Step 1: Select the number of dimensions of the space-time from the drop-down menu in <b>
+      Step 1: Select number of dimensions of the space-time model from the drop-down menu in <b>
         Number of Dimensions
       </b>.
       <br />
@@ -50,7 +50,7 @@ const quickGuideDescription = () => {
       Step 6 (a): Click on <b>Calculate</b>.
       <br />
       <br />
-      Step 6 (b): To start over, please click on the <b>Reset</b> button.
+      Step 6 (b): To start over, click on the <b>Reset</b> button.
     </>
   )
 }

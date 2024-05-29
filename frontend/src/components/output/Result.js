@@ -39,8 +39,8 @@ const Result = ({ numChristoffelCalculated, resultRef }) => {
   const einsteinTensorRef = useRef(null);
 
   const resultRefOptions = {
-    "Christoffel Symbols second kind": christoffelSkRef,
     "Christoffel Symbols first kind": christoffelFkRef,
+    "Christoffel Symbols second kind": christoffelSkRef,
     "Riemann Tensor first kind": riemannTensorFkRef,
     "Riemann Tensor second kind": riemannTensorSkRef,
     "Ricci Tensor": ricciTensorRef,
