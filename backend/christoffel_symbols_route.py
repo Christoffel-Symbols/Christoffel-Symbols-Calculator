@@ -140,8 +140,14 @@ def put_christoffel_symbols_json():
             #Calculate Riemann Tensors
             riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
             riemann_fk = riemann_tensor.cleaner_riemann_fk
-            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
-            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            if 'Riemann Tensor second kind' in calculate_options:     
+                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+                riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+                rm_sk_dict = dict()
+                for key,value in riemann_sk.items():
+                    rm_sk_dict[key] = sym.latex(value)
 
             #Calculate Ricci Tensor
             ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
@@ -163,11 +169,6 @@ def put_christoffel_symbols_json():
             rm_fk_dict = dict()
             for key,value in riemann_fk.items():
                 rm_fk_dict[key] = sym.latex(value)
-
-            rm_sk_dict = dict()
-            for key,value in riemann_sk.items():
-                rm_sk_dict[key] = sym.latex(value)
-
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
@@ -192,8 +193,14 @@ def put_christoffel_symbols_json():
             #Calculate Riemann Tensors
             riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
             riemann_fk = riemann_tensor.cleaner_riemann_fk
-            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
-            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            if 'Riemann Tensor second kind' in calculate_options:
+                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+                riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+                rm_sk_dict = dict()
+                for key,value in riemann_sk.items():
+                    rm_sk_dict[key] = sym.latex(value)
 
             #Calculate Ricci Tensor
             ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
@@ -212,11 +219,6 @@ def put_christoffel_symbols_json():
             rm_fk_dict = dict()
             for key,value in riemann_fk.items():
                 rm_fk_dict[key] = sym.latex(value)
-
-            rm_sk_dict = dict()
-            for key,value in riemann_sk.items():
-                rm_sk_dict[key] = sym.latex(value)
-
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
@@ -241,8 +243,14 @@ def put_christoffel_symbols_json():
             #Calculate Riemann Tensors
             riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
             riemann_fk = riemann_tensor.cleaner_riemann_fk
-            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
-            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            if 'Riemann Tensor second kind' in calculate_options:
+                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+                riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+                rm_sk_dict = dict()
+                for key,value in riemann_sk.items():
+                    rm_sk_dict[key] = sym.latex(value)
 
             #Calculate Ricci Tensor
             ricci_fk = ricci_tensor.calculate(config='ll', show=False, simplify=simplify)
@@ -258,11 +266,6 @@ def put_christoffel_symbols_json():
             rm_fk_dict = dict()
             for key,value in riemann_fk.items():
                 rm_fk_dict[key] = sym.latex(value)
-
-            rm_sk_dict = dict()
-            for key,value in riemann_sk.items():
-                rm_sk_dict[key] = sym.latex(value)
-
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
@@ -287,8 +290,14 @@ def put_christoffel_symbols_json():
             #Calculate Riemann Tensors
             riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
             riemann_fk = riemann_tensor.cleaner_riemann_fk
-            riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
-            riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+            if 'Riemann Tensor second kind' in calculate_options:                    
+                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+                riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+                rm_sk_dict = dict()
+                for key,value in riemann_sk.items():
+                    rm_sk_dict[key] = sym.latex(value)
 
             cs_sk_dict = dict()
             for index in range(len(christoffel_sk)):
@@ -301,10 +310,6 @@ def put_christoffel_symbols_json():
             rm_fk_dict = dict()
             for key,value in riemann_fk.items():
                 rm_fk_dict[key] = sym.latex(value)
-
-            rm_sk_dict = dict()
-            for key,value in riemann_sk.items():
-                rm_sk_dict[key] = sym.latex(value)
 
 
             return jsonify(
