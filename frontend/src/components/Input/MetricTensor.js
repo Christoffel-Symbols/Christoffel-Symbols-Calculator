@@ -76,7 +76,7 @@ const MetricTensor = ({ myInitialValues }) => {
                   fontSize: '1.2rem'
                 }}>
                   {
-                    <MathJax dynamic>{"$$" + "\{I}/\{i} \\text{: Imaginary unit}" + "$$"}</MathJax>
+                    <MathJax dynamic>{"$$" + "\{I} \\text{: Imaginary unit}" + "$$"}</MathJax>
 
                   }
                 </span>
@@ -104,7 +104,7 @@ const MetricTensor = ({ myInitialValues }) => {
                   fontSize: '1.2rem'
                 }}>
                   {
-                    <MathJax dynamic>{"$$" + "\{E}/\{e} \\text{: Euler's number}" + "$$"}</MathJax>
+                    <MathJax dynamic>{"$$" + "\{E} \\text{: Euler's number}" + "$$"}</MathJax>
 
                   }
                 </span>
