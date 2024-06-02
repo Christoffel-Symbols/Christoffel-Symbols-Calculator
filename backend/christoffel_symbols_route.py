@@ -141,8 +141,10 @@ def put_christoffel_symbols_json():
             riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
             riemann_fk = riemann_tensor.cleaner_riemann_fk
 
-            if 'Riemann Tensor second kind' in calculate_options:     
+            if 'Riemann Tensor second kind' in calculate_options: 
+
                 riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+
                 riemann_sk = riemann_tensor.cleaner_riemann_sk
 
                 rm_sk_dict = dict()
@@ -195,7 +197,9 @@ def put_christoffel_symbols_json():
             riemann_fk = riemann_tensor.cleaner_riemann_fk
 
             if 'Riemann Tensor second kind' in calculate_options:
+
                 riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+
                 riemann_sk = riemann_tensor.cleaner_riemann_sk
 
                 rm_sk_dict = dict()
@@ -245,7 +249,9 @@ def put_christoffel_symbols_json():
             riemann_fk = riemann_tensor.cleaner_riemann_fk
 
             if 'Riemann Tensor second kind' in calculate_options:
+
                 riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+                
                 riemann_sk = riemann_tensor.cleaner_riemann_sk
 
                 rm_sk_dict = dict()
@@ -284,33 +290,36 @@ def put_christoffel_symbols_json():
             christoffel_fk_dirty = christoffel_symbols.calculate(config='lll', show=False, simplify=simplify)
             christoffel_fk = christoffel_symbols.cleaner_christoffel_fk
 
+            cs_fk_dict = dict()
+            for key,value in christoffel_fk.items():
+                cs_fk_dict[key] = sym.latex(value)
+
             #List of matrices
             christoffel_sk = christoffel_symbols.calculate(config='ull', show=False, simplify=simplify)
-
-            #Calculate Riemann Tensors
-            riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
-            riemann_fk = riemann_tensor.cleaner_riemann_fk
-
-            if 'Riemann Tensor second kind' in calculate_options:                    
-                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
-                riemann_sk = riemann_tensor.cleaner_riemann_sk
-
-                rm_sk_dict = dict()
-                for key,value in riemann_sk.items():
-                    rm_sk_dict[key] = sym.latex(value)
 
             cs_sk_dict = dict()
             for index in range(len(christoffel_sk)):
                     cs_sk_dict[str(index)] = sym.latex(christoffel_sk[index])
 
-            cs_fk_dict = dict()
-            for key,value in christoffel_fk.items():
-                cs_fk_dict[key] = sym.latex(value)
+            #Calculate Riemann Tensors
+            if 'Riemann Tensor first kind' in calculate_options:
 
-            rm_fk_dict = dict()
-            for key,value in riemann_fk.items():
-                rm_fk_dict[key] = sym.latex(value)
+                riemann_fk_dirty = riemann_tensor.calculate(config='llll', show=False, simplify=simplify)
 
+                riemann_fk = riemann_tensor.cleaner_riemann_fk
+
+                rm_fk_dict = dict()
+                for key,value in riemann_fk.items():
+                    rm_fk_dict[key] = sym.latex(value)
+
+            if 'Riemann Tensor second kind' in calculate_options:                    
+                riemann_sk_dirty = riemann_tensor.calculate(config='ulll', show=False, simplify=simplify)
+
+                riemann_sk = riemann_tensor.cleaner_riemann_sk
+
+                rm_sk_dict = dict()
+                for key,value in riemann_sk.items():
+                    rm_sk_dict[key] = sym.latex(value)
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
