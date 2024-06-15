@@ -14,19 +14,29 @@ const Footer = () => {
   return (
     <div className='footer'>
       <p>&copy; DHANANJHAY BANSAL - ALL RIGHTS RESERVED</p>
+      <p>
+        <Link href="/privacy" sx={{
+          fontSize: '1rem',
+          color: 'white',
+          cursor: 'pointer',
+          textDecoration: 'underline'
+        }}>
+          Contact and Privacy
+        </Link>
+      </p>
       <div style={{
         display: 'flex',
         gap: '1rem',
         justifyContent: 'center'
       }}>
         <Link href="https://www.linkedin.com/in/dhananjhay-bansal-637105193/">
-        <LinkedInIcon sx={styleIcon} />
+          <LinkedInIcon sx={styleIcon} />
         </Link>
         <Link href="https://github.com/Dhananjhay">
-        <GitHubIcon sx={styleIcon} />
+          <GitHubIcon sx={styleIcon} />
         </Link>
         <Link href="mailto:dhananjhay03@gmail.com">
-        <EmailIcon sx={styleIcon} />
+          <EmailIcon sx={styleIcon} />
         </Link>
       </div>
     </div>

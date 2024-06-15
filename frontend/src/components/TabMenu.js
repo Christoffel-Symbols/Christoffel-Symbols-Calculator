@@ -19,7 +19,7 @@ const aboutDescription = () => {
       Users can work with a 2,3, or 4-Dimensional coordinate system of their choice, and specify at most 3 variable parameters to substitute in the metric tensor.
       <br />
       <br />
-      For first-time users, please use the <b>QUICK GUIDE</b> section to get familiarized with the software. There are also some cool space-time models listed in the <b>EXAMPLES</b> section to experiment with! To understand the physics behind their origin, please check out <Link href="https://profoundphysics.com/">Profound Physics</Link>.
+      For first-time users, please use the <b>QUICK GUIDE</b> section to get familiarized with the software. There are also some cool space-time models listed in the <b>EXAMPLES</b> section to experiment with!
       <br />
       <br />
       This project is still very much in development, and as the mission matures, you can expect the software to become more efficient and sophisticated. Happy Calculating!
