@@ -37,6 +37,7 @@ if __name__ != "__main__":
     logger.debug("Asumming app is configured for gunicorn in Docker container.")
 
     @app.route("/")
+    @app.route("/privacy")
     def index():
         """
         Serve the index.html file when client requests the static url (e.g., <http://localhost:5000/>).
