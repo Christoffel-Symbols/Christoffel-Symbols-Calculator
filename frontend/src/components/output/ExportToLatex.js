@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { styleButton } from '../CommonFormElements';
 import { Link } from '@mui/material';
+import logo from '../ORCID.webp'
 
 import '../../App.css'
 
@@ -106,7 +107,7 @@ const ExportToLatex = ({ name, result }) => {
                         marginBottom: '1rem',
                         backgroundImage: 'linear-gradient(to right, #244855 1px, transparent),linear-gradient(to bottom, #244855 1px, transparent 1px)'
                     }}>
-                        <img src="ORCID.webp" style={{
+                        <img src={logo} style={{
                             width: '10%',
                             verticalAlign: 'middle',
                         }} />
