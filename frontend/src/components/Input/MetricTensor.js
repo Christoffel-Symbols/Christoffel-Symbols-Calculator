@@ -5,6 +5,8 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import WarningIcon from '@mui/icons-material/Warning';
 import { Link } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 
 const chipStyle = {
   marginBottom: '0.5rem',
@@ -204,21 +206,11 @@ const MetricTensor = ({ myInitialValues }) => {
             </div>
             <article style={{
               marginTop: '0.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.2rem',
               fontFamily: 'Roboto',
-              textWrap: 'wrap',
             }}>
-              <WarningIcon sx={{
-                color: 'red',
-                fontSize: '1.4rem'
-              }} />
-              <span style={{
-                fontSize: '1.2rem',
-                marginTop: '0.1rem'
-              }}>
-                Use <b>Python Syntax</b> and <b>Mathematical Operators</b> to fill the Metric Tensor.
+              <span className='metricWarning'>
+                <WarningIcon sx={{ color: 'red', fontSize: '1.4rem' }} />
+                Use <b>Python Syntax</b> and <b>Mathematical Operators</b> (i.e., <CloseIcon sx={{ color: 'red', fontSize: '1.7rem' }} /> xy <CheckIcon sx={{ color: 'green', fontSize: '1.9rem' }} /> x*y).
               </span>
             </article>
           </div>
