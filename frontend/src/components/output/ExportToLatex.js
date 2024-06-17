@@ -106,7 +106,7 @@ const ExportToLatex = ({ name, result }) => {
                         marginBottom: '1rem',
                         backgroundImage: 'linear-gradient(to right, #244855 1px, transparent),linear-gradient(to bottom, #244855 1px, transparent 1px)'
                     }}>
-                        <img src="ORCID.png" style={{
+                        <img src="ORCID.webp" style={{
                             width: '10%',
                             verticalAlign: 'middle',
                         }} />
