@@ -219,12 +219,32 @@ const MetricTensor = ({ myInitialValues }) => {
           christoffelParams?.metric_tensor
             ?
             <div style={{
-              border: '3px solid',
-              padding: '1rem',
-              backgroundColor: 'white',
-              overflow: 'scroll'
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              justifyContent: 'center'
             }}>
-              <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
+              <article style={{
+                border: '3px solid',
+                padding: '1rem',
+                backgroundColor: 'white',
+                overflow: 'scroll'
+              }}>
+                <MathJax dynamic>{"$$" + christoffelParams["metric_tensor"] + "$$"}</MathJax>
+              </article>
+              <article style={{
+                border: '3px solid',
+                padding: '1rem',
+                backgroundColor: 'white',
+                overflow: 'scroll',
+                alignSelf: 'flex-start'
+              }}>
+                <span style={{
+                  fontSize: '2.5rem'
+                }}>Symbols</span>
+                <MathJax dynamic>{"$$" + christoffelParams["metric_tensor_symbols"] + "$$"}</MathJax>
+              </article>
             </div>
             :
             <div className='metricTensorDisplayMessage'>
