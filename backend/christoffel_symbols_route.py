@@ -174,6 +174,7 @@ def put_christoffel_symbols_json():
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
+            metric_tensor_symbols = sym.latex(list(metric_tensor.tensor.free_symbols)),
             christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
             christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
             riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
@@ -226,6 +227,7 @@ def put_christoffel_symbols_json():
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
+            metric_tensor_symbols = sym.latex(list(metric_tensor.tensor.free_symbols)),
             christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
             christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
             riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
@@ -275,6 +277,7 @@ def put_christoffel_symbols_json():
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
+            metric_tensor_symbols = sym.latex(list(metric_tensor.tensor.free_symbols)),
             christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
             christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
             riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
@@ -323,6 +326,7 @@ def put_christoffel_symbols_json():
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
+            metric_tensor_symbols = sym.latex(list(metric_tensor.tensor.free_symbols)),
             christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
             christoffel_symbols_sk = cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
             riemann_tensor_fk = rm_fk_dict if 'Riemann Tensor first kind' in calculate_options else '',
@@ -354,6 +358,7 @@ def put_christoffel_symbols_json():
 
             return jsonify(
             metric_tensor = sym.latex(metric_tensor.tensor),
+            metric_tensor_symbols = sym.latex(list(metric_tensor.tensor.free_symbols)),
             christoffel_symbols_fk = cs_fk_dict if 'Christoffel Symbols first kind' in calculate_options else '',
             christoffel_symbols_sk =  cs_sk_dict if 'Christoffel Symbols second kind' in calculate_options else '',
             riemann_tensor_fk = '',
