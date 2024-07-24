@@ -223,7 +223,9 @@ const MetricTensor = ({ myInitialValues }) => {
               flexDirection: 'row',
               flexWrap: 'wrap',
               gap: '1rem',
-              justifyContent: 'center'
+              justifyContent: 'safe center',
+              alignItems: 'safe center',
+              overflow: 'scroll'
             }}>
               <article style={{
                 border: '3px solid',
