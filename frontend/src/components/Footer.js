@@ -24,7 +24,7 @@ const Footer = () => {
           Contact and Privacy
         </Link>
       </p>
-      <div style={{
+      {/* <div style={{
         display: 'flex',
         gap: '1rem',
         justifyContent: 'center'
@@ -38,7 +38,7 @@ const Footer = () => {
         <Link href="mailto:dhananjhay03@gmail.com">
           <EmailIcon sx={styleIcon} />
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }
