@@ -125,9 +125,9 @@ const MetricTensor = ({ myInitialValues }) => {
                         }}>
                           {myInitialValues.coordinates[key].length > 1
                             ?
-                            <MathJax dynamic>{"$$" + "x^{" + index + "} = " + "{\\" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
+                            <MathJax dynamic>{"$$" + "x^{" + (index - 1) + "} = " + "{\\" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
                             :
-                            <MathJax dynamic>{"$$" + "x^{" + index + "} = " + "{" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
+                            <MathJax dynamic>{"$$" + "x^{" + (index - 1) + "} = " + "{" + myInitialValues.coordinates[key] + "}$$"}</MathJax>
                           }
                         </span>
                       } />
