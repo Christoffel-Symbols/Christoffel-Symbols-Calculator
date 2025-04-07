@@ -20,7 +20,7 @@ RUN=${1:-true}
 #
 cd ${REPO_DIR}  # necessary so Docker can access other folders within the repo
 docker build -t pycsc_gui:${VERSION} \
-        -f docker/Dockerfile .
+        --platform=linux/arm64 -f docker/Dockerfile .
 #
 echo "Finishing building pycsc_gui:${VERSION}"
 #
