@@ -1,4 +1,21 @@
-# -------------------------------------------------------------------------------------- #
+# Stage 1: Frontend builder
+FROM node:18-slim AS frontend-builder
+
+WORKDIR /app/frontend
+
+# Copy only package files first for caching install step
+COPY frontend/package*.json ./
+
+RUN npm install
+
+# Now copy the rest of the frontend code
+COPY frontend/ .
+
+# Build the frontend
+RUN npm run build
+
+# Stage 2: Final backend image
+
 # needed in macos --platform=linux/arm64
 FROM --platform=linux/arm64 python:3.9-slim
 
@@ -17,15 +34,7 @@ RUN pip3 install git+https://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@github.com
 
 COPY backend /backend
 
-# -------------------------------------------------------------------------------------- #
-# Build the frontend assets
-WORKDIR /frontend
-
-RUN npm install
-RUN npm run build
-
-# Copy the frontend build files into the container
-COPY frontend/build /backend/client
+COPY --from=frontend-builder /app/frontend/build /backend/client
 
 EXPOSE 5000
 
