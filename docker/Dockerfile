@@ -1,6 +1,3 @@
-# WORKDIR /frontend/build
-# COPY frontend/build /frontend/build
-
 # -------------------------------------------------------------------------------------- #
 # needed in macos --platform=linux/arm64
 FROM --platform=linux/arm64 python:3.9-slim
@@ -20,7 +17,16 @@ RUN pip3 install git+https://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@github.com
 
 COPY backend /backend
 
-# COPY --from=frontend-builder /frontend/build /backend/client
+# -------------------------------------------------------------------------------------- #
+# Build the frontend assets (adjust this if you're using npm, yarn, or another tool)
+# Add steps to install frontend dependencies and build the frontend if necessary
+WORKDIR /frontend
+
+# Assuming you're using npm (adjust the build steps accordingly)
+RUN npm install
+RUN npm run build
+
+# Copy the frontend build files into the container
 COPY frontend/build /backend/client
 
 EXPOSE 5000

@@ -32,7 +32,7 @@ from traceback import format_exception
 from flask import Flask, Response, jsonify
 from flask_cors import CORS
 
-local_devel = True
+local_devel = False
 
 if local_devel:
     # --- Python ---
