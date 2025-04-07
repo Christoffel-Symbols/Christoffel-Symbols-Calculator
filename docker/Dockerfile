@@ -17,7 +17,7 @@ RUN npm run build
 # Stage 2: Final backend image
 
 # needed in macos --platform=linux/arm64
-FROM --platform=linux/arm64 python:3.9-slim
+FROM  python:3.9-slim
 
 USER root
 
@@ -25,7 +25,7 @@ RUN mkdir /opt/image-build && chmod 777 /opt/image-build
 
 COPY docker/apt-install.sh /opt/image-build
 WORKDIR /opt/image-build
-RUN ./apt-install.sh sssd acl gunicorn gcc g++ libcurl4-openssl-dev libssl-dev git
+RUN ./apt-install.sh bash sssd acl gunicorn gcc g++ libcurl4-openssl-dev libssl-dev git
 
 RUN pip3 install flask flask-cors wheel gunicorn
 
