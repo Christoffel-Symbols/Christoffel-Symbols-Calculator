@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# package installer for apt based Dockerfiles
+# package installer for apt-based Dockerfiles
 # 1. Install apt packages silently
 # 2. Update metadata before install
 # 3. Remove unneeded files after install
-# From <https://github.com/opencadc/skaha/blob/master/containers/session-containers/astroml-notebook/scripts/apt-install.sh>
 
 [[ $# == 0 ]] && echo "usage: apt-install.sh [packages...]" >&2 && exit 0
 
@@ -17,7 +16,10 @@ set -eu
 
 apt-get update --yes -qq
 apt-get update --yes --fix-missing
-DEBIAN_FRONTEND=noninteractive apt-get install --yes ${packages}
+
+# Install npm and nodejs
+DEBIAN_FRONTEND=noninteractive apt-get install --yes ${packages} nodejs npm
+
 apt-get autoremove --purge -y
 apt-get clean --yes
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

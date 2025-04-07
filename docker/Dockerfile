@@ -18,11 +18,9 @@ RUN pip3 install git+https://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@github.com
 COPY backend /backend
 
 # -------------------------------------------------------------------------------------- #
-# Build the frontend assets (adjust this if you're using npm, yarn, or another tool)
-# Add steps to install frontend dependencies and build the frontend if necessary
+# Build the frontend assets
 WORKDIR /frontend
 
-# Assuming you're using npm (adjust the build steps accordingly)
 RUN npm install
 RUN npm run build
 
