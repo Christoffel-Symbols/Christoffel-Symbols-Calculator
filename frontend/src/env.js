@@ -6,4 +6,4 @@
 
 // export const API_URL = "https://christoffel-symbols-calculator.com/";
 
-export const API_URL = "https://christoffel-symbols-calculator-frontend.onrender.com/";
+export const API_URL = "https://christoffel-symbols-calculator.onrender.com/";
