@@ -64,7 +64,7 @@ else:
         # static_folder="/backend/client", #Different path for server
         static_url_path="/",  # https://github.com/opencadc/skaha/pull/323
     )
-    cors = CORS()
+    cors = CORS(app=app)
     # Add logger to Flask app (only logs application errors, not HTTP errors)
     logger = logging.getLogger("gunicorn.error")
     app.logger.handlers = logger.handlers
