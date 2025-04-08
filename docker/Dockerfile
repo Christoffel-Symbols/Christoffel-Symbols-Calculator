@@ -30,7 +30,7 @@ RUN ./apt-install.sh bash sssd acl gunicorn gcc g++ libcurl4-openssl-dev libssl-
 RUN pip3 install flask flask-cors wheel gunicorn
 
 # Install PyCSC package
-RUN pip3 install git+https://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@github.com/Christoffel-Symbols/Christoffel-Symbols-Calculator.git@v2.1.1
+RUN pip3 install git+https://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@github.com/Christoffel-Symbols/PyCSC.git@v2.1.1
 
 COPY backend /backend
 
