@@ -35,6 +35,8 @@ RUN pip3 install git+https://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@github.com
 COPY backend /backend
 
 COPY --from=frontend-builder /app/frontend/build /backend/client
+COPY sitemap.xml /backend/client
+COPY robots.txt /backend/client
 
 EXPOSE 5000
 
