@@ -60,8 +60,8 @@ else:
     app = Flask(
         __name__,
         # static_folder="../frontend/build", # For local testing
-        static_folder="/backend/client", #For building inside docker
-        # static_folder="/backend/client", #Different path for server
+        # static_folder="/backend/client", #For building inside docker
+        static_folder="/home/dhananjhay/myproject/client", #Different path for server
         static_url_path="/",  # https://github.com/opencadc/skaha/pull/323
     )
     cors = CORS(app=app)

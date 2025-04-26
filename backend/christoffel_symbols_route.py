@@ -368,11 +368,8 @@ def put_christoffel_symbols_json():
             einstein_tensor = ''
             ) 
     
+    
     except Exception as e:
         log_tracebook(e)
-        logger.error(
-            "There was a problem initializing the `PyCSC` object and " + "returning some of its attributes in a JSON format."
-        )
-        return server_error(
-            "There was a problem initializing the `PyCSC` object and " + "returning some of its attributes in a JSON format."
-        )
+        logger.error("An internal error occurred during tensor computations: " + str(e))
+        return server_error(f"Internal error: {str(e)}")

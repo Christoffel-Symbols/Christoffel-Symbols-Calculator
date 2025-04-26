@@ -3,3 +3,7 @@
 /backend/requestData.log
 
 /venv
+
+*.pyc
+
+qc_script.py

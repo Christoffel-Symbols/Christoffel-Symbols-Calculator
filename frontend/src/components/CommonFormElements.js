@@ -169,7 +169,7 @@ export const AlertError = ({ isError, setIsError, errorMessage, setErrorMessage 
         <AlertTitle>
           Error</AlertTitle>
         {errorMessage} <br />
-        Revise your inputs and submit a new request.
+        Do not use external libraries (i.e., Math, numpy). Revise your inputs and submit a new request.
       </Alert>
     </Snackbar>
   );

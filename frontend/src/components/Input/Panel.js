@@ -219,10 +219,14 @@ const Panel = ({ incrNumChristoffelCalculated, resultRef, setReset }) => {
                 setIsError(true);
                 if (error.code === 'ECONNABORTED') {
                   setErrorMessage("Timeout exceeded. Uncheck the simplify option!")
-                } else if (error.code = 'ERR_BAD_RESPONSE') {
-                  setErrorMessage("Please make sure you're using correct Python syntax. Do not use external libraries (i.e., Math, numpy).")
+                } else if (
+                  error.response && error.response.status === 500 &&
+                  error.response.data && error.response.data.error
+                ) {
+                  // Show backend's internal error message
+                  setErrorMessage(error.response.data.error);
                 } else {
-                  setErrorMessage(error.message);
+                  setErrorMessage(error.message); // Fallback
                 }
               })
               .finally(() => {
