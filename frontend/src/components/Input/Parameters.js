@@ -2,6 +2,7 @@ import React from 'react'
 import VariableParameters from './VariableParameters';
 import Dimensions from './Dimensions';
 import DefineCoordinates from './DefineCoordinates';
+import Donate from './Donate'
 
 
 
@@ -9,11 +10,8 @@ const Parameters = ({ myInitialValues }) => {
 
   return (
     <>
-      <div style={{
-        display: 'flex',
-        gap: '1rem',
-      }}>
-
+      <div className='container'>
+        <Donate />
         <div className='leftPanel'>
           <Dimensions myInitialValues={myInitialValues} />
           <DefineCoordinates myInitialValues={myInitialValues

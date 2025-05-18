@@ -70,30 +70,10 @@ body {
   border-radius: 1rem;
 }
 
-.leftPanel {
-  border: solid #244855;
-  border-radius: 1rem;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 1rem;
-  gap: 1rem;
-}
-
 .variable {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.rightPanel {
-  border: solid #244855;
-  border-radius: 1rem;
-  padding: 1rem;
-  font-size: 2rem;
-  text-align: center;
-  align-self: flex-start;
 }
 
 .input {
@@ -287,4 +267,37 @@ body {
   .metricWarning {
     font-size: 1.2rem;
   }
+
+  .container {
+    flex-direction: column;
+    /* switch to column layout */
+    flex-wrap: wrap;
+  }
+
+  /* make each panel span full width of the container */
+  .leftPanel,
+  .rightPanel {
+    width: 100%;
+    /* if you want some vertical spacing between rows: */
+    margin-bottom: 1rem;
+  }
+}
+
+/* give your root div a class, e.g. <div class="container"> */
+.container {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  /* desktop: no wrapping */
+}
+
+/* your existing panel styles */
+.leftPanel,
+.rightPanel {
+  border: solid #244855;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
+  text-align: center;
 }
