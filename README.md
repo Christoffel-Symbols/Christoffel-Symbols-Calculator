@@ -1,6 +1,6 @@
 # Christoffel Symbols Calculator frontend
 
-Christoffel-Symbols-Calculator Team - 2024-2025
+Christoffel-Symbols-Calculator Team - 2024-2026 
 
 **This project is under development!**
 
@@ -46,3 +46,12 @@ Brief walkthrough on how to _locally_ prepare the `PyCSC GUI` in a Docker contai
 Please reach out if you have any questions about this, either through email
 ([dhananjhay03@gmail.com](mailto:dhananjhay03@gmail.com)) or the [discussions
 page](https://github.com/orgs/Christoffel-Symbols/discussions).
+
+## Citation
+
+If you use this calculator or the underlying symbolic engine in your research, please cite it as follows:
+
+**Bansal, D. (2024). Christoffel symbols calculator (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.20124442**
+
+> [!TIP]
+> This tool has been utilized in peer-reviewed research for tensor-based derivations in nonlinear control and contraction analysis (e.g., Lohmiller & Slotine, 2023).
