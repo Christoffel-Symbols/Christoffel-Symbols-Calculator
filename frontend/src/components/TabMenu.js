@@ -9,6 +9,35 @@ import FormLabel from '@mui/material/FormLabel';
 import { examplesData } from '../data/examples';
 import { Link } from '@mui/material';
 
+const citedByDescription = () => {
+  return (
+    <>
+      This tool has been utilized and cited in the following research:
+      <br />
+      <br />
+      <b>Natural Metrics in Contraction Analysis</b>
+      <br />
+      W. Lohmiller and J.J.E. Slotine.
+      <i> arXiv preprint arXiv:2306.06628.</i>
+      <br />
+      <Link href="https://arxiv.org/pdf/2306.06628" target="_blank" rel="noopener">
+        View Paper on arXiv
+      </Link>
+      <br />
+      <br />
+      <hr />
+      <br />
+      <b>To cite this software:</b>
+      <br />
+      Bansal, D. (2024). Christoffel symbols calculator. Zenodo.
+      <br />
+      <Link href="https://doi.org/10.5281/zenodo.20124442" target="_blank" rel="noopener">
+        https://doi.org/10.5281/zenodo.20124442
+      </Link>
+    </>
+  )
+}
+
 
 const aboutDescription = () => {
   return (
@@ -171,6 +200,13 @@ const TabMenu = ({ incrNumChristoffelCalculated }) => {
         name={'QUICK GUIDE'}
         description={quickGuideDescription}
         open={selected === 'QUICK GUIDE'}
+        handleClose={handleClose}
+        handleClickOpen={handleClickOpen}
+      />
+      <CommonAlertDialog
+        name={'CITED BY'}
+        description={citedByDescription}
+        open={selected === 'CITED BY'}
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
       />
